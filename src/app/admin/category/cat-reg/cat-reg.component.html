@@ -1,0 +1,42 @@
+<p-card>
+  <div class="container-fluid d-flex justify-content-center">
+    <div class="row">
+      <div class="d-flex ">
+        <h3 style="color: #2C74B3;">New Category</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4" style="height: 20rem">
+    <form [formGroup]="fg">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-4 pt-2 ms-2">
+            <span class="text-primary" >Category Name</span>
+          </div>
+          <div class="col-6">
+            <input type="text" formControlName="CategoryName" class="pe-5" placeholder="Name of the category" pInputText>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-4 pt-2 ms-2">
+            <span class="text-primary" >Category Name</span>
+          </div>
+          <div class="col-6">
+            <textarea pInputTextarea formControlName="CategoryDescription" [rows]="5" [cols]="23" [autoResize]="true" class="pe-5" placeholder="A short description of the category"></textarea>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-5">
+          </div>
+          <div class="col-6">
+            <p-button [disabled]="this.fg.invalid" label="Submit" (click)="submitForm(this.fg.getRawValue())"></p-button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</p-card>

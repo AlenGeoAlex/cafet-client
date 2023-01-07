@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/admin">
+      <span class="ml-3 font-weight-bold">Cafet</span>
+    </a>
+
+
+<!--    <div class="collapse navbar-collapse ms-5" id="navbar4">
+      <ul class="navbar-nav mr-auto pl-lg-4">
+        <li class="nav-item px-lg-2 active"> <a class="nav-link" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" > <span class="d-inline-block d-lg-none icon-width"><i class="fas fa-home" ></i></span>Home</a> </li>
+        <li class="nav-item px-lg-2"> <a class="nav-link"  routerLink="/admin/category" routerLinkActive="active" ><span class="d-inline-block d-lg-none icon-width"><i class="fas fa-spa" ></i></span>Category</a> </li>
+        <li class="nav-item px-lg-2"> <a class="nav-link"  routerLink="/admin/food" routerLinkActive="active" ><span class="d-inline-block d-lg-none icon-width"><i class="fas fa-spa" ></i></span>Foods</a> </li>
+        <li class="nav-item px-lg-2"> <a class="nav-link"  routerLink="/admin/users" routerLinkActive="active" ><span class="d-inline-block d-lg-none icon-width"><i class="fas fa-spa" ></i></span>Users</a> </li>
+      </ul>
+    </div>-->
+
+    <div class="row">
+      <div class="col-1">
+        <p-avatar label="A" shape="circle" (click)="menu.toggle($event)"></p-avatar>
+        <p-menu #menu [popup]="true" [model]="items"></p-menu>
+      </div>
+    </div>
+  </div>
+</nav>
