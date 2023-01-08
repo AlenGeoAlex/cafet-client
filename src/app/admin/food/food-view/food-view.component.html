@@ -1,0 +1,47 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<p-table [value]="foods" sortField="category" editMode="row" sortMode="single" dataKey="category" rowGroupMode="subheader" groupRowsBy="category" [tableStyle]="{'min-width': '70rem'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width:5%">Image</th>
+      <th style="width:10%">Name</th>
+      <th style="width:20%">Description</th>
+      <th style="width:10%">Price</th>
+      <th style="width:25%">Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="groupheader" let-food let-rowIndex="rowIndex" let-expanded="expanded">
+    <tr>
+      <td colspan="5" class="d-flex justify-content-around">
+        <button type="button" pButton pRipple [pRowToggler]="food" class="p-button-text p-button-rounded p-button-plain d-inline-block" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        <span class="font-bold" style="margin-top: 6.9%">{{food.category}}</span>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="groupfooter" let-food>
+    <tr class="p-rowgroup-footer">
+      <td  style="text-align: left">Total in Category</td>
+      <td>{{getLengthOf(food.category)}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-food>
+    <tr>
+      <td>
+        <img src="{{food.foodImage}}" alt="{{food.name}}" width="35">
+      </td>
+      <td>
+        {{food.name}}
+      </td>
+      <td>
+        {{food.foodDescription}}
+      </td>
+      <td>
+        <span>{{food.foodPrice | currency: 'INR'}}</span>
+      </td>
+      <td>
+        <button pButton pRipple type="button" icon="pi pi-pencil" (click)="onEdit(food)" class="p-button-rounded p-button-text"></button>
+        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="onDelete(food)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -26,6 +26,9 @@ import { FoodRegComponent } from './food/food-reg/food-reg.component';
 import {FileUploadModule} from "primeng/fileupload";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {InputNumberModule} from "primeng/inputnumber";
+import { FoodViewComponent } from './food/food-view/food-view.component';
+import { FoodEditComponent } from './food/food-edit/food-edit.component';
+import {ImageModule} from "primeng/image";
 
 @NgModule({
   declarations: [
@@ -36,28 +39,31 @@ import {InputNumberModule} from "primeng/inputnumber";
     UsersComponent,
     CatViewComponent,
     CatRegComponent,
-    FoodRegComponent
+    FoodRegComponent,
+    FoodViewComponent,
+    FoodEditComponent
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    AvatarModule,
-    MenuModule,
-    RouterModule,
-    CardModule,
-    DividerModule,
-    ButtonModule,
-    TableModule,
-    RippleModule,
-    FormsModule,
-    InputTextModule,
-    InputTextareaModule,
-    ReactiveFormsModule,
-    ToastModule,
-    ConfirmDialogModule,
-    FileUploadModule,
-    AutoCompleteModule,
-    InputNumberModule,
-  ]
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        AvatarModule,
+        MenuModule,
+        RouterModule,
+        CardModule,
+        DividerModule,
+        ButtonModule,
+        TableModule,
+        RippleModule,
+        FormsModule,
+        InputTextModule,
+        InputTextareaModule,
+        ReactiveFormsModule,
+        ToastModule,
+        ConfirmDialogModule,
+        FileUploadModule,
+        AutoCompleteModule,
+        InputNumberModule,
+        ImageModule,
+    ]
 })
 export class AdminModule { }

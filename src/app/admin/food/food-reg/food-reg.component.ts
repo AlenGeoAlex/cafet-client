@@ -109,17 +109,18 @@ export class FoodRegComponent implements OnInit {
     data.append("FoodImage", this.fg.get("FoodImage")?.value)
     this.foodService.createNewFood(data).subscribe({
       next: value => {
-        this.messageService.add({severity: "success", summary: "Success", detail: "Successfully registered the new food item"})
+        this.regEvent.emit(true);
       },
       error: err => {
-        this.messageService.add({severity: "error", summary: "Error", detail: "Failed to register the food"})
-
+        this.regEvent.emit(true);
       },
       complete: () => {
-
+        this.fg.reset();
       }
     })
   }
+
+
 
   selectCategory(value : AutoComplete) {
     if(!this.contains(value.value))

@@ -1,0 +1,82 @@
+<app-overlay></app-overlay>
+<p-toast position="top-right"></p-toast>
+<ng-container *ngIf="food" >
+  <div class="container-fluid" style="margin-top: 6rem;">
+      <p-toast position="top-right"></p-toast>
+      <div class="container-fluid d-flex justify-content-center">
+        <div class="row">
+          <div class="d-flex ">
+            <h3 style="color: #2C74B3;">Update {{food.name}}</h3>
+          </div>
+        </div>
+      </div>
+
+    <div class="card" style=" margin-top: 2rem; margin-right: 20rem; margin-left: 20rem">
+      <form [formGroup]="fg">
+      <div class="row">
+        <div class="col-3 mt-5">
+          <div class="row">
+            <div class="container offset-2" >
+              <p-image src="{{this.pfpLink}}" alt="Image" width="150" height="150" class="img-fluid" [preview]="true"></p-image>
+            </div>
+          </div>
+          <div class="row">
+            <p-fileUpload name="pfpImage" mode="basic" chooseLabel="Select Image" class="offset-2 mt-5" accept="image/*" (onSelect)="onImageSelect($event)" [maxFileSize]="1000000"></p-fileUpload>
+          </div>
+        </div>
+
+        <div class="col-9">
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4 pt-2 ms-2">
+                  <span class="text-primary" >Food Name</span>
+                </div>
+                <div class="col-6">
+                  <input type="text" formControlName="FoodName" placeholder="Name of the food" pInputText>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-4 pt-2 ms-2">
+                  <span class="text-primary" >Category Name</span>
+                </div>
+                <div class="col-6">
+                  <p-autoComplete #catName formControlName="CategoryName" placeholder="Name of the category" [dropdown]="true" field="" [showEmptyMessage]="true" (onSelect)="selectCategory(catName)" [suggestions]="filter" (completeMethod)="filterCategory($event)" [minLength]="1"></p-autoComplete>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-4 pt-2 ms-2">
+                  <span class="text-primary" >Food Description</span>
+                </div>
+                <div class="col-6">
+                  <textarea pInputTextarea formControlName="FoodDescription" [rows]="5" [cols]="23" [autoResize]="true"  placeholder="A short description of the food"></textarea>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-4 pt-2 ms-2">
+                  <span class="text-primary" >Food Price</span>
+                </div>
+                <div class="col-6">
+                  <p-inputNumber formControlName="FoodPrice"  locale="en-IN" [minFractionDigits]="2"  inputId="stacked" mode="currency" [min]="0" currency="INR" ></p-inputNumber>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-4">
+                </div>
+                <div class="col-6">
+                  <p-button (click)="cancel()" class="mx-3" icon="pi pi-arrow-left" label="Back"></p-button>
+                  <p-button (click)="submit()" [disabled]="this.isValid()" icon="pi pi-check" label="Update"></p-button>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</ng-container>

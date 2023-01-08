@@ -1,6 +1,7 @@
+<p-toast position="top-right"></p-toast>
 <p-card>
   <p-toast position="top-right"></p-toast>
-  <div class="container-fluid d-flex justify-content-center">
+  <div class="container-fluid d-flex justify-content-center" >
     <div class="row">
       <div class="d-flex ">
         <h3 style="color: #2C74B3;">Register Food</h3>
@@ -16,7 +17,7 @@
             <span class="text-primary" >Food Name</span>
           </div>
           <div class="col-6">
-            <input type="text" formControlName="FoodName" class="pe-5" placeholder="Name of the food" pInputText>
+            <input type="text" formControlName="FoodName" placeholder="Name of the food" pInputText>
           </div>
         </div>
 
@@ -25,7 +26,7 @@
             <span class="text-primary" >Category Name</span>
           </div>
           <div class="col-6">
-            <p-autoComplete #catName formControlName="CategoryName" class="pe-5" placeholder="Name of the category" [dropdown]="true" field="" [showEmptyMessage]="true" (onSelect)="selectCategory(catName)" [suggestions]="filter" (completeMethod)="filterCategory($event)" [minLength]="1"></p-autoComplete>
+            <p-autoComplete #catName formControlName="CategoryName" placeholder="Name of the category" [dropdown]="true" field="" [showEmptyMessage]="true" (onSelect)="selectCategory(catName)" [suggestions]="filter" (completeMethod)="filterCategory($event)" [minLength]="1"></p-autoComplete>
           </div>
         </div>
 
@@ -34,16 +35,16 @@
             <span class="text-primary" >Food Description</span>
           </div>
           <div class="col-6">
-            <textarea pInputTextarea formControlName="FoodDescription" [rows]="5" [cols]="23" [autoResize]="true" class="pe-5" placeholder="A short description of the food"></textarea>
+            <textarea pInputTextarea formControlName="FoodDescription" [rows]="5" [cols]="23" [autoResize]="true"  placeholder="A short description of the food"></textarea>
           </div>
         </div>
 
         <div class="row mt-3">
           <div class="col-4 pt-2 ms-2">
-            <span class="text-primary" >Category Name</span>
+            <span class="text-primary" >Food Price</span>
           </div>
           <div class="col-6">
-            <p-inputNumber formControlName="FoodPrice"  locale="en-IN" class="pe-5" [minFractionDigits]="2" [showButtons]="true" inputId="stacked" mode="currency" [min]="0" currency="INR" ></p-inputNumber>
+            <p-inputNumber formControlName="FoodPrice"  locale="en-IN" [minFractionDigits]="2"  inputId="stacked" mode="currency" [min]="0" currency="INR" ></p-inputNumber>
           </div>
         </div>
 

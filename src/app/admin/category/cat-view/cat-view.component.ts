@@ -56,7 +56,7 @@ export class CatViewComponent implements OnInit {
             this.catDelete.emit(true);
           },
           error: err => {
-            this.catDelete.emit(true);
+            this.catDelete.emit(false);
             console.log(err);
           },
           complete: () => {

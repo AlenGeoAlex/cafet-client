@@ -9,10 +9,13 @@ import {HttpClientModule} from "@angular/common/http";
 import { AdminModule } from './admin/admin.module';
 import {ToastModule} from "primeng/toast";
 import {ConfirmationService, MessageService} from "primeng/api";
+import { Error404Component } from './error404/error404.component';
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
@@ -22,6 +25,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
     FileUploadModule,
     AdminModule,
     ToastModule,
+    NgxSpinnerModule
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]

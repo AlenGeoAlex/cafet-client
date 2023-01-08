@@ -5,23 +5,20 @@
     <div class="card">
       <div class="row row-cols-1 g-0">
         <div class="col-4" style="margin-right: -0.5rem; margin-left: 0.5rem">
-          <app-food-reg></app-food-reg>
-<!--
-          <app-cat-reg (regEvent)="onRegistrationEvent($event)" ></app-cat-reg>
--->
+          <app-food-reg (regEvent)="this.onFoodRegSuccess($event)"></app-food-reg>
         </div>
         <div class="col-1" style="width: 1.8%;">
           <p-divider layout="vertical"></p-divider>
         </div>
         <div class="col-5" style="width: 64%">
-<!--          <ng-container *ngIf="category">
-            <app-cat-view [category]="category" (catDelete)="onDeleteEvent($event)" (catUpdate)="this.onCatUpdate($event)" (catUpdateCancelled)="this.onCatUpdateCancelled($event)"></app-cat-view>
+          <ng-container *ngIf="foods">
+            <app-food-view [foods]="foods" (foodDelete)="this.onFoodDelete($event)"></app-food-view>
           </ng-container>
-          <ng-container *ngIf="!category" class="no-error-provider">
+          <ng-container *ngIf="!foods" class="no-error-provider">
             <div class="d-flex h-100 align-items-center justify-content-center">
-              <h5 style="font-family: 'Poppins-Bold', sans-serif; color: #f4003a">No Categories are registered. Create a new one now!</h5>
+              <h5 style="font-family: 'Poppins-Bold', sans-serif; color: #f4003a">No Foods are registered. Create a new one now!</h5>
             </div>
-          </ng-container>-->
+          </ng-container>
         </div>
       </div>
     </div>

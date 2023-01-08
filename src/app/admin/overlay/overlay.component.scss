@@ -6,3 +6,31 @@
 }
 /* Font Awesome Icons have variable width. Added fixed width to fix that.*/
 .icon-width { width: 2rem;}
+
+.main-nav {
+}
+
+@media (min-width: 1200px){
+  .container {
+    max-width: 100%;
+  }
+}
+
+.main-nav {
+  background-color: #2750bf;
+}
+
+@media (min-width: 992px){
+  .navbar-expand-lg {
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -ms-flex-pack: start;
+    justify-content: space-between;
+    padding: 10px 20px;
+
+  }
+}
+
+.mns{display: flex;}
+.mns .flt{    display: flex;
+  padding: 0px 10px;}
