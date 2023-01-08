@@ -8,8 +8,6 @@ import {PrimeNGConfig} from "primeng/api";
 })
 export class AppComponent implements OnInit{
 
-  name="myfile"
-
   constructor(private readonly primeNgConfig : PrimeNGConfig) {
   }
 
@@ -17,8 +15,4 @@ export class AppComponent implements OnInit{
     this.primeNgConfig.ripple = true;
   }
 
-
-  upload($event: any) {
-    console.log(typeof $event);
-  }
 }

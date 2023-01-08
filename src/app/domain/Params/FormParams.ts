@@ -10,3 +10,15 @@ export interface FoodParam {
   FoodImage: File;
   FoodPrice: string;
 }
+
+export interface IRegistrationParams {
+  firstName: string,
+  lastName: string,
+  emailAddress: string,
+  password: string
+}
+
+export interface ILoginParams {
+  emailAddress: string,
+  password: string,
+}
