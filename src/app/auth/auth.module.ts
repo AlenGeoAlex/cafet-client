@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
   declarations: [
     AuthComponent,
   ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        ReactiveFormsModule,
+        ToastModule
+    ]
 })
 export class AuthModule { }

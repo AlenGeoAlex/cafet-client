@@ -16,6 +16,15 @@ export interface IRegistrationParams {
   lastName: string,
   emailAddress: string,
   password: string
+  role: "ADMIN" | "STAFF" | "CUSTOMER",
+}
+
+export class RegistrationParam implements IRegistrationParams {
+  emailAddress: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  role: "ADMIN" | "STAFF" | "CUSTOMER";
 }
 
 export interface ILoginParams {

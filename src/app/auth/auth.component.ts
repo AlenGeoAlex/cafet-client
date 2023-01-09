@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ILoginParams, IRegistrationParams, RegistrationParam} from "../domain/Params/FormParams";
+import {AuthenticationService} from "./authentication.service";
+import {HttpErrorResponse, HttpResponseBase} from "@angular/common/http";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +17,7 @@ export class AuthComponent implements OnInit {
   public mode : "sign-up-mode" | "" = "";
   public readonly regGroup : FormGroup;
   public readonly logGroup : FormGroup;
-  constructor(private readonly fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder, private readonly authenticationService : AuthenticationService, private messageService: MessageService) {
     this.regGroup = fb.group({
       firstName : ['', Validators.required],
       lastName : ['', Validators.required],
@@ -54,11 +58,42 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  signin(){
-
+  signin(loginParam : ILoginParams){
+    console.log(loginParam);
   }
 
   signup(){
+    var rawValue = this.regGroup.getRawValue();
+    const param = new RegistrationParam();
+    param.emailAddress = rawValue.emailAddress;
+    param.firstName = rawValue.firstName;
+    param.lastName = rawValue.lastName;
+    param.password = rawValue.password;
+    param.role = "CUSTOMER";
+
+    this.authenticationService.registerNewAccount(param).subscribe({
+      next: value => {
+        this.authenticationService.setLoginData(value);
+      },
+      error: err => {
+        this.regGroup.reset();
+        if(err instanceof HttpErrorResponse){
+          const error = <HttpErrorResponse> err;
+          if(err.status === 400){
+            const errMessage = error.error;
+            if(errMessage != null || errMessage != undefined){
+              this.messageService.add({severity: "error", summary: "Failed", detail: errMessage})
+            }
+          }else{
+            console.log(err);
+            this.messageService.add({severity: "error", summary: "Failed", detail: "An unknown error occurred. Please try again later!"})
+          }
+        }
+      },
+      complete: () => {
+
+      }
+    });
 
   }
 

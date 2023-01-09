@@ -1,4 +1,4 @@
-
+<p-toast position="top-right"></p-toast>
 <div class="whole">
   <div class="container {{mode}}">
     <div class="forms-container">
@@ -16,7 +16,7 @@
             <i class="far {{this.toggleIconName}}" id="togglePassword" (click)="togglePassword()" style="cursor: pointer;"></i>
           </div>
           <a class="pass" >Forgot your password?</a>
-          <input type="submit" [disabled]="logGroup.invalid" value="Sign in" (click)="this.signin()" class="btn solid">
+          <input type="submit" [disabled]="logGroup.invalid" value="Sign in" (click)="this.signin(this.logGroup.getRawValue())" class="btn solid">
         </form>
         <form [formGroup]="regGroup" class="sign-up-form">
           <img src="assets/cafet.svg" width="52px" height="52px">
