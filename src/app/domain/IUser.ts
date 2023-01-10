@@ -1,21 +1,21 @@
 
 export interface IUser {
-  UserEmailAddress: string;
-  UserFullName: string;
-  UserRole: string;
-  AccessToken: string;
-  RefreshToken?: any;
-  ImageLink: any;
-  CartId: any;
+  userEmailAddress: string;
+  userFullName: string;
+  userRole: string;
+  accessToken: string;
+  refreshToken?: any;
+  imageLink: any;
+  cartId: any;
 }
 
 class User implements IUser {
-  AccessToken: string;
-  UserEmailAddress: string;
-  UserFullName: string;
-  UserRole: string;
-  RefreshToken?: any;
-  CartId: any;
-  ImageLink: any;
+  accessToken: string;
+  userEmailAddress: string;
+  userFullName: string;
+  userRole: string;
+  refreshToken?: any;
+  cartId: any;
+  imageLink: any;
 
 }

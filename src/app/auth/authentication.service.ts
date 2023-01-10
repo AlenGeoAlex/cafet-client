@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {IRegistrationParams} from "../domain/Params/FormParams";
+import {ILoginParams, IRegistrationParams} from "../domain/Params/FormParams";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {IUser} from "../domain/IUser";
@@ -20,14 +20,35 @@ export class AuthenticationService {
     return this.client.post<IUser>(this.apiUrl+"register/", regParam);
   }
 
+  loginAccount(loginParam : ILoginParams) : Observable<IUser> {
+    return this.client.post<IUser>(this.apiUrl+"login/", loginParam);
+  }
+
   setLoginData(userData : IUser){
-    localStorage.setItem(UserConstants.AccessToken, userData.AccessToken);
-    localStorage.setItem(UserConstants.Email, userData.UserEmailAddress);
-    localStorage.setItem(UserConstants.UserName, userData.UserFullName);
-    localStorage.setItem(UserConstants.RefreshTokens, userData.RefreshToken);
-    localStorage.setItem(UserConstants.Role, userData.UserRole)
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.router.navigateByUrl(returnUrl);
+    localStorage.setItem(UserConstants.AccessToken, userData.accessToken);
+    localStorage.setItem(UserConstants.Email, userData.userEmailAddress);
+    localStorage.setItem(UserConstants.UserName, userData.userFullName);
+    localStorage.setItem(UserConstants.RefreshTokens, userData.refreshToken);
+    localStorage.setItem(UserConstants.Role, userData.userRole)
+    localStorage.setItem(UserConstants.ImageLink, userData.imageLink)
+    localStorage.setItem(UserConstants.CartId, userData.cartId)
+
+    let roleItem  = userData.userRole;
+    if(roleItem == null){
+      this.logout();
+      return;
+    }
+
+    roleItem = roleItem.toUpperCase();
+    if(roleItem === "ADMIN"){
+      this.router.navigate(["/admin/"])
+    }else if(roleItem === "STAFF"){
+      //this.router.navigate(["/staff/"])
+    }else if(roleItem === "CUSTOMER"){
+
+    }else {
+      this.router.navigate(["/404"])
+    }
   }
 
   setData(constant : UserConstants, value : string){
@@ -40,6 +61,8 @@ export class AuthenticationService {
     localStorage.removeItem(UserConstants.UserName);
     localStorage.removeItem(UserConstants.RefreshTokens);
     localStorage.removeItem(UserConstants.Role)
+    localStorage.removeItem(UserConstants.ImageLink)
+    localStorage.removeItem(UserConstants.CartId)
     this.router.navigate(["/auth/"]);
   }
 

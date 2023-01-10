@@ -6,7 +6,12 @@
 
   <div class="row">
     <div class="col-1 mns">
-      <p-avatar label="A" shape="circle" (click)="menu.toggle($event)"></p-avatar>
+      <ng-container *ngIf="iLink">
+        <p-avatar image="{{this.iLink}}" (click)="menu.toggle($event)" styleClass="mr-2" size="small" shape="circle"></p-avatar>
+      </ng-container>
+      <ng-container *ngIf="!iLink">
+        <p-avatar label="A" shape="circle" (click)="menu.toggle($event)"></p-avatar>
+      </ng-container>
       <p-menu #menu [popup]="true" [model]="items"></p-menu>
     </div>
   </div>

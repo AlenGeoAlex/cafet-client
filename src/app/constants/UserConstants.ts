@@ -5,4 +5,5 @@ export enum UserConstants{
   Role = "USER_ROLE",
   ImageLink = "USER_IMAGE",
   RefreshTokens = "REFRESH_TOKEN",
+  CartId = "CART_ID",
 }

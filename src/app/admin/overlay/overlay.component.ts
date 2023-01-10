@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
+import {AuthenticationService} from "../../auth/authentication.service";
+import {NgxSpinnerService} from "ngx-spinner";
+import {UserConstants} from "../../constants/UserConstants";
 
 @Component({
   selector: 'app-overlay',
@@ -9,8 +12,8 @@ import {MenuItem} from "primeng/api";
 export class OverlayComponent implements OnInit {
 
   public items: MenuItem[];
-
-  constructor() {
+  public iLink : string | null  = null;
+  constructor(private readonly authService : AuthenticationService,private readonly spinnerService:NgxSpinnerService) {
     this.items = [
       {
         label: 'Administration',
@@ -48,11 +51,13 @@ export class OverlayComponent implements OnInit {
 
 
   logout() {
-    console.log("Log out")
+    this.authService.logout()
   }
 
   ngOnInit(): void {
-
+    const imageLink = this.authService.getUserData(UserConstants.ImageLink);
+    if(imageLink != null && imageLink.length > 0)
+      this.iLink = imageLink;
   }
 
 }

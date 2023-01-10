@@ -5,13 +5,14 @@ import {CategoryComponent} from "./category/category.component";
 import {FoodComponent} from "./food/food.component";
 import {UsersComponent} from "./user/user.component";
 import {FoodEditComponent} from "./food/food-edit/food-edit.component";
+import {AuthorizationGuard} from "../auth/authorization.guard";
 
 const routes: Routes = [
   {path: "", component: AdminHomeComponent},
-  {path: "admin/category", component: CategoryComponent},
-  {path: "admin/food", component: FoodComponent},
-  {path: "admin/food/edit/:id", component: FoodEditComponent},
-  {path: "admin/users", component: UsersComponent}
+  {path: "admin/category", component: CategoryComponent, canActivate: [AuthorizationGuard]},
+  {path: "admin/food", component: FoodComponent, canActivate: [AuthorizationGuard]},
+  {path: "admin/food/edit/:id", component: FoodEditComponent, canActivate: [AuthorizationGuard]},
+  {path: "admin/users", component: UsersComponent, canActivate: [AuthorizationGuard]}
 
 ];
 

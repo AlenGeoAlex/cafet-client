@@ -21,14 +21,14 @@ export class AuthComponent implements OnInit {
     this.regGroup = fb.group({
       firstName : ['', Validators.required],
       lastName : ['', Validators.required],
-      emailAddress : ['', Validators.required],
-      password : ['', Validators.required],
+      emailAddress : ['', [Validators.email, Validators.required]],
+      password : ['', [Validators.required, Validators.min(5)]],
       termsCheckbox: [false, Validators.required]
     });
 
     this.logGroup = fb.group({
-      emailAddress : ['', Validators.required],
-      password : ['', Validators.required],
+      emailAddress : ['', [Validators.email, Validators.required]],
+      password : ['', [Validators.required, Validators.min(5)]],
     });
   }
 
@@ -59,7 +59,34 @@ export class AuthComponent implements OnInit {
   }
 
   signin(loginParam : ILoginParams){
-    console.log(loginParam);
+    this.authenticationService.loginAccount(loginParam).subscribe({
+      next: value => {
+        this.authenticationService.setLoginData(value);
+      },
+      error: err => {
+        this.logGroup.reset();
+        if(err instanceof HttpErrorResponse){
+          const error = <HttpErrorResponse> err;
+          if(err.status === 400){
+            const errMessage = error.error;
+            if(errMessage != null || errMessage != undefined){
+              this.messageService.add({severity: "error", summary: "Failed", detail: errMessage})
+            }
+          } else if(err.status === 401){
+            const errMessage = error.error;
+            if(errMessage != null || errMessage != undefined){
+              this.messageService.add({severity: "error", summary: "Denied", detail: errMessage})
+            }
+          } else{
+            console.log(err);
+            this.messageService.add({severity: "error", summary: "Failed", detail: "An unknown error occurred. Please try again later!"})
+          }
+        }
+      },
+      complete: () => {
+
+      }
+    })
   }
 
   signup(){
