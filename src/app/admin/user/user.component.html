@@ -1,6 +1,64 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
 <div class="d-flex">
   <app-overlay></app-overlay>
-  <div class="mt-5">
-    <span>User works</span>
+  <div class="mt-5" >
+    <div class="container-fluid min-vw-100" style="margin-top: 2rem">
+      <div class="row">
+        <div class="col-12">
+          <p-table [value]="this.users" sortField="userRole" sortMode="single" dataKey="userRole" rowGroupMode="subheader" groupRowsBy="userRole">
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width:6%"></th>
+                <th style="width:5%"></th>
+                <th style="width:10%; font-family: Poppins, sans-serif;">First Name</th>
+                <th style="width:10%; font-family: Poppins, sans-serif;">Last Name</th>
+                <th style="width:10%; font-family: Poppins, sans-serif;">Email</th>
+                <th style="width:10%; font-family: Poppins, sans-serif;">Wallet</th>
+                <th style="width:10%; font-family: Poppins, sans-serif;">Status</th>
+                <th style="width:10%; font-family: Poppins, sans-serif;">Actions</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="groupheader" let-user let-rowIndex="rowIndex" let-expanded="expanded">
+              <tr>
+                <td colspan="7">
+                  <button type="button" pButton pRipple [pRowToggler]="user" class="p-button-text p-button-rounded p-button-plain mr-2" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                  <p-avatar label="{{this.getUserRoleAvatar(user.userRole)}}" styleClass="mr-4 mb-2" size="small" pBadge value="{{this.getUserCountFor(user.userRole)}}" severity="info" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}"></p-avatar>
+                  <span style="margin-left: 7px; font-family: Poppins, sans-serif; ">{{user.userRole}}</span>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" let-customer>
+              <tr>
+                <td>
+                </td>
+                <td>
+                  <p-avatar image="{{customer.userImage}}" styleClass="mr-2" shape="circle"></p-avatar>
+                </td>
+                <td>
+                  {{customer.userFirstName}}
+                </td>
+                <td>
+                  {{customer.userLastName}}
+                </td>
+                <td>
+                  {{customer.userEmail}}
+                </td>
+                <td>
+                  {{customer.walletBalance | currency: "INR"}}
+                </td>
+                <td>
+                  {{customer.activated.toString() | uppercase}}
+                </td>
+                <td>
+                  <button pButton icon="pi pi-cog" class=" p-button-text" (click)="this.onClick(customer.userId, $event, this.menu)" ></button>
+                  <p-menu #menu [popup]="true" [model]="items"></p-menu>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -36,9 +36,7 @@ import {ErrorInterceptor} from "./interceptor/error.interceptor";
     ConfirmationService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-/*
-    {provide: APP_INITIALIZER, useFactory: initializeApp, multi: true, deps: [AuthenticationService]},
-*/
+    // {provide: APP_INITIALIZER, useFactory: initializeApp, multi: true, deps: [AuthenticationService]},
   ],
   bootstrap: [AppComponent]
 })

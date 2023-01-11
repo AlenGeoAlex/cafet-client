@@ -15,16 +15,16 @@ export interface IRegistrationParams {
   firstName: string,
   lastName: string,
   emailAddress: string,
-  password: string
-  role: "ADMIN" | "STAFF" | "CUSTOMER",
+  password?: string
+  role: "Admin" | "Staff" | "Customer",
 }
 
 export class RegistrationParam implements IRegistrationParams {
   emailAddress: string;
   firstName: string;
   lastName: string;
-  password: string;
-  role: "ADMIN" | "STAFF" | "CUSTOMER";
+  password?: string;
+  role: "Admin" | "Staff" | "Customer";
 }
 
 export interface ILoginParams {

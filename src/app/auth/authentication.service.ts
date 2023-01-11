@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ILoginParams, IRegistrationParams} from "../domain/Params/FormParams";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
-import {IUser} from "../domain/IUser";
+import {ICred} from "../domain/ICred";
 import {UserConstants} from "../constants/UserConstants";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -12,19 +12,21 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class AuthenticationService {
   readonly apiUrl : string;
+  readonly authenticationObservable$ : BehaviorSubject<string | null>
   constructor(private readonly client: HttpClient, private readonly router : Router, private readonly route : ActivatedRoute) {
     this.apiUrl = `${environment.apiUrl}auth/`;
+    this.authenticationObservable$ = new BehaviorSubject<string | null>(this.getUserData(UserConstants.UserName));
   }
 
-  registerNewAccount(regParam : IRegistrationParams) : Observable<IUser> {
-    return this.client.post<IUser>(this.apiUrl+"register/", regParam);
+  registerNewAccount(regParam : IRegistrationParams) : Observable<ICred> {
+    return this.client.post<ICred>(this.apiUrl+"register/", regParam);
   }
 
-  loginAccount(loginParam : ILoginParams) : Observable<IUser> {
-    return this.client.post<IUser>(this.apiUrl+"login/", loginParam);
+  loginAccount(loginParam : ILoginParams) : Observable<ICred> {
+    return this.client.post<ICred>(this.apiUrl+"login/", loginParam);
   }
 
-  setLoginData(userData : IUser){
+  setLoginData(userData : ICred){
     localStorage.setItem(UserConstants.AccessToken, userData.accessToken);
     localStorage.setItem(UserConstants.Email, userData.userEmailAddress);
     localStorage.setItem(UserConstants.UserName, userData.userFullName);
@@ -49,6 +51,7 @@ export class AuthenticationService {
     }else {
       this.router.navigate(["/404"])
     }
+    this.authenticationObservable$.next(userData.userFullName);
   }
 
   setData(constant : UserConstants, value : string){
@@ -63,6 +66,7 @@ export class AuthenticationService {
     localStorage.removeItem(UserConstants.Role)
     localStorage.removeItem(UserConstants.ImageLink)
     localStorage.removeItem(UserConstants.CartId)
+    this.authenticationObservable$.next(null);
     this.router.navigate(["/auth/"]);
   }
 

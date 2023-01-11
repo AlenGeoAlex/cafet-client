@@ -96,7 +96,7 @@ export class AuthComponent implements OnInit {
     param.firstName = rawValue.firstName;
     param.lastName = rawValue.lastName;
     param.password = rawValue.password;
-    param.role = "CUSTOMER";
+    param.role = "Customer";
 
     this.authenticationService.registerNewAccount(param).subscribe({
       next: value => {

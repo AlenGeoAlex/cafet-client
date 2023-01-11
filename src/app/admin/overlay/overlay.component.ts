@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
+import {MenuModule} from 'primeng/menu';
+
 import {AuthenticationService} from "../../auth/authentication.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {UserConstants} from "../../constants/UserConstants";
@@ -28,10 +30,20 @@ export class OverlayComponent implements OnInit {
             icon: 'pi pi-circle',
             routerLink: "/admin/food"
           },
+        ]
+      },
+      {
+        label: "User Management",
+        items: [
           {
-            label: 'User',
-            icon: 'pi pi-user',
+            label: 'Manage',
+            icon: 'pi pi-key',
             url: "/admin/users"
+          },
+          {
+            label: 'Registration',
+            icon: 'pi pi-file-edit',
+            url: "/admin/users/reg"
           },
         ]
       },
@@ -45,7 +57,8 @@ export class OverlayComponent implements OnInit {
             }
           },
           ]
-      }
+      },
+
     ];
   }
 

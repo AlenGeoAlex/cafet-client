@@ -29,6 +29,10 @@ import {InputNumberModule} from "primeng/inputnumber";
 import { FoodViewComponent } from './food/food-view/food-view.component';
 import { FoodEditComponent } from './food/food-edit/food-edit.component';
 import {ImageModule} from "primeng/image";
+import { UserRegComponent } from './user/user-reg/user-reg.component';
+import {DropdownModule} from "primeng/dropdown";
+import {MultiSelectModule} from "primeng/multiselect";
+import {BadgeModule} from "primeng/badge";
 
 @NgModule({
   declarations: [
@@ -41,29 +45,33 @@ import {ImageModule} from "primeng/image";
     CatRegComponent,
     FoodRegComponent,
     FoodViewComponent,
-    FoodEditComponent
+    FoodEditComponent,
+    UserRegComponent
   ],
-    imports: [
-        CommonModule,
-        AdminRoutingModule,
-        AvatarModule,
-        MenuModule,
-        RouterModule,
-        CardModule,
-        DividerModule,
-        ButtonModule,
-        TableModule,
-        RippleModule,
-        FormsModule,
-        InputTextModule,
-        InputTextareaModule,
-        ReactiveFormsModule,
-        ToastModule,
-        ConfirmDialogModule,
-        FileUploadModule,
-        AutoCompleteModule,
-        InputNumberModule,
-        ImageModule,
-    ]
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    AvatarModule,
+    MenuModule,
+    RouterModule,
+    CardModule,
+    DividerModule,
+    ButtonModule,
+    TableModule,
+    RippleModule,
+    FormsModule,
+    InputTextModule,
+    InputTextareaModule,
+    ReactiveFormsModule,
+    ToastModule,
+    ConfirmDialogModule,
+    FileUploadModule,
+    AutoCompleteModule,
+    InputNumberModule,
+    ImageModule,
+    DropdownModule,
+    MultiSelectModule,
+    BadgeModule,
+  ]
 })
 export class AdminModule { }
