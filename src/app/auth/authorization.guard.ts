@@ -1,5 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanActivateChild,
+  Router,
+  RouterStateSnapshot,
+  UrlTree
+} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthenticationService} from "./authentication.service";
 import {UserConstants} from "../constants/UserConstants";
@@ -9,7 +16,7 @@ import {UserConstants} from "../constants/UserConstants";
 })
 export class AuthorizationGuard implements CanActivate, CanActivateChild {
 
-  constructor(private readonly authService : AuthenticationService) {
+  constructor(private readonly authService : AuthenticationService, private readonly router : Router) {
   }
 
   canActivate(
@@ -38,7 +45,7 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
     if(role === userRole){
       return true;
     }else{
-      this.authService.logout();
+      this.router.navigate(['/auth'])
       return false;
     }
   }
@@ -47,7 +54,6 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
     console.log(childRoute.parent)
     if(childRoute.parent != null){
       var canActivate1 = this.canActivate(childRoute.parent, state);
-      console.log(canActivate1)
       return canActivate1;
     }
     else return false;

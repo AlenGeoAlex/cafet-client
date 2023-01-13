@@ -1,0 +1,42 @@
+<header class="pt-2 pb-2 ps-3 shadow-sm text-white fixed-top nav-bar-bg">
+  <div class="container-fluid">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-1 mb-lg-0 text-white text-decoration-none">
+          <img src="../../../assets/cafet.svg" width="45px">
+          <span class="font-weight-bold" style="font-size: x-large; color: #4747A1; padding-top: 1px; margin-left: -5px; font-family: Poppins, sans-serif">afet </span>
+        </a>
+
+        <ul class="nav col-12 ms-4 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li class="">
+            <a class="nav-link nav-btn px-3 link-secondary" [routerLink]="['/staff']" routerLinkActive="selected" [routerLinkActiveOptions]="{exact: true}"><span class="nav-btn-text">Home</span></a>
+          </li>
+          <li class="">
+            <a class="nav-link nav-btn px-3" [routerLink]="['/staff/reg-stock']" routerLinkActive="selected"><span class="nav-btn-text">Register Stock</span></a>
+          </li>
+          <li class="">
+            <a class="nav-link nav-btn px-3" [routerLink]="['/staff/daily-stock']" routerLinkActive="selected"><span class="nav-btn-text">Daily Stock</span></a>
+          </li>
+          <li class="">
+            <a class="nav-link nav-btn px-3" [routerLink]="['/staff/order']" routerLinkActive="selected"><span class="nav-btn-text">Orders</span></a>
+          </li>
+          <li class="">
+            <a class="nav-link nav-btn px-3" [routerLink]="['/staff/recharge']" routerLinkActive="selected"><span class="nav-btn-text">Recharge</span></a>
+          </li>
+        </ul>
+
+
+        <div class="row">
+          <div class="col-1 mns">
+            <ng-container *ngIf="imageLink">
+              <p-avatar image="{{this.imageLink}}" (click)="menu.toggle($event)" styleClass="mr-2" size="small" shape="circle"></p-avatar>
+            </ng-container>
+            <ng-container *ngIf="!imageLink">
+              <p-avatar label="A" shape="circle" (click)="menu.toggle($event)"></p-avatar>
+            </ng-container>
+            <p-menu #menu [popup]="true" [model]="this.menuItem"></p-menu>
+          </div>
+        </div>
+    </div>
+  </div>
+</header>
+

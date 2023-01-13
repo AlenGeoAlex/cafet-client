@@ -5,6 +5,7 @@ import {IRole} from "../../domain/IRole";
 import {RegistrationParam} from "../../domain/Params/FormParams";
 import {environment} from "../../../environments/environment";
 import {IUser} from "../../domain/IUser";
+import {AccountStatus} from "../../domain/AccountStatus";
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,11 @@ export class UserService {
 
   registerNewUser(regParam : RegistrationParam) : Observable<any>{
     return this.client.post<any>(this.authUrl+"register", regParam);
+  }
+
+  deleteUserAccount(id : number) : Observable<boolean> {
+    const statusData = new AccountStatus();
+    statusData.accountId = id;
+    return this.client.post<boolean>(this.userUrl+"delete", statusData);
   }
 }

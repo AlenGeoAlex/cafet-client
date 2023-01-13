@@ -1,0 +1,81 @@
+<div class="position-relative">
+  <app-staff-navbar></app-staff-navbar>
+  <div class="container-fluid" style="padding-top: 4.05rem">
+    <div class="row">
+      <div class="col-10">
+
+      </div>
+      <div class="col-1 pt-1">
+        <button pButton pRipple type="button" icon="pi pi-check" (click)="submit()" pTooltip="Update new stock" label="Update" class="p-button p-button-text p-button-icon p-button-info"></button>
+      </div>
+      <div class="col-1 pt-1">
+        <button pButton pRipple type="button" icon="pi pi-times" (click)="removeAll()" pTooltip="Reset all selected food items" label="Reset" class="p-button p-button-text p-button-icon p-button-warning "></button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <p-tabView>
+          <p-tabPanel [header]="item.key" *ngFor="let item of this.foodByCat | keyvalue; let i = index" [selected]="i == 0">
+            <div class="col-12 md:col-6 drag-column">
+              <div *ngFor="let product of item.value">
+                <div class="product-item" pDraggable="products" (onDragStart)="this.dragStart(product)" (onDragEnd)="this.dragEnd()"  >
+                  <div class="image-container">
+                    <img src="{{product.foodImage}}" [alt]="product.name" class="product-image" />
+                  </div>
+                  <div class="product-list-detail">
+                    <h5 class="mb-2">{{product.name}}</h5>
+                    <i class="pi pi-tag product-category-icon"></i>
+                    <span class="product-category">{{product.category}}</span>
+                  </div>
+                  <div class="product-list-action">
+                    <h6 class="mb-2">${{product.foodPrice}}</h6>
+                    <button pButton pRipple type="button" icon="pi pi-chevron-right" pTooltip="Create Stock" (click)="clickSelected(product)" class="p-button-rounded p-button-text p-button-icon"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+
+      <!--
+      ------------------------------------------------------------------------------------------------------------------
+      -->
+
+      <div class="col-6"  pDroppable="products" (onDrop)="this.onDrop()">
+        <div class="col-12 md:col-6 drop-column">
+          <p-tabView>
+            <p-tabPanel [header]="item.key" *ngFor="let item of this.selectedByCat | keyvalue; let i = index" [selected]="i == 0">
+              <p-table [value]="item.value">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="width: 5%">Name</th>
+                    <th style="width: 5%">Food Quantity</th>
+                    <th style="width: 5%">Food Price</th>
+                    <th style="width: 5%">Total Price</th>
+                    <th style="width: 15%">Delete</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                  <tr>
+                    <td>{{product.name}}</td>
+                    <td>
+                      <p-inputNumber [(ngModel)]="product.quantity" [showButtons]="true" [size]="1" inputId="stacked"  [min]="1">
+
+                      </p-inputNumber>
+                    </td>
+                    <td>{{product.foodPrice | currency: "INR"}}</td>
+                    <td>{{product.foodPrice * product.quantity}}</td>
+                    <td>
+                      <button pButton pRipple type="button" icon="pi pi-trash" (click)="clickRemove(product)" class="p-button-rounded p-button-text p-button-icon"></button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

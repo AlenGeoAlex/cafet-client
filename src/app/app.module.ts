@@ -12,8 +12,6 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import { Error404Component } from './error404/error404.component';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {JwtInterceptor} from "./interceptor/jwt.interceptor";
-import {initializeApp} from "./helper/initializeApp";
-import {AuthenticationService} from "./auth/authentication.service";
 import {ErrorInterceptor} from "./interceptor/error.interceptor";
 
 @NgModule({

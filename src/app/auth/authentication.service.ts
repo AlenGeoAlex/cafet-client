@@ -31,10 +31,10 @@ export class AuthenticationService {
     localStorage.setItem(UserConstants.Email, userData.userEmailAddress);
     localStorage.setItem(UserConstants.UserName, userData.userFullName);
     localStorage.setItem(UserConstants.RefreshTokens, userData.refreshToken);
-    localStorage.setItem(UserConstants.Role, userData.userRole)
-    localStorage.setItem(UserConstants.ImageLink, userData.imageLink)
-    localStorage.setItem(UserConstants.CartId, userData.cartId)
-
+    localStorage.setItem(UserConstants.Role, userData.userRole);
+    localStorage.setItem(UserConstants.ImageLink, userData.imageLink);
+    localStorage.setItem(UserConstants.CartId, userData.cartId);
+    localStorage.setItem(UserConstants.Cart, userData.CartData);
     let roleItem  = userData.userRole;
     if(roleItem == null){
       this.logout();
@@ -66,6 +66,7 @@ export class AuthenticationService {
     localStorage.removeItem(UserConstants.Role)
     localStorage.removeItem(UserConstants.ImageLink)
     localStorage.removeItem(UserConstants.CartId)
+    localStorage.removeItem(UserConstants.Cart);
     this.authenticationObservable$.next(null);
     this.router.navigate(["/auth/"]);
   }

@@ -4,9 +4,10 @@ export interface ICred {
   userFullName: string;
   userRole: string;
   accessToken: string;
-  refreshToken?: any;
-  imageLink: any;
-  cartId: any;
+  refreshToken: string;
+  imageLink: string;
+  cartId: string;
+  CartData: string;
 }
 
 class Cred implements ICred {
@@ -14,8 +15,9 @@ class Cred implements ICred {
   userEmailAddress: string;
   userFullName: string;
   userRole: string;
-  refreshToken?: any;
-  cartId: any;
-  imageLink: any;
+  refreshToken: string;
+  cartId: string;
+  imageLink: string;
+  CartData: string;
 
 }

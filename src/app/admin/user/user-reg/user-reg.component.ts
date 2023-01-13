@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {IRole} from "../../../domain/IRole";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ILoginParams, RegistrationParam} from "../../../domain/Params/FormParams";
 import {UserService} from "../user.service";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -28,7 +28,8 @@ export class UserRegComponent implements OnInit {
       lastName : ['', Validators.required],
       emailAddress : ['', [Validators.email, Validators.required]],
       role: ["", Validators.required],
-    })
+    });
+
   }
 
   ngOnInit(): void {
@@ -50,4 +51,5 @@ export class UserRegComponent implements OnInit {
       }
     })
   }
+
 }

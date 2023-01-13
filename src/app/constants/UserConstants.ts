@@ -6,4 +6,5 @@ export enum UserConstants{
   ImageLink = "USER_IMAGE",
   RefreshTokens = "REFRESH_TOKEN",
   CartId = "CART_ID",
+  Cart = "CART",
 }

@@ -1,0 +1,65 @@
+.nav-btn {
+  background-color: #ffffff;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0.25rem 0.125rem;
+  border-radius: 10px;
+  -webkit-transition: width 0.25s ease, background 0.25s ease;
+  transition: width 0.25s ease, background 0.25s ease;
+}
+
+.nav-bar-bg {
+  background-color: #ffffff;
+
+}
+
+.nav-btn-text {
+  color: black;
+  font-family: "Nunito", sans-serif;
+  font-weight: 500;
+}
+
+.selected {
+  background-color: #5E50F9;
+
+  span {
+    color: white;
+  }
+}
+
+.nav-btn:hover {
+  background-color: #5E50F9;
+
+  span {
+    color: white;
+  }
+}
+
+@media (min-width: 1200px){
+  .container {
+    max-width: 100%;
+  }
+}
+
+.main-nav {
+  background-color: #2750bf;
+}
+
+@media (min-width: 992px){
+  .navbar-expand-lg {
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -ms-flex-pack: start;
+    justify-content: space-between;
+    padding: 10px 20px;
+
+  }
+}
+
+.mns{display: flex;}
+.mns .flt{    display: flex;
+  padding: 0px 10px;}
+
