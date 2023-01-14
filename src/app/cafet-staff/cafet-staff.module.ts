@@ -13,26 +13,30 @@ import {DragDropModule} from "primeng/dragdrop";
 import {RippleModule} from "primeng/ripple";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
+import {DividerModule} from "primeng/divider";
+import { DailyStockComponent } from './daily-stock/daily-stock.component';
 
 @NgModule({
   declarations: [
     StaffComponent,
     StaffNavbarComponent,
     RegStockComponent,
+    DailyStockComponent,
 
   ],
-  imports: [
-    CommonModule,
-    CafetStaffRoutingModule,
-    ButtonModule,
-    AvatarModule,
-    MenuModule,
-    TableModule,
-    TabViewModule,
-    DragDropModule,
-    RippleModule,
-    InputNumberModule,
-    FormsModule,
-  ]
+    imports: [
+        CommonModule,
+        CafetStaffRoutingModule,
+        ButtonModule,
+        AvatarModule,
+        MenuModule,
+        TableModule,
+        TabViewModule,
+        DragDropModule,
+        RippleModule,
+        InputNumberModule,
+        FormsModule,
+        DividerModule,
+    ]
 })
 export class CafetStaffModule { }

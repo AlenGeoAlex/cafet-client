@@ -68,9 +68,7 @@ export class CatViewComponent implements OnInit {
   }
 
   onRowEditInit(product: ICategory) {
-    this.localCache.set(product.id, product);/*
-    localStorage.setItem("TEST_DATA",product.id.toString());
-    console.log(localStorage.getItem("TEST_DATA"));*/
+    this.localCache.set(product.id, Object.assign({}, product));
   }
 
   onRowEditSave(product: ICategory) {

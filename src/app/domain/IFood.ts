@@ -26,3 +26,4 @@ export class SelectedFood {
     this.quantity = 0;
   }
 }
+

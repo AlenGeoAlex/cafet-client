@@ -3,13 +3,22 @@
   <div class="container-fluid" style="padding-top: 4.05rem">
     <div class="row">
       <div class="col-10">
+      </div>
 
+      <div class="col-1 py-1">
+        <button
+          pButton pRipple type="button" icon="pi pi-check"
+          [disabled]="!hasAnySelectedFood()" (click)="submit()"
+          pTooltip="Register new stock" label="Update"
+          class="p-button p-button-text p-button-icon p-button-info">
+        </button>
       </div>
       <div class="col-1 pt-1">
-        <button pButton pRipple type="button" icon="pi pi-check" (click)="submit()" pTooltip="Update new stock" label="Update" class="p-button p-button-text p-button-icon p-button-info"></button>
-      </div>
-      <div class="col-1 pt-1">
-        <button pButton pRipple type="button" icon="pi pi-times" (click)="removeAll()" pTooltip="Reset all selected food items" label="Reset" class="p-button p-button-text p-button-icon p-button-warning "></button>
+        <button pButton pRipple type="button" icon="pi pi-times"
+                [disabled]="!hasAnySelectedFood()"  (click)="removeAll()"
+                pTooltip="Reset all selected food items" label="Reset"
+                class="p-button p-button-text p-button-icon p-button-warning ">
+        </button>
       </div>
     </div>
     <div class="row">

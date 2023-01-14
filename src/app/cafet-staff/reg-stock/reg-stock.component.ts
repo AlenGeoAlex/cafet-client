@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {IFood, SelectedFood} from "../../domain/IFood";
-import {RegStockService} from "./reg-stock.service";
+import {StockService} from "../stock.service";
+import {finalize} from "rxjs";
+import {NgxSpinnerService} from "ngx-spinner";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-reg-stock',
@@ -15,14 +20,26 @@ export class RegStockComponent implements OnInit {
 
   public currentlyDragging : IFood | null;
 
-  constructor(private readonly regStockSer : RegStockService) { }
+  constructor(private readonly regStockSer : StockService,
+              private readonly spinnerService : NgxSpinnerService,
+              private readonly messageService : MessageService,
+              private readonly confirmationSer : ConfirmationService,
+              private readonly router : Router,
+  ) { }
 
   ngOnInit(): void {
     this.populate();
   }
 
   populate(){
-    this.regStockSer.foodObservable$.subscribe({next: value => {
+    this.spinnerService.show();
+    this.regStockSer.foodObservable$
+      .pipe(
+        finalize(() => {
+          this.spinnerService.hide();
+        })
+      )
+      .subscribe({next: value => {
         this.availableFoods = value;
         for (let iFood of value) {
             const catName = iFood.category;
@@ -134,8 +151,48 @@ export class RegStockComponent implements OnInit {
         result.push(selectedFood);
       }
     }
-    console.log(result);
 
+    this.spinnerService.show();
+    this.regStockSer.registerStock(result)
+      .pipe(finalize(() => {
+        this.spinnerService.hide();
+      }))
+      .subscribe({
+        next: value => {
+          this.messageService.add({severity: "success", detail: "Successfully Registered!", summary: "Complete"});
+          this.removeAll();
+          this.router.navigate(['/staff/daily-stock'])
+        },
+        error: err => {
+          let errorMsg = "Failed to register products!"
+          if(err instanceof HttpErrorResponse){
+            if(err.status === 422 && err.error){
+              errorMsg = "Failed to register these "+err.error+"."
+            }
+          }
+          console.log(err);
+          this.messageService.add({severity: "error", detail: errorMsg, summary: "Failed"});
+          this.removeAll();
+        },
+        complete: () => {
+
+        }
+      })
+  }
+
+  hasAnySelectedFood() : boolean {
+    let foundOne = false;
+    for (let value of this.selectedByCat.values()) {
+      for (let selectedFood of value) {
+        foundOne = true;
+        break;
+      }
+
+      if(foundOne)
+        break;
+    }
+
+    return foundOne;
   }
 
   removeAll() {
@@ -149,5 +206,14 @@ export class RegStockComponent implements OnInit {
     for (let selectedFood of toRemove) {
       this.removeSelected(selectedFood);
     }
+  }
+
+  onReset(){
+    this.confirmationSer.confirm({
+      message: "Are you sure want to reset the entire stock list?",
+      accept: () => {
+        this.removeAll();
+      }
+    })
   }
 }

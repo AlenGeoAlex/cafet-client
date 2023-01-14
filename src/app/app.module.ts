@@ -13,22 +13,24 @@ import { Error404Component } from './error404/error404.component';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {JwtInterceptor} from "./interceptor/jwt.interceptor";
 import {ErrorInterceptor} from "./interceptor/error.interceptor";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
     AppComponent,
     Error404Component
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FileUploadModule,
-    AdminModule,
-    ToastModule,
-    NgxSpinnerModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FileUploadModule,
+        AdminModule,
+        ToastModule,
+        NgxSpinnerModule,
+        ConfirmDialogModule
+    ],
   providers: [
     MessageService,
     ConfirmationService,
