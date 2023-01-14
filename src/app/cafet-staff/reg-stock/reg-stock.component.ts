@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {IFood, SelectedFood} from "../../domain/IFood";
-import {StockService} from "../stock.service";
+import {StockService} from "../services/stock.service";
 import {finalize} from "rxjs";
 import {NgxSpinnerService} from "ngx-spinner";
 import {ConfirmationService, MessageService} from "primeng/api";

@@ -15,6 +15,9 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
 import {DividerModule} from "primeng/divider";
 import { DailyStockComponent } from './daily-stock/daily-stock.component';
+import {InputTextModule} from "primeng/inputtext";
+import {CardModule} from "primeng/card";
+import {AutoCompleteModule} from "primeng/autocomplete";
 
 @NgModule({
   declarations: [
@@ -24,19 +27,22 @@ import { DailyStockComponent } from './daily-stock/daily-stock.component';
     DailyStockComponent,
 
   ],
-    imports: [
-        CommonModule,
-        CafetStaffRoutingModule,
-        ButtonModule,
-        AvatarModule,
-        MenuModule,
-        TableModule,
-        TabViewModule,
-        DragDropModule,
-        RippleModule,
-        InputNumberModule,
-        FormsModule,
-        DividerModule,
-    ]
+  imports: [
+    CommonModule,
+    CafetStaffRoutingModule,
+    ButtonModule,
+    AvatarModule,
+    MenuModule,
+    TableModule,
+    TabViewModule,
+    DragDropModule,
+    RippleModule,
+    InputNumberModule,
+    FormsModule,
+    DividerModule,
+    InputTextModule,
+    CardModule,
+    AutoCompleteModule,
+  ]
 })
 export class CafetStaffModule { }
