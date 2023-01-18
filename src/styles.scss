@@ -8,3 +8,9 @@
   padding-top: 4.05rem;
   margin-top: 4.05rem;
 }
+
+img {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

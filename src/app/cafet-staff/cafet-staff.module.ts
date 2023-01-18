@@ -18,6 +18,9 @@ import { DailyStockComponent } from './daily-stock/daily-stock.component';
 import {InputTextModule} from "primeng/inputtext";
 import {CardModule} from "primeng/card";
 import {AutoCompleteModule} from "primeng/autocomplete";
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {DialogModule} from "primeng/dialog";
+import { RechargeCusComponent } from './recharge-cus/recharge-cus.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +28,9 @@ import {AutoCompleteModule} from "primeng/autocomplete";
     StaffNavbarComponent,
     RegStockComponent,
     DailyStockComponent,
-
+    RechargeCusComponent,
   ],
+
   imports: [
     CommonModule,
     CafetStaffRoutingModule,
@@ -43,6 +47,8 @@ import {AutoCompleteModule} from "primeng/autocomplete";
     InputTextModule,
     CardModule,
     AutoCompleteModule,
+    OverlayPanelModule,
+    DialogModule,
   ]
 })
 export class CafetStaffModule { }

@@ -22,7 +22,11 @@ export class StockService {
   }
 
   registerStock(selectedFood : SelectedFood[]) : Observable<any>{
-    return this.client.post<any>(this.stockUrl+"register/", selectedFood);
+    return this.client.post<any>(this.stockUrl+"register/?clear=1", selectedFood);
+  }
+
+  addNewSingleStock(selectedFood : SelectedFood) : Observable<any> {
+    return this.client.post<any>(this.stockUrl+"register/", [selectedFood]);
   }
 
   deleteStock(id : number) : Observable<any> {

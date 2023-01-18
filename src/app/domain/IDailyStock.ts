@@ -6,4 +6,5 @@ export interface IDailyStock {
   foodCategory: string;
   totalInStock: number;
   currentInStock: number;
+  foodPrice: number;
 }

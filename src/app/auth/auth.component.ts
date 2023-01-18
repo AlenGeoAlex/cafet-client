@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ILoginParams, IRegistrationParams, RegistrationParam} from "../domain/Params/FormParams";
+import {ILoginParams, IRegistrationParams, RegistrationParam} from "../domain/Params/OutputDto";
 import {AuthenticationService} from "./authentication.service";
 import {HttpErrorResponse, HttpResponseBase} from "@angular/common/http";
 import {MessageService} from "primeng/api";

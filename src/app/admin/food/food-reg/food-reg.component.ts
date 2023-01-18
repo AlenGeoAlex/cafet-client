@@ -110,9 +110,11 @@ export class FoodRegComponent implements OnInit {
     this.foodService.createNewFood(data).subscribe({
       next: value => {
         this.regEvent.emit(true);
+        this.fg.reset();
       },
       error: err => {
         this.regEvent.emit(true);
+        this.fg.reset();
       },
       complete: () => {
         this.fg.reset();

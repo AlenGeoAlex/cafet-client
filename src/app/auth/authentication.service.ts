@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ILoginParams, IRegistrationParams} from "../domain/Params/FormParams";
+import {ILoginParams, IRegistrationParams} from "../domain/Params/OutputDto";
 import {BehaviorSubject, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {ICred} from "../domain/ICred";
@@ -45,7 +45,7 @@ export class AuthenticationService {
     if(roleItem === "ADMIN"){
       this.router.navigate(["/admin/"])
     }else if(roleItem === "STAFF"){
-      //this.router.navigate(["/staff/"])
+      this.router.navigate(["/staff/"])
     }else if(roleItem === "CUSTOMER"){
 
     }else {

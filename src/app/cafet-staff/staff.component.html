@@ -1,79 +1,265 @@
 <div class="position-relative">
   <app-staff-navbar></app-staff-navbar>
   <div class="container-fluid" style="margin-top: 4.05rem;">
-    <div class="row my-1" style="min-width: 100vw">
-      <div class="col" style="font-family: Poppins, sans-serif">
-        <p-card class="shadow-sm border-light" styleClass="bg-light">
-          <ng-template pTemplate="header" >
-            <div class="row pt-5">
-              <h3 class="text-center fw-bolder">Customer Details</h3>
-            </div>
-          </ng-template>
+    <div class="row my-1" style="min-width: 100vw;">
+      <!-- Right Side -->
+      <div class="col-8 card shadow-sm">
 
-          <!-- Email Address -->
-          <div class="row mb-3 ">
+        <div class="row">
+          <div class="col bg-light">
+            <p-table [value]="this.selectedFoods" >
+              <ng-template pTemplate="caption">
+                <div class="row">
+                  <div class="col-9">
+                    <span class="fw-bold">
+                      Search Item
+                    </span>
+                  </div>
+                  <div class="col">
+                    <p-autoComplete inputStyleClass="form-control" #foodSearch field="foodName" [minLength]="1" (onSelect)="this.onFoodSelect($event)"  [virtualScroll]="true" [suggestions]="foodSuggestion" (completeMethod)="this.searchFood($event)" dropdownIcon="pi pi-search" >
+
+                      <ng-template let-food pTemplate="item">
+                        <ng-container *ngIf="food.currentInStock > 0">
+                          <div class="row">
+                            <div class="col-8">
+                              <img src="{{food.foodImage}}" style="width:52px;display:inline-block;margin:5px 0 2px 5px"/>
+                            </div>
+
+                            <div class="col">
+                              <div class="row">
+                                <div style="font-size:15px;float:right">{{food.foodName}} <span class="text-primary ps-3">x{{food.currentInStock}}</span></div>
+                              </div>
+                              <div class="row">
+                                <div style="font-size:13px;float:right;margin:10px 0 0 0">{{food.foodPrice | currency: "INR"}}</div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="food.currentInStock <= 0">
+                          <div class="row ">
+                            <div class="col-8">
+                              <img src="{{food.foodImage}}" style="width:52px;display:inline-block;margin:2px 0 0 2px"/>
+                            </div>
+
+                            <div class="col">
+                              <div class="row">
+                                <div style="font-size:15px;float:right" class="text-decoration-line-through">{{food.foodName}}</div>
+                              </div>
+                              <div class="row">
+                                <div style="font-size:13px;float:right;margin:10px 0 0 0" class="text-decoration-line-through">{{food.foodPrice | currency: "INR"}}</div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </ng-template>
+
+                    </p-autoComplete>
+                  </div>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Item</th>
+                  <th>Image</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total Price</th>
+                  <th>Action</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-selectedFood let-rowindex="rowindex" let-editing="editing">
+                <tr>
+                  <td>{{selectedFood.foodName}}</td>
+
+                  <td>
+                    <div class="img-fluid" style="width: 40px; height: auto">
+                      <img src="{{selectedFood.foodImage}}" width="40px" height="auto" alt="image-{{selectedFood.foodName}}" >
+                    </div>
+                  </td>
+
+                  <td>{{selectedFood.foodPrice | currency:"INR" }}</td>
+
+                  <td >
+                    <p-inputNumber [(ngModel)]="selectedFood.orderQuantity" (onClear)="this.removeFromSelectedFood(selectedFood.foodId)"   (onBlur)="this.onQuantityUpdate(selectedFood)" ></p-inputNumber>
+                  </td>
+                  <td>{{selectedFood.orderQuantity * selectedFood.foodPrice}}</td>
+
+                  <td>
+                    <button pButton type="button" label="Remove" (click)="this.removeFromSelectedFood(selectedFood.foodId)" icon="pi pi-trash" class="p-button-text"></button>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template [ngIf]="selectedFoods.length > 0" pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                  Total Products : {{this.selectedFoods.length}}
+                </div>
+              </ng-template>
+
+            </p-table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left Side -->
+      <div class="col" style="font-family: Poppins, sans-serif">
+        <!-- Left Side - Top -->
+        <div class="row">
+          <p-card class="" styleClass="shadow-sm bg-light" >
+            <ng-template pTemplate="header" >
+              <div class="row pt-4 mb-3">
+                <h3 class="text-center fw-bolder">Customer Details</h3>
+              </div>
+            </ng-template>
+
+            <!-- Email Address -->
+            <div class="row mb-3 " style="margin-top: -3rem">
               <div class="col">
                 <div class="row">
-                  <h5>Customer Email Address</h5>
+                  <div class="col">
+                    <h5>Email Address</h5>
+                  </div>
+                  <div class="col-1">
+                    <i *ngIf="!this.newRegistration" class="pi pi-eye btn-outline-info btn-info" pTooltip="Click to enable account creation" (click)="this.toggleRegistration(true)" style="cursor: pointer"></i>
+                    <i *ngIf="this.newRegistration" class="pi pi-eye-slash btn-outline-info btn-info" pTooltip="Click to disable account creation" (click)="this.toggleRegistration(false)" style="cursor: pointer"></i>
+                  </div>
                 </div>
                 <div class="row mb-1">
                   <div class="col-12">
                     <span class="p-fluid">
-                      <p-autoComplete field="emailAddress" (completeMethod)="this.search($event)" [suggestions]="suggestions" (onUnselect)="this.onUnselected()" (onClear)="this.onUnselected()" [lazy]="true" (onSelect)="this.onSelected($event)" [minLength]="1"></p-autoComplete>
+                      <p-autoComplete
+                        *ngIf="!this.newRegistration" #autoComplete
+                        [required]="true" field="emailAddress" [showClear]="true"
+                        dropdownIcon="pi pi-search" (completeMethod)="this.searchUser($event)" [forceSelection]="true" [suggestions]="emailQuerySuggestion"
+                        (onUnselect)="this.onAccountUnselcted()" (onClear)="this.onAccountUnselcted()" (onSelect)="this.onAccountSelected($event.emailAddress)"
+                        [minLength]="2" >
+                      </p-autoComplete>
+
+                      <input type="text"
+                             #textBox
+                             *ngIf="this.newRegistration"
+                             (blur)="onBlur(textBox)"
+                             pInputText/>
                   </span>
                   </div>
                 </div>
                 <div class="row">
-                  <small id="username1-help" class="fw-light">Search for the users email address, If not present a new account would be created</small>
-                </div>
-              </div>
-          </div>
-
-          <!-- Customer Name -->
-          <div class=" row mb-3">
-            <div class="col">
-              <div class="row">
-                <h5>Customer First Name</h5>
-              </div>
-              <div class="row mb-1">
-                <div class="col-12">
-                  <input [readOnly]="true" type="text" class="form-control" value="{{this.currentlySelected? this.currentlySelected.firstName : ''}}" />
+                  <small
+                    *ngIf="!this.newRegistration"
+                    class="fw-light">Search for the users email address, If not present toggle to new account creator mode</small>
+                  <small
+                    *ngIf="this.newRegistration"
+                    class="fw-light">Register the new user using email and details!</small>
                 </div>
               </div>
             </div>
 
-            <div class="col">
-              <div class="row">
-                <h5>Customer Last Name</h5>
+            <!-- Customer Name -->
+            <div class=" row mb-3">
+              <div class="col">
+                <div class="row">
+                  <h5>First Name</h5>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-12">
+                    <input [readOnly]="false" *ngIf="this.newRegistration" #firstName type="text" class="form-control" (input)="this.inputFirstName()" />
+                    <input [readOnly]="true"  *ngIf="!this.newRegistration" type="text" class="form-control" (input)="this.inputFirstName()" value="{{this.currentlySelectedAccounts != null ? this.currentlySelectedAccounts.firstName : ''}}" />
+                  </div>
+                </div>
               </div>
-              <div class="row mb-1">
-                <div class="col-12">
-                  <input [readOnly]="true" type="text" class="form-control" value="{{this.currentlySelected? this.currentlySelected.lastName : ''}}" />
+
+              <div class="col">
+                <div class="row">
+                  <h5>Last Name</h5>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-12">
+                      <input [readOnly]="false" *ngIf="this.newRegistration" #lastName type="text" class="form-control" (input)="this.inputSecondName()" />
+                    <input [readOnly]="true" *ngIf="!this.newRegistration" type="text" class="form-control" (input)="this.inputSecondName()" value="{{this.currentlySelectedAccounts  != null ? this.currentlySelectedAccounts.lastName : ''}}" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-9">
-              <ng-container *ngIf="this.currentlySelected && this.currentlySelected.wallet >= 0">
-                <img src="assets/coin.svg" width="40px" alt="">
-                <span class="ps-2 text-info fw-bold">{{this.currentlySelected.wallet | currency: "INR"}}</span>
-              </ng-container>
+            <div class="row">
+              <div class="col-2">
+                <ng-container *ngIf="this.currentlySelectedAccounts && this.currentlySelectedAccounts.wallet >= 0">
+                  <img src="assets/coin.svg" width="40px" alt="">
+                  <span class="ps-2 text-info fw-bold">{{this.currentlySelectedAccounts.wallet | currency: "INR"}}</span>
+                </ng-container>
+              </div>
+              <div class="col">
+                <button pButton type="button" [disabled]="!canPlaceOrder()" label="Place Order" (click)="this.finalizeOrder()" icon="pi pi-check"></button>
+                <p-dialog header="Order Confirmation" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
+                          [draggable]="false" [resizable]="false">
+
+                  <div class="container-fluid">
+                    <div class="row mt-4 ps-3">
+                      <div class="row">
+                        <div class="col-3">
+                          <span class="text-info">Email Address</span>
+                        </div>
+                        <div class="col">
+                          <span class="text-info">{{this.currentlySelectedAccounts?.emailAddress}}</span>
+                        </div>
+                      </div>
+
+                      <div class="row mt-2">
+                        <div class="col-3">
+                          <span class="text-info">Registered</span>
+                        </div>
+                        <div class="col">
+                          <span class="text-info">{{!this.newRegistration}}</span>
+                        </div>
+                      </div>
+
+
+                      <div class="row mt-2">
+                        <div class="col-3">
+                          <span class="text-info">Products</span>
+                        </div>
+                        <div class="col">
+                          <span class="text-info">{{this.selectedFoods.length}}</span>
+                        </div>
+                      </div>
+
+
+                      <div class="row mt-2">
+                        <div class="col-3">
+                          <span class="text-info">Cost</span>
+                        </div>
+                        <div class="col">
+                          <span class="text-info">{{this.getPossibleCostOfOrder()}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ng-template pTemplate="footer">
+                    <div class="row">
+                      <div class="col">
+                        <div class="" *ngIf="!this.newRegistration">
+                          <p-button (click)="this.placeOrder(true)" *ngIf="getPossibleCostOfOrder() > (currentlySelectedAccounts ? currentlySelectedAccounts.wallet : 0)" label="Insufficient Balance" [disabled]="true" styleClass="p-button-text"></p-button>
+                          <p-button (click)="this.placeOrder(true)" *ngIf="getPossibleCostOfOrder() <= (currentlySelectedAccounts ? currentlySelectedAccounts.wallet : 0)" label="Wallet Pay" styleClass="p-button-text"></p-button>
+                        </div>
+                        <p-button (click)="this.placeOrder(false)" label="Cash" styleClass="p-button-text"></p-button>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-dialog>
+              </div>
+              <div class="col">
+                <button pButton type="button" label="Cancel" class="p-button-warning" (click)="this.cancelOrder()" icon="pi pi-trash"></button>
+              </div>
             </div>
-            <div class="col">
-              <button pButton type="button" label="Place Order" icon="pi pi-check"></button>
-            </div>
-            <div class="col">
-              <button pButton type="button" label="Cancel" class="p-button-warning" icon="pi pi-trash"></button>
-            </div>
-          </div>
-        </p-card>
+          </p-card>
+        </div>
+
+        <!-- Left Side Bottom -->
+
       </div>
-    </div>
-
-    <div class="row">
-
     </div>
   </div>
 </div>

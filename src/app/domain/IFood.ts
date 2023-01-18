@@ -23,7 +23,7 @@ export class SelectedFood {
     this.foodId = food.foodId;
     this.foodPrice = food.foodPrice;
     this.name = food.name;
-    this.quantity = 0;
+    this.quantity = 1;
   }
 }
 

@@ -31,3 +31,8 @@ export interface ILoginParams {
   emailAddress: string,
   password: string,
 }
+
+export interface IWalletRechargeParams {
+  emailAddress : string,
+  balanceToAdd : number,
+}

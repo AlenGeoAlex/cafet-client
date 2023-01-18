@@ -37,7 +37,7 @@
                     <span class="product-category">{{product.category}}</span>
                   </div>
                   <div class="product-list-action">
-                    <h6 class="mb-2">${{product.foodPrice}}</h6>
+                    <h6 class="mb-2">{{product.foodPrice | currency: "INR"}}</h6>
                     <button pButton pRipple type="button" icon="pi pi-chevron-right" pTooltip="Create Stock" (click)="clickSelected(product)" class="p-button-rounded p-button-text p-button-icon"></button>
                   </div>
                 </div>

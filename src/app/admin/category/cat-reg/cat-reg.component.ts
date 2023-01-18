@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CategoryParams} from "../../../domain/Params/FormParams";
+import {CategoryParams} from "../../../domain/Params/OutputDto";
 import {CategoryService} from "../category.service";
 
 @Component({

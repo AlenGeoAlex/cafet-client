@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IDailyStock} from "../../domain/IDailyStock";
 import {StockService} from "../services/stock.service";
 import {finalize} from "rxjs";
 import {NgxSpinnerService} from "ngx-spinner";
 import {ConfirmationService, MessageService} from "primeng/api";
+import {IFood, SelectedFood} from "../../domain/IFood";
+import {OverlayPanel} from "primeng/overlaypanel";
 
 @Component({
   selector: 'app-daily-stock',
@@ -12,9 +14,13 @@ import {ConfirmationService, MessageService} from "primeng/api";
 })
 export class DailyStockComponent implements OnInit {
 
+  @ViewChild("op") overlayPanel : OverlayPanel;
+
   stocks : IDailyStock[];
 
   selectedStocks : IDailyStock[];
+
+  newPossibleFoodItems : SelectedFood[];
 
   editCache = new Map<number, IDailyStock>;
 
@@ -24,6 +30,7 @@ export class DailyStockComponent implements OnInit {
               private readonly confirmationService : ConfirmationService,
   ) {
     this.selectedStocks = [];
+    this.newPossibleFoodItems = [];
   }
 
   ngOnInit(): void {
@@ -148,5 +155,66 @@ export class DailyStockComponent implements OnInit {
         }
       }
     )
+  }
+
+  loadNewDailyStock() {
+    this.populate();
+    this.loadNewPossibleFoods();
+  }
+
+  loadNewPossibleFoods(){
+    this.spinnerService.show();
+    this.stockSer.foodObservable$
+      .pipe(
+        finalize(() => {
+          this.spinnerService.hide();
+        })
+      )
+      .subscribe({next: value => {
+          for (let iFood of value) {
+            if(!this.isInStock(iFood.foodId))
+              this.newPossibleFoodItems.push(new SelectedFood(iFood));
+          }
+        },
+        error: err => {
+
+        },
+        complete: () => {
+
+        }
+      })
+  }
+
+  isInStock(foodId : number) : boolean {
+    for (let stock of this.stocks) {
+      if(stock.foodId === foodId)
+        return true;
+    }
+
+    return false;
+  }
+
+  onHideOverlayPanel() {
+    this.newPossibleFoodItems = [];
+  }
+
+  addNewSingleStock(product: SelectedFood) {
+      this.spinnerService.show();
+      this.stockSer.addNewSingleStock(product)
+        .pipe(finalize(() => {
+          this.spinnerService.hide();
+        }))
+        .subscribe({
+        next: value => {
+          this.populate();
+          this.overlayPanel.hide();
+        },
+        error: err => {
+
+        },
+        complete: () => {
+
+        }
+      })
   }
 }
