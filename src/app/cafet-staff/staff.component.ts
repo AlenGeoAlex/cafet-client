@@ -295,7 +295,6 @@ export class StaffComponent implements OnInit {
               this.messageService.add({severity: "error", detail: `${err.error}`, summary: "Failed"})
             }else{
               this.messageService.add({severity: "error", detail: `An unknown error occurred`, summary: "Failed"})
-
               console.log(err)
             }
           }

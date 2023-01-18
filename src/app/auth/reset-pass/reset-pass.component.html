@@ -1,0 +1,64 @@
+<div class="d-flex flex-column min-vh-100 min-vw-100 bg-light">
+  <div class="m-2 p-2">
+    <img src="assets/cafet.svg" style="height: auto; width: 60px">
+  </div>
+  <div class="d-flex flex-grow-1 justify-content-center align-items-center">
+    <div class="card p-4 shadow-lg border-light" style="width: 40%;">
+      <form [formGroup]="emailForm">
+        <div class="container-fluid">
+          <div class="row mb-3">
+            <div class="d-flex justify-content-center">
+              <h3 style="font-family: 'Nunito', sans-serif;" class="fw-bolder">Forgot Password?</h3>
+            </div>
+          </div>
+
+
+          <div>
+            <div class="row">
+              <div class="container">
+                <div class="col-5" style="padding-left: 2px">
+                  <h5>Email Address</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="container">
+                <div class="col-12 md:col-4">
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+                    <input formControlName="emailAddress" type="text" pInputText placeholder="Email Address">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class="container">
+                <div class="col-12" style="padding-left: 2px">
+                  <span style="color: #333333">Enter the email address you registered</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div>
+            <div class="row mt-5">
+              <div class="d-flex justify-content-center">
+                <p-button label="Reset"
+                          [disabled]="this.emailForm.invalid"
+                          [pTooltip]="(this.emailForm.invalid) ? 'Enter a valid email address' : 'Reset your password' "
+                          (click)="onReset()"
+                          icon="pi pi-check-circle" iconPos="left"></p-button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
