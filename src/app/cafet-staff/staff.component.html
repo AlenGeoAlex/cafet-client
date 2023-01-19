@@ -3,7 +3,7 @@
   <div class="container-fluid" style="margin-top: 4.05rem;">
     <div class="row my-1" style="min-width: 100vw;">
       <!-- Right Side -->
-      <div class="col-8 card shadow-sm">
+      <div class="col-8 h-100 card shadow-sm">
 
         <div class="row">
           <div class="col bg-light">
@@ -63,6 +63,7 @@
                 <tr>
                   <th>Item</th>
                   <th>Image</th>
+                  <th>Type</th>
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Total Price</th>
@@ -78,6 +79,11 @@
                     <div class="img-fluid" style="width: 40px; height: auto">
                       <img src="{{selectedFood.foodImage}}" width="40px" height="auto" alt="image-{{selectedFood.foodName}}" >
                     </div>
+                  </td>
+
+                  <td>
+                    <span class="product-badge {{this.getClassForVeg(selectedFood.foodType)}}">{{(selectedFood.foodType) ? 'Vegetarian' : 'Non Vegetarian'}}</span>
+
                   </td>
 
                   <td>{{selectedFood.foodPrice | currency:"INR" }}</td>

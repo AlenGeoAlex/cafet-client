@@ -4,7 +4,8 @@ const Endpoints = {
   Search : environment.apiUrl+"search/",
   Stock : environment.apiUrl+"stock/",
   Order : environment.apiUrl+"order/",
-  User : environment.apiUrl+"users/"
+  User : environment.apiUrl+"users/",
+  Auth : environment.apiUrl+"auth/",
 }
 
 export default Endpoints;

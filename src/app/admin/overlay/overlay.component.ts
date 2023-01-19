@@ -49,7 +49,13 @@ export class OverlayComponent implements OnInit {
       },
       {
         label: 'Account',
-        items: [{
+        items: [
+          {
+            label: 'Profile',
+            icon: 'pi pi-users',
+            url: "/user/"
+          },
+          {
           label: 'Logout',
           icon: 'pi pi-lock',
           command: () => {

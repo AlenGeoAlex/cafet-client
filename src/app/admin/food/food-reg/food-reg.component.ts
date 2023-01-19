@@ -4,6 +4,7 @@ import {CategoryService} from "../../category/category.service";
 import {MessageService} from "primeng/api";
 import {AutoComplete} from "primeng/autocomplete";
 import {FoodService} from "../food.service";
+import {IFoodType} from "../../../domain/IFood";
 
 @Component({
   selector: 'app-food-reg',
@@ -20,8 +21,14 @@ export class FoodRegComponent implements OnInit {
   public filter : string[];
   public categoryMap = new Map<string, number>;
 
+  public foodType : IFoodType[];
+
   constructor(private readonly fb: FormBuilder, private readonly catService : CategoryService, private readonly foodService: FoodService,private readonly messageService: MessageService) {
     this.pfpImage = null;
+    this.foodType = [
+      {name: "Vegetarian", code: true},
+      {name: "Non-Vegetarian", code: false},
+    ]
     this.filter = [];
     this.fg = fb.group(
       {
@@ -29,7 +36,9 @@ export class FoodRegComponent implements OnInit {
         CategoryName: ['', Validators.required],
         FoodDescription: ['', Validators.required],
         FoodImage: [null, ],
-        FoodPrice: ["", Validators.required]
+        FoodType: ["true", Validators.required],
+        FoodPrice: ["", Validators.required],
+        FoodTags: [[]],
       }
     )
 
@@ -77,7 +86,21 @@ export class FoodRegComponent implements OnInit {
     this.filter = filtered;
   }
 
-  private contains(key: string): boolean {
+  parseFoodTag(ar : string[]) : string {
+    let str = "";
+
+    for (let i = 0; i < ar.length; i++) {
+      if(i == 0)
+        str = ar[i];
+      else{
+        str = str + ","+ar[i];
+      }
+    }
+
+    return str;
+  }
+
+private contains(key: string): boolean {
     let cont = false;
 
     for (let catName of this.categoryMap.keys()) {
@@ -106,7 +129,10 @@ export class FoodRegComponent implements OnInit {
     data.append("CategoryId", number.toString())
     data.append("FoodDescription", this.fg.get("FoodDescription")?.value);
     data.append("FoodPrice", this.fg.get("FoodPrice")?.value);
-    data.append("FoodImage", this.fg.get("FoodImage")?.value)
+    data.append("FoodImage", this.fg.get("FoodImage")?.value);
+    data.append("FoodType", this.fg.get("FoodType")?.value);
+    data.append("Tags", this.parseFoodTag(this.fg.get("FoodTags")?.value));
+
     this.foodService.createNewFood(data).subscribe({
       next: value => {
         this.regEvent.emit(true);

@@ -33,8 +33,9 @@
                   </div>
                   <div class="product-list-detail">
                     <h5 class="mb-2">{{product.name}}</h5>
-                    <i class="pi pi-tag product-category-icon"></i>
-                    <span class="product-category">{{product.category}}</span>
+                    <span class="product-badge {{this.getClassForVeg(product.vegetarian)}}">{{(product.vegetarian) ? 'Vegetarian' : 'Non Vegetarian'}}</span>
+
+
                   </div>
                   <div class="product-list-action">
                     <h6 class="mb-2">{{product.foodPrice | currency: "INR"}}</h6>

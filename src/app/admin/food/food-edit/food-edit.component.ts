@@ -4,7 +4,7 @@ import {CategoryService} from "../../category/category.service";
 import {FoodService} from "../food.service";
 import {MessageService} from "primeng/api";
 import {AutoComplete} from "primeng/autocomplete";
-import {IFood} from "../../../domain/IFood";
+import {IFood, IFoodType} from "../../../domain/IFood";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {delay} from "rxjs";
@@ -22,8 +22,13 @@ export class FoodEditComponent implements OnInit {
   public categoryMap = new Map<string, number>;
   public food : IFood;
   public readonly foodId : number;
+  public readonly foodType : IFoodType[];
   constructor(private readonly fb: FormBuilder, private readonly catService : CategoryService, private readonly foodService: FoodService,private readonly messageService: MessageService, private readonly activateRoute : ActivatedRoute, private readonly router : Router, private readonly spinnerService:NgxSpinnerService) {
     this.pfpImage = null;
+    this.foodType = [
+      {name: "Vegetarian", code: true},
+      {name: "Non-Vegetarian", code: false},
+    ]
     this.filter = [];
     this.fg = fb.group(
       {
@@ -31,7 +36,9 @@ export class FoodEditComponent implements OnInit {
         CategoryName: ['', Validators.required],
         FoodDescription: ['', Validators.required],
         FoodImage: [null, ],
-        FoodPrice: ["", Validators.required]
+        FoodPrice: ["", Validators.required],
+        FoodType: ["", Validators.required],
+        FoodTags: [[]],
       }
     )
 
@@ -75,12 +82,15 @@ export class FoodEditComponent implements OnInit {
     this.foodService.getFood(this.foodId).subscribe({
       next: value => {
         this.food = value;
+        console.log(value)
         this.fg.setValue({
           FoodName: this.food.name,
           CategoryName: this.food.category,
           FoodDescription: this.food.foodDescription,
           FoodImage: null,
           FoodPrice: this.food.foodPrice,
+          FoodType: `${this.food.vegetarian}`,
+          FoodTags: this.food.tags,
         })
         this.pfpLink = this.food.foodImage;
       },
@@ -162,10 +172,21 @@ export class FoodEditComponent implements OnInit {
     this.router.navigate(["/admin/food"])
   }
 
-  submit() {
-    if(this.pfpImage == null)
-      return;
+  parseFoodTag(ar : string[]) : string {
+    let str = "";
 
+    for (let i = 0; i < ar.length; i++) {
+      if(i == 0)
+        str = ar[i];
+      else{
+        str = str + ","+ar[i];
+      }
+    }
+
+    return str;
+  }
+
+  submit() {
     var number = this.categoryMap.get(this.fg.get("CategoryName")?.value);
 
     if(number === null || number === undefined)
@@ -182,6 +203,9 @@ export class FoodEditComponent implements OnInit {
     data.append("FoodPrice", this.fg.get("FoodPrice")?.value);
     data.append("FoodImage", this.fg.get("FoodImage")?.value);
     data.append("FoodId", this.foodId.toString());
+    data.append("FoodType", this.fg.get("FoodType")?.value);
+    data.append("Tags", this.parseFoodTag(this.fg.get("FoodTags")?.value));
+
     this.foodService.updateFood(data).subscribe({
       next: value => {
         this.messageService.add({severity: "success", summary: "Success", detail: "Successfully updated"})

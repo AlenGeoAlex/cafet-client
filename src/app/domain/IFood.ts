@@ -6,6 +6,8 @@ export interface IFood {
   foodPrice: number;
   categoryId: number;
   category: string;
+  vegetarian : boolean;
+  tags : string[];
 }
 
 export class SelectedFood {
@@ -26,4 +28,7 @@ export class SelectedFood {
     this.quantity = 1;
   }
 }
-
+export interface IFoodType {
+  name: string,
+  code: boolean,
+}

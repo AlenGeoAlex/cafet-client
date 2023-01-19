@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: "404", component: Error404Component},
   {path: "auth", loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule)},
   {path: "staff", loadChildren: () => import('./cafet-staff/cafet-staff.module').then(mod => mod.CafetStaffModule), data: {"ROLE": "STAFF"}, canActivate: [AuthorizationGuard]},
-  {path: "user", loadChildren: () => import('./user/user.module').then(mod => mod.UserModule), data: {"ROLE": "CUSTOMER"}},
+  {path: "user", loadChildren: () => import('./user/user.module').then(mod => mod.UserModule)},
   {path: '**', redirectTo: '404', pathMatch: "full"},
 ];
 

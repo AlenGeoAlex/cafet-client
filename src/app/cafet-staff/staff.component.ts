@@ -158,6 +158,7 @@ export class StaffComponent implements OnInit {
       this.selectedFoods[index] = updatedOrder;
       this.messageService.add({severity: "success", detail: `${updateStock.foodName} is updated with new quantity!`, summary: "Updated"})
     }
+
   }
 
   toggleRegistration(state : boolean){
@@ -250,6 +251,12 @@ export class StaffComponent implements OnInit {
 
     if(this.foodSearch != null)
       this.foodSearch.writeValue(null);
+  }
+
+  getClassForVeg(isVeg : boolean) : string {
+    if(isVeg)
+      return "status-veg"
+    else return "status-non-veg";
   }
 
   finalizeOrder() {

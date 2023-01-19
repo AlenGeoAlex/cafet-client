@@ -64,3 +64,22 @@
     }
   }
 }
+
+.product-badge {
+  border-radius: 2px;
+  padding: 0.25em 0.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+}
+
+.product-badge.status-veg {
+  background: #C8E6C9;
+  color: #256029;
+}
+
+.product-badge.status-non-veg {
+  background: #FFCDD2;
+  color: #c63737;
+}

@@ -12,6 +12,7 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  //margin-top: 3.5rem;
 }
 
 main {
@@ -188,7 +189,7 @@ main {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
 
         .lx-btn {
           padding: 0.5rem 1rem;
@@ -240,3 +241,7 @@ main {
     }
   }
 }
+
+.mns{display: flex;}
+.mns .flt{    display: flex;
+  padding: 0px 10px;}

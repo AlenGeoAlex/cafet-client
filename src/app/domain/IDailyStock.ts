@@ -7,4 +7,5 @@ export interface IDailyStock {
   totalInStock: number;
   currentInStock: number;
   foodPrice: number;
+  foodType: boolean;
 }

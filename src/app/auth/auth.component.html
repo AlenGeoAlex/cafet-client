@@ -14,7 +14,7 @@
             <input type="{{this.toggleIcon}}" formControlName="password" placeholder="Password" id="id_password" >
             <i class="far {{this.toggleIconName}}" id="togglePassword" (click)="togglePassword()" style="cursor: pointer;"></i>
           </div>
-          <a class="pass" >Forgot your password?</a>
+          <a class="pass" [routerLink]="['reset']"  >Forgot your password?</a>
           <input type="submit" [disabled]="logGroup.invalid" value="Sign in" (click)="this.signin(this.logGroup.getRawValue())" class="btn solid">
         </form>
         <form [formGroup]="regGroup" class="sign-up-form">

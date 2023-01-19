@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div class="card mt-4" style="height: 33rem">
+  <div class="card mt-4">
     <form [formGroup]="fg">
       <div class="card-body">
         <div class="row">
@@ -39,10 +39,28 @@
 
         <div class="row mt-3">
           <div class="col-4 pt-2 ms-2">
+            <span class="text-primary" >Food Type</span>
+          </div>
+          <div class="col-6">
+            <p-dropdown [options]="this.foodType"  formControlName="FoodType" optionLabel="name" optionValue="code"></p-dropdown>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-4 pt-2 ms-2">
             <span class="text-primary" >Food Price</span>
           </div>
           <div class="col-6">
             <p-inputNumber formControlName="FoodPrice"  locale="en-IN" [minFractionDigits]="2"  inputId="stacked" mode="currency" [min]="0" currency="INR" ></p-inputNumber>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-4 pt-2 ms-2">
+            <span class="text-primary">Food Tags</span>
+          </div>
+          <div class="col-6">
+            <p-chips formControlName="FoodTags" separator=","></p-chips>
           </div>
         </div>
 

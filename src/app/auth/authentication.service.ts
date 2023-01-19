@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 import {ICred} from "../domain/ICred";
 import {UserConstants} from "../constants/UserConstants";
 import {ActivatedRoute, Router} from "@angular/router";
+import Endpoints from "../constants/Endpoints";
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,15 @@ export class AuthenticationService {
   }
 
   registerNewAccount(regParam : IRegistrationParams) : Observable<ICred> {
-    return this.client.post<ICred>(this.apiUrl+"register/", regParam);
+    return this.client.post<ICred>(Endpoints.Auth+"register/", regParam);
   }
 
   loginAccount(loginParam : ILoginParams) : Observable<ICred> {
-    return this.client.post<ICred>(this.apiUrl+"login/", loginParam);
+    return this.client.post<ICred>(Endpoints.Auth+"login/", loginParam);
+  }
+
+  resetPassword(emailAddress : any) : Observable<any> {
+    return this.client.post(Endpoints.Auth+"reset-pass/", emailAddress);
   }
 
   setLoginData(userData : ICred){
@@ -40,17 +45,8 @@ export class AuthenticationService {
       this.logout();
       return;
     }
-
-    roleItem = roleItem.toUpperCase();
-    if(roleItem === "ADMIN"){
-      this.router.navigate(["/admin/"])
-    }else if(roleItem === "STAFF"){
-      this.router.navigate(["/staff/"])
-    }else if(roleItem === "CUSTOMER"){
-
-    }else {
-      this.router.navigate(["/404"])
-    }
+    const toRoute = this.getHomeRouteForRole(roleItem);
+    this.router.navigate([toRoute]);
     this.authenticationObservable$.next(userData.userFullName);
   }
 
@@ -77,6 +73,21 @@ export class AuthenticationService {
 
   isUserRegistered() : boolean {
     return this.getUserData(UserConstants.Role) != null
-            && this.getUserData(UserConstants.AccessToken) != null
+      && this.getUserData(UserConstants.Email) != null
+      && this.getUserData(UserConstants.AccessToken) != null
+  }
+
+  getHomeRouteForRole(role : string) : string {
+
+    switch (role.toUpperCase()){
+      case "ADMIN" :
+        return "/admin/";
+      case "STAFF":
+        return "/staff/"
+      case "CUSTOMER":
+        return "";
+      default:
+        return "/"
+    }
   }
 }

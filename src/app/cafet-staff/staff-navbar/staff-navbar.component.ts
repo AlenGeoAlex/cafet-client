@@ -36,7 +36,7 @@ export class StaffNavbarComponent implements OnInit {
           {
             label: "Profile",
             icon: "pi pi-users",
-            url: ""
+            url: "/user"
           },
           {
             label: "Logout",
@@ -52,7 +52,6 @@ export class StaffNavbarComponent implements OnInit {
 
   openMenu($event: MouseEvent, menu: Menu) {
     menu.show($event);
-    console.log(1);
   }
 
   open($event : any){

@@ -33,6 +33,8 @@ import { UserRegComponent } from './user/user-reg/user-reg.component';
 import {DropdownModule} from "primeng/dropdown";
 import {MultiSelectModule} from "primeng/multiselect";
 import {BadgeModule} from "primeng/badge";
+  import {RadioButtonModule} from "primeng/radiobutton";
+  import {ChipsModule} from "primeng/chips";
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import {BadgeModule} from "primeng/badge";
     DropdownModule,
     MultiSelectModule,
     BadgeModule,
+    RadioButtonModule,
+    ChipsModule,
   ]
 })
 export class AdminModule { }

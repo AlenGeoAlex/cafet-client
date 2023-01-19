@@ -9,4 +9,5 @@ export interface IUser {
   userRole: string;
   activated: boolean;
   deleted: boolean;
+  phoneNumber? : string;
 }

@@ -31,7 +31,7 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
     if(route.data == null)
         return true;
 
-    const role = route.data["ROLE"];
+    const role : string | string[] = route.data["ROLE"];
     if(role == null)
       return true;
 
@@ -42,7 +42,18 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
     }
     userRole = userRole?.toUpperCase();
 
-    if(role === userRole){
+    let roleMatches = false;
+
+    if(typeof role === 'string'){
+      roleMatches = role === userRole;
+    }else if(Array.isArray(role)){
+     var index = role.findIndex(r => r === userRole);
+
+     if(index >= 0)
+       roleMatches = true;
+    }
+
+    if(roleMatches){
       return true;
     }else{
       this.router.navigate(['/auth'])

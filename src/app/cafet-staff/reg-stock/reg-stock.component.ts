@@ -61,6 +61,13 @@ export class RegStockComponent implements OnInit {
     })
   }
 
+  getClassForVeg(isVeg : boolean) : string {
+    if(isVeg)
+      return "status-veg"
+    else return "status-non-veg";
+  }
+
+
 
   dragStart(food: IFood) {
     this.currentlyDragging = food;
