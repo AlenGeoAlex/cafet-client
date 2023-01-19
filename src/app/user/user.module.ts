@@ -6,7 +6,7 @@ import {UserProfileComponent} from "./user-profile.component";
 import { UserOverlayComponent } from './user-overlay/user-overlay.component';
 import {AvatarModule} from "primeng/avatar";
 import {MenuModule} from "primeng/menu";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 
@@ -23,7 +23,8 @@ import {RippleModule} from "primeng/ripple";
     MenuModule,
     ReactiveFormsModule,
     ButtonModule,
-    RippleModule
+    RippleModule,
+    FormsModule
   ]
 })
 export class UserModule { }

@@ -22,8 +22,10 @@ export class UserProfileComponent implements OnInit {
   public showConfPassword : boolean;
   public imageFile : File | null;
   public imageUrl : string;
+  public confirmPassComponent : ElementRef;
   @ViewChild("passComponent") passwordComponent : ElementRef;
   @ViewChild("fileComponent") fileComponent : ElementRef;
+  confirmPassword: any;
 
   constructor(
     private readonly authService: AuthenticationService,
@@ -37,10 +39,11 @@ export class UserProfileComponent implements OnInit {
     this.user = null;
     this.imageUrl = "";
     this.userFormGroup = formBuilder.group({
-      FirstName : ['', Validators.required],
-      LastName : ['', Validators.required],
+      FirstName : ['', [Validators.required]],
+      LastName : ['', [Validators.required]],
       PhoneNumber : [''],
-      Password : ['', Validators.min(8)]
+      Password : ['', []],
+      ConfPassword : ['', []],
     })
     this.imageFile = null;
   }
@@ -127,13 +130,15 @@ export class UserProfileComponent implements OnInit {
 
 
     if(this.showConfPassword){
-      const confirmPass = this.passwordComponent.nativeElement.value;
-      if(this.userFormGroup.get("Password") == null)
+      if(this.userFormGroup.get("ConfPassword") === null)
+        return false;
+
+      if(this.userFormGroup.get("Password") === null)
         return false;
 
       const password = this.userFormGroup.get("Password")?.value;
-
-      if(confirmPass !== password){
+      const confirmPassword = this.userFormGroup.get("ConfPassword")?.value;
+      if(confirmPassword !== password){
         return false;
       }
     }
@@ -142,6 +147,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   submitChanges() {
+
     if(!this.checkPassword())
       return;
 
@@ -161,6 +167,9 @@ export class UserProfileComponent implements OnInit {
     this.userService.updateUserProfile(formData)
       .pipe(finalize(() => {
         this.spinnerService.hide();
+        this.userFormGroup.reset();
+        this.showConfPassword = false;
+        this.passwordComponent.nativeElement.value = "";
       }))
       .subscribe({
         next: value => {

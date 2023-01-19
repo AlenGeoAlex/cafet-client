@@ -5,6 +5,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {MessageService} from "primeng/api";
 import {finalize} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-reset-pass',
@@ -18,10 +19,12 @@ export class ResetPassComponent implements OnInit {
   constructor(private readonly fb : FormBuilder,
               private readonly authService : AuthenticationService,
               private readonly spinnerService : NgxSpinnerService,
-              private readonly messageService : MessageService
+              private readonly messageService : MessageService,
+              private readonly activatedRoute : ActivatedRoute,
   ) {
+    const emailAddress = activatedRoute.snapshot.paramMap.get("email");
     this.emailForm = fb.group({
-      emailAddress : ["", [Validators.required, Validators.email]]
+      emailAddress : [(emailAddress == null) ? "" : emailAddress, [Validators.required, Validators.email]]
     })
   }
 
