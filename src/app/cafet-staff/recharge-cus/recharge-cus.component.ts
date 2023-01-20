@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IEmailQuery} from "../../domain/IEmailQuery";
-import {CafetService} from "../services/cafet.service";
+import {CafetService} from "../../services/cafet.service";
 import {AutoComplete} from "primeng/autocomplete";
 import {IWalletRechargeParams} from "../../domain/Params/OutputDto";
 import {finalize} from "rxjs";

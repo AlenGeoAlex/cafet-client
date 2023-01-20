@@ -1,0 +1,45 @@
+<app-shop-overlay (onSearch)="this.onSearch($event)" ></app-shop-overlay>
+<div class="container-fluid bg-light pt-4 pb-4">
+  <div class="row me-5">
+
+    <div class="d-flex justify-content-end">
+      <div class="me-4 c-checkbox">
+        <span class="me-2 fw-semibold" style="font-family: 'Noto Sans', sans-serif;">
+          Only In Stock
+        </span>
+        <p-checkbox [binary]="true" inputId="binary" [(ngModel)]="ignoreOutOfStock" (click)="this.setOnIgnoreStock()" ></p-checkbox>
+      </div>
+      <div class="mx-2 c-dropdown" style="margin-bottom: 2px">
+        <span class="me-2 fw-semibold" style="font-family: 'Noto Sans', sans-serif">
+          Food Type
+        </span>
+        <p-dropdown [options]="FoodType" [(ngModel)]="this.allowedFoodType" (onChange)="this.onFoodTypeSet()" optionLabel="typeIdentifier" optionValue="typeCode"></p-dropdown>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="padding-left: 0px; padding-right: 0">
+  <div class="">
+    <div class="col-12">
+      <p-accordion [multiple]="true">
+        <ng-container *ngIf="stock.length > 0">
+          <ng-container *ngFor="let each of this.stockMap | keyvalue">
+            <app-category [categoryName]="each.key" [categoryStock]="each.value"></app-category>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="stock.length <= 0">
+          <div class="container-fluid">
+            <div class="d-flex justify-content-center align-items-center">
+              <img src="assets/foodpot.gif" alt="onnumilla">
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <span class="fw-bolder" style="font-family: Poppins, sans-serif;white-space: initial">Seems like there are none....</span>
+
+            </div>
+          </div>
+        </ng-container>
+      </p-accordion>
+    </div>
+  </div>
+</div>

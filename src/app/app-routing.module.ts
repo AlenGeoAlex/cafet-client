@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {AppComponent} from "./app.component";
 import {Error404Component} from "./error404/error404.component";
 import {AuthorizationGuard} from "./auth/authorization.guard";
+import {ShopComponent} from "./shop/shop.component";
 
 const routes: Routes = [
   {path: "", component: AppComponent},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: "auth", loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule)},
   {path: "staff", loadChildren: () => import('./cafet-staff/cafet-staff.module').then(mod => mod.CafetStaffModule), data: {"ROLE": "STAFF"}, canActivate: [AuthorizationGuard]},
   {path: "user", loadChildren: () => import('./user/user.module').then(mod => mod.UserModule)},
+  {path: "shop", loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule)},
   {path: '**', redirectTo: '404', pathMatch: "full"},
 ];
 

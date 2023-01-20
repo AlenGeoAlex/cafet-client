@@ -8,4 +8,5 @@ export interface IDailyStock {
   currentInStock: number;
   foodPrice: number;
   foodType: boolean;
+  foodDescription : string;
 }

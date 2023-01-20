@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, SimpleChange, ViewChild} from '@angular/core';
-import {CafetService} from "./services/cafet.service";
+import {CafetService} from "../services/cafet.service";
 import {IEmailQuery} from "../domain/IEmailQuery";
 import {IDailyStock} from "../domain/IDailyStock";
 import {MessageService} from "primeng/api";

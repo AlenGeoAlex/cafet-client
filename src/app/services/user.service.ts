@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {IRole} from "../../domain/IRole";
-import {RegistrationParam} from "../../domain/Params/OutputDto";
-import {environment} from "../../../environments/environment";
-import {IUser} from "../../domain/IUser";
-import {AccountStatus} from "../../domain/AccountStatus";
-import Endpoints from "../../constants/Endpoints";
+import {IRole} from "../domain/IRole";
+import {RegistrationParam} from "../domain/Params/OutputDto";
+import {environment} from "../../environments/environment";
+import {IUser} from "../domain/IUser";
+import {AccountStatus} from "../domain/AccountStatus";
+import Endpoints from "../constants/Endpoints";
 
 @Injectable({
   providedIn: 'root'

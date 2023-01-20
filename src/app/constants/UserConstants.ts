@@ -7,4 +7,5 @@ export enum UserConstants{
   RefreshTokens = "REFRESH_TOKEN",
   CartId = "CART_ID",
   Cart = "CART",
+  FilterConstants = "FILTER_SETTINGS",
 }

@@ -14,7 +14,7 @@ import {RippleModule} from "primeng/ripple";
 @NgModule({
   declarations: [
     UserProfileComponent,
-    UserOverlayComponent
+    UserOverlayComponent,
   ],
   imports: [
     CommonModule,

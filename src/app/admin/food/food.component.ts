@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {IFood} from "../../domain/IFood";
-import {FoodService} from "./food.service";
+import {FoodService} from "../../services/food.service";
 import {MessageService} from "primeng/api";
 
 @Component({

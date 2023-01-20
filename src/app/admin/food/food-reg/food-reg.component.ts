@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CategoryService} from "../../category/category.service";
+import {CategoryService} from "../../../services/category.service";
 import {MessageService} from "primeng/api";
 import {AutoComplete} from "primeng/autocomplete";
-import {FoodService} from "../food.service";
+import {FoodService} from "../../../services/food.service";
 import {IFoodType} from "../../../domain/IFood";
 
 @Component({

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ICategory} from "../../../domain/ICategory";
 import {ConfirmationService} from "primeng/api";
-import {CategoryService} from "../category.service";
+import {CategoryService} from "../../../services/category.service";
 
 @Component({
   selector: 'app-cat-view',

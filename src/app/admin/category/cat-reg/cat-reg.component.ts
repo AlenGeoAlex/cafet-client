@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CategoryParams} from "../../../domain/Params/OutputDto";
-import {CategoryService} from "../category.service";
+import {CategoryService} from "../../../services/category.service";
 
 @Component({
   selector: 'app-cat-reg',

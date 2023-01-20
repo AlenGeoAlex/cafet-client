@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
+import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {IEmailQuery} from "../../domain/IEmailQuery";
-import {IDailyStock} from "../../domain/IDailyStock";
-import {StaffFoodOrder} from "../../domain/StaffFoodOrder";
-import {IProcessedOrder} from "../../domain/IProcessedOrder";
-import {IWalletRechargeParams} from "../../domain/Params/OutputDto";
-import Endpoints from "../../constants/Endpoints";
+import {IEmailQuery} from "../domain/IEmailQuery";
+import {IDailyStock} from "../domain/IDailyStock";
+import {StaffFoodOrder} from "../domain/StaffFoodOrder";
+import {IProcessedOrder} from "../domain/IProcessedOrder";
+import {IWalletRechargeParams} from "../domain/Params/OutputDto";
+import Endpoints from "../constants/Endpoints";
 
 @Injectable({
   providedIn: 'root'

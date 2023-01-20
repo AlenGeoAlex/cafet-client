@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ICategory} from "../../domain/ICategory";
-import {CategoryService} from "./category.service";
+import {CategoryService} from "../../services/category.service";
 import {MessageService} from "primeng/api";
 
 @Component({

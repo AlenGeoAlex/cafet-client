@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IDailyStock} from "../../domain/IDailyStock";
-import {StockService} from "../services/stock.service";
+import {StockService} from "../../services/stock.service";
 import {finalize} from "rxjs";
 import {NgxSpinnerService} from "ngx-spinner";
 import {ConfirmationService, MessageService} from "primeng/api";

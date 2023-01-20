@@ -1,0 +1,67 @@
+<div class="col hp">
+  <div class="card h-100 shadow-sm">
+    <a href="#">
+      <img src="{{Stock.foodImage}}" class="card-img-top" alt="product.title" />
+    </a>
+
+    <div class="label-top">
+      <span pTooltip='{{(Stock.foodType ? "This product is 100% vegetarian" : "This product may or may not contain non vegetarian products")}}' class="product-badge {{this.getCssBadgeOfFoodType()}}">{{(Stock.foodType ? "Veg" : "Non-Veg")}}</span>
+    </div>
+    <div class="card-body">
+      <div class="clearfix mb-3">
+        <span class="float-start badge rounded-pill bg-success">{{this.Stock.foodPrice | currency: 'INR'}}</span>
+
+      </div>
+      <h5 class="card-title">
+        <a> <span class="fw-bold">{{this.Stock.foodName}}</span> - {{this.Stock.foodDescription}}</a>
+      </h5>
+
+      <div class="d-grid gap-2 my-4">
+
+        <ng-container *ngIf="this.Stock.currentInStock > 0">
+          <button pButton #addToStock pRipple type="button"  (click)="this.openStockCart(op, $event, addToStock)" label="{{getCartQuantityString()}}" [ngClass]="cartButtonStyle" class="p-button-raised {{this.cartButtonStyle}}"></button>
+          <p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
+            <ng-template pTemplate="content">
+              <div class="container-fluid">
+                <div class="row">
+                  <span class="fw-bold">Select Quantity</span>
+                </div>
+                <div class="cart-qua" >
+                  <div class="row mt-4">
+                    <div style="max-width: 20%">
+                      <p-inputNumber [showButtons]="true" [(ngModel)]="tempCartQuantity" buttonLayout="vertical" inputId="horizontal" spinnerMode="horizontal" [step]="1" [min]="0" [max]="Stock.currentInStock"
+                                     decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" >
+                      </p-inputNumber>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="d-flex justify-content-center">
+                    <button pButton pRipple type="button" icon="pi pi-times" label="Clear" *ngIf="cartQuantity > 0" (click)="clearCart(op)" class="p-button-rounded p-button-danger p-button-outlined me-3"></button>
+                    <button pButton pRipple type="button" icon="pi pi-check" label="Continue" (click)="addToCart(op)" class="p-button-rounded p-button-outlined"></button>
+                  </div>
+                </div>
+
+              </div>
+            </ng-template>
+          </p-overlayPanel>
+        </ng-container>
+
+        <ng-container *ngIf="this.Stock.currentInStock <= 0">
+          <button pButton pRipple  type="button" [disabled]="true" label="Out Of Stock"  class="p-button-raised p-button-danger"></button>
+
+        </ng-container>
+      </div>
+      <div class="clearfix mb-1">
+
+<!--        <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+
+        <span class="float-end">
+              <i class="far fa-heart" style="cursor: pointer"></i>
+
+            </span>-->
+      </div>
+    </div>
+  </div>
+</div>

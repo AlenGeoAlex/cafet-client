@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from "../../auth/authentication.service";
+import {AuthenticationService} from "../../services/authentication.service";
 import {MenuItem} from "primeng/api";
 import {UserConstants} from "../../constants/UserConstants";
 import {Menu} from "primeng/menu";

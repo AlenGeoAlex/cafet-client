@@ -18,7 +18,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 @NgModule({
   declarations: [
     AppComponent,
-    Error404Component
+    Error404Component,
+
   ],
     imports: [
         BrowserModule,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {IRole} from "../../../domain/IRole";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ILoginParams, RegistrationParam} from "../../../domain/Params/OutputDto";
-import {UserService} from "../user.service";
+import {UserService} from "../../../services/user.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {finalize, pipe} from "rxjs";
 

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PrimeNGConfig} from "primeng/api";
-import {AuthenticationService} from "./auth/authentication.service";
+import {AuthenticationService} from "./services/authentication.service";
 import {Subscriber, Subscription} from "rxjs";
 
 @Component({

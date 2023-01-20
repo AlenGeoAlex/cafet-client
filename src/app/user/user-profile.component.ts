@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MenuItem, MessageService} from "primeng/api";
-import {AuthenticationService} from "../auth/authentication.service";
+import {AuthenticationService} from "../services/authentication.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
-import {UserService} from "../admin/user/user.service";
+import {UserService} from "../services/user.service";
 import {UserConstants} from "../constants/UserConstants";
 import {finalize} from "rxjs";
 import {IUser} from "../domain/IUser";

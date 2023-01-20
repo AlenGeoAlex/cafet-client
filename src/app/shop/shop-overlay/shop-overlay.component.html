@@ -1,0 +1,28 @@
+<header class="p-3 shadow-sm border-bottom">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a routerLink="/staff" class="d-flex align-items-center mb-1 me-5 mb-lg-0 text-white text-decoration-none">
+        <img src="../../../assets/cafet.svg" width="45px">
+        <span class="font-weight-bold" style="font-size: x-large; color: #4747A1; padding-top: 1px; margin-left: -5px; font-family: Poppins, sans-serif">afet </span>
+      </a>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+
+      </ul>
+
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-4">
+        <input type="search" class="form-control" #inputElement (input)="this.searchEvent(inputElement)" placeholder="Search...">
+      </form>
+
+      <div class="ms-1 me-4">
+        <i class="pi pi-shopping-cart p-text-secondary" pBadge style="font-size: 1.4rem" value="2"></i>
+      </div>
+
+      <div class="dropdown text-end">
+        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

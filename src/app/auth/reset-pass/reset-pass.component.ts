@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthenticationService} from "../authentication.service";
+import {AuthenticationService} from "../../services/authentication.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MessageService} from "primeng/api";
 import {finalize} from "rxjs";

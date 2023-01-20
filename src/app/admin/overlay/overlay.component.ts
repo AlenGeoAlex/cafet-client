@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {MenuModule} from 'primeng/menu';
 
-import {AuthenticationService} from "../../auth/authentication.service";
+import {AuthenticationService} from "../../services/authentication.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {UserConstants} from "../../constants/UserConstants";
 

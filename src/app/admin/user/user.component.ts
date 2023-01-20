@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfirmationService, LazyLoadEvent, MenuItem, MessageService} from "primeng/api";
 import {IUser} from "../../domain/IUser";
-import {UserService} from "./user.service";
+import {UserService} from "../../services/user.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {Menu} from "primeng/menu";
 import {finalize} from "rxjs";

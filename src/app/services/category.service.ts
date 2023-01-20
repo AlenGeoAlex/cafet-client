@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {ICategory} from "../../domain/ICategory";
+import {environment} from "../../environments/environment";
+import {ICategory} from "../domain/ICategory";
 import {Observable} from "rxjs";
-import {CategoryParams} from "../../domain/Params/OutputDto";
+import {CategoryParams} from "../domain/Params/OutputDto";
 
 @Injectable({
   providedIn: 'root'

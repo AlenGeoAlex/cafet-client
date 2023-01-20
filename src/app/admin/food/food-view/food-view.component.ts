@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FoodService} from "../food.service";
+import {FoodService} from "../../../services/food.service";
 import {IFood} from "../../../domain/IFood";
 import {ConfirmationService} from "primeng/api";
 import {Router} from "@angular/router";
