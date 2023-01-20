@@ -36,3 +36,8 @@ export interface IWalletRechargeParams {
   emailAddress : string,
   balanceToAdd : number,
 }
+
+export interface ICartAddition {
+  foodId : number,
+  quantity : number
+}

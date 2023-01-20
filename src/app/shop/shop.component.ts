@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CafetService} from "../services/cafet.service";
 import {IDailyStock} from "../domain/IDailyStock";
 import {StockService} from "../services/stock.service";
 import {NgxSpinnerService} from "ngx-spinner";
-import {MenuItem, MessageService} from "primeng/api";
-import {finalize} from "rxjs";
+import {MessageService} from "primeng/api";
+import {BehaviorSubject, finalize} from "rxjs";
 import {UserConstants} from "../constants/UserConstants";
+import {CartService} from "../services/cart.service";
+import {ICart, ICartData} from "../domain/ICart";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent implements OnInit, OnDestroy {
 
   public ignoreOutOfStock : boolean;
   public allowedFoodType : string;
@@ -20,6 +23,12 @@ export class ShopComponent implements OnInit {
   public stock : IDailyStock[];
   public stockMap = new Map<string, IDailyStock[]>;
 
+  public readonly cartSubject : BehaviorSubject<ICart | null>;
+  public cart : ICart;
+
+  public cartMap = new Map<string, ICartData[]>;
+
+  public imageLink : string | null;
 
   public readonly FoodType : FoodTypeDropDown[] = [
     {typeIdentifier: "All", typeCode: "A"},
@@ -32,9 +41,46 @@ export class ShopComponent implements OnInit {
     private readonly spinnerService: NgxSpinnerService,
     private readonly messageService : MessageService,
     private readonly stockService : StockService,
+    private readonly cartService : CartService,
+    private readonly authService : AuthenticationService,
   ) {
     this.stock = [];
+    this.imageLink = this.authService.getUserData(UserConstants.ImageLink);
+
+    const tempCart  = this.cartService.getCart();
+    if(tempCart != null)
+      this.cart = tempCart;
+
+    this.cartSubject = cartService.cartCacheSubject$;
     var filterSettings = localStorage.getItem(UserConstants.FilterConstants);
+    this.cartService.updateCart();
+    this.cartSubject.subscribe({
+      next: value => {
+        if(value == null)
+          return;
+
+        console.log(value);
+        this.cart = value;
+
+        for (let cartDatum of value.cartData) {
+          const cartData = this.cartMap.get(cartDatum.foodCategory);
+
+          if(cartData == null){
+            this.cartMap.set(cartDatum.foodCategory, [cartDatum]);
+          }else{
+            cartData.push(cartDatum);
+          }
+        }
+
+      },
+      error: err => {
+
+      },
+      complete: () => {
+
+      }
+    });
+
     if(filterSettings == null){
       this.ignoreOutOfStock = true;
       this.allowedFoodType = 'A';
@@ -44,6 +90,10 @@ export class ShopComponent implements OnInit {
       this.ignoreOutOfStock = settings.ignoreFoodOnStock;
       this.allowedFoodType = settings.foodTypeCode;
     }
+  }
+
+  getCategoryMappedStock(cat : string) : ICartData[] | undefined {
+    return this.cartMap.get(cat);
   }
 
   loadFoodInStock() {
@@ -140,6 +190,10 @@ export class ShopComponent implements OnInit {
   onFoodTypeSet() {
     this.loadFoodInStock()
     this.createAndSetFilterCache();
+  }
+
+  ngOnDestroy(): void {
+    this.cartSubject.unsubscribe();
   }
 }
 

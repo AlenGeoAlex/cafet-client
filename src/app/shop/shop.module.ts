@@ -18,6 +18,8 @@ import {TooltipModule} from "primeng/tooltip";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {DialogModule} from "primeng/dialog";
 import {BreadcrumbModule} from "primeng/breadcrumb";
+import {AvatarModule} from "primeng/avatar";
+import {MenuModule} from "primeng/menu";
 
 
 @NgModule({
@@ -27,21 +29,23 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
     ShopCardComponent,
     CategoryComponent
   ],
-    imports: [
-        CommonModule,
-        ShopRoutingModule,
-        AccordionModule,
-        DividerModule,
-        BadgeModule,
-        CheckboxModule,
-        DropdownModule,
-        PaginatorModule,
-        ButtonModule,
-        RippleModule,
-        TooltipModule,
-        OverlayPanelModule,
-        DialogModule,
-        BreadcrumbModule
-    ]
+  imports: [
+    CommonModule,
+    ShopRoutingModule,
+    AccordionModule,
+    DividerModule,
+    BadgeModule,
+    CheckboxModule,
+    DropdownModule,
+    PaginatorModule,
+    ButtonModule,
+    RippleModule,
+    TooltipModule,
+    OverlayPanelModule,
+    DialogModule,
+    BreadcrumbModule,
+    AvatarModule,
+    MenuModule
+  ]
 })
 export class ShopModule { }

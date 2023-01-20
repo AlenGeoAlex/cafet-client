@@ -1,4 +1,4 @@
-<app-shop-overlay (onSearch)="this.onSearch($event)" ></app-shop-overlay>
+<app-shop-overlay (onSearch)="this.onSearch($event)" [userImage]="imageLink" [cart]="cart" ></app-shop-overlay>
 <div class="container-fluid bg-light pt-4 pb-4">
   <div class="row me-5">
 
@@ -24,22 +24,21 @@
       <p-accordion [multiple]="true">
         <ng-container *ngIf="stock.length > 0">
           <ng-container *ngFor="let each of this.stockMap | keyvalue">
-            <app-category [categoryName]="each.key" [categoryStock]="each.value"></app-category>
+            <app-category [categoryName]="each.key" [categoryCart]="getCategoryMappedStock(each.key)" [categoryStock]="each.value"></app-category>
           </ng-container>
         </ng-container>
-
-        <ng-container *ngIf="stock.length <= 0">
-          <div class="container-fluid">
-            <div class="d-flex justify-content-center align-items-center">
-              <img src="assets/foodpot.gif" alt="onnumilla">
-            </div>
-            <div class="d-flex justify-content-center align-items-center">
-              <span class="fw-bolder" style="font-family: Poppins, sans-serif;white-space: initial">Seems like there are none....</span>
-
-            </div>
-          </div>
-        </ng-container>
       </p-accordion>
+
+      <ng-container *ngIf="stock.length <= 0">
+        <div class="container-fluid">
+          <div class="d-flex justify-content-center align-items-center">
+            <img src="assets/foodpot.gif" alt="onnumilla">
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <span class="fw-bolder" style="font-family: Poppins, sans-serif;white-space: initial">Seems like there are none....</span>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

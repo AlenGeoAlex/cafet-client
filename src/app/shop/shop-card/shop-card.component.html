@@ -1,6 +1,6 @@
 <div class="col hp">
   <div class="card h-100 shadow-sm">
-    <a href="#">
+    <a>
       <img src="{{Stock.foodImage}}" class="card-img-top" alt="product.title" />
     </a>
 
@@ -19,7 +19,7 @@
       <div class="d-grid gap-2 my-4">
 
         <ng-container *ngIf="this.Stock.currentInStock > 0">
-          <button pButton #addToStock pRipple type="button"  (click)="this.openStockCart(op, $event, addToStock)" label="{{getCartQuantityString()}}" [ngClass]="cartButtonStyle" class="p-button-raised {{this.cartButtonStyle}}"></button>
+          <button pButton #addToStock pRipple type="button"  (click)="this.openStockCart(op, $event, addToStock)" icon="pi pi-cart-plus" label="{{getCartQuantityString()}}" [ngClass]="cartButtonStyle" class="p-button-raised {{this.cartButtonStyle}}"></button>
           <p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
             <ng-template pTemplate="content">
               <div class="container-fluid">
@@ -38,7 +38,7 @@
 
                 <div class="row mt-3">
                   <div class="d-flex justify-content-center">
-                    <button pButton pRipple type="button" icon="pi pi-times" label="Clear" *ngIf="cartQuantity > 0" (click)="clearCart(op)" class="p-button-rounded p-button-danger p-button-outlined me-3"></button>
+                    <button pButton pRipple type="button" icon="pi pi-times" label="Clear" *ngIf="cartQuantity > 0" (click)="clearItem(op)" class="p-button-rounded p-button-danger p-button-outlined me-3"></button>
                     <button pButton pRipple type="button" icon="pi pi-check" label="Continue" (click)="addToCart(op)" class="p-button-rounded p-button-outlined"></button>
                   </div>
                 </div>

@@ -6,6 +6,7 @@ const Endpoints = {
   Order : environment.apiUrl+"order/",
   User : environment.apiUrl+"users/",
   Auth : environment.apiUrl+"auth/",
+  Cart : environment.apiUrl+"cart/",
 }
 
 export default Endpoints;

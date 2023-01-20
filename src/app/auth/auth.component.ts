@@ -101,6 +101,7 @@ export class AuthComponent implements OnInit {
     this.authenticationService.registerNewAccount(param).subscribe({
       next: value => {
         this.authenticationService.setLoginData(value);
+        this.messageService.add({severity: "success", summary: "Login", detail: "An account has been created, Please login!"})
       },
       error: err => {
         this.regGroup.reset();

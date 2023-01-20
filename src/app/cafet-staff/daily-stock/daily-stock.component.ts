@@ -64,6 +64,23 @@ export class DailyStockComponent implements OnInit {
 
   onRowEditSave(stock: IDailyStock) {
     this.editCache.delete(stock.stockId);
+    this.spinnerService.show();
+    this.stockSer.updateQuantity(stock)
+      .pipe(finalize(() => {
+        this.spinnerService.hide();
+      }))
+      .subscribe({
+        next: value => {
+          this.messageService.add({severity: "success", detail: "Successfully updated the food stock", summary: "Success"})
+        },
+        error: err => {
+          this.messageService.add({severity: "error", detail: "Failed to update stock details", summary: "Failed"})
+          console.log(err);
+        },
+        complete: () => {
+
+        }
+      })
   }
 
   onRowEditCancel(stock: IDailyStock) {
