@@ -62,11 +62,10 @@
 
             <div class="row mt-2">
               <div class="d-flex justify-content-between">
-                <button pButton pRipple [disabled]="!this.cart.isValid && (this.user.walletBalance < getTotalPrice())" pTooltip="{{(this.user.walletBalance < getTotalPrice()) ? 'You don\'t have enough balance in wallet' : 'Pay ₹'+getTotalPrice()+' using your wallet balance' }}" (click)="this.order(true)" type="button" label="Wallet {{this.user.walletBalance | currency: 'INR'}}" icon="pi pi-cart-plus" class="p-button-rounded p-button-help"></button>
+                <button pButton pRipple [disabled]="!this.cart.isValid || this.user.walletBalance < getTotalPrice()" pTooltip="{{(this.user.walletBalance < getTotalPrice()) ? 'You don\'t have enough balance in wallet' : 'Pay ₹'+getTotalPrice()+' using your wallet balance' }}" (click)="this.order(true)" type="button" label="Wallet {{this.user.walletBalance | currency: 'INR'}}" icon="pi pi-cart-plus" class="p-button-rounded p-button-help"></button>
                 <button pButton pRipple [disabled]="!this.cart.isValid" pTooltip="{{'Pay ₹'+getTotalPrice()+' using online payments'}}"  type="button" label="Checkout" icon="pi pi-cart-plus" class="p-button-rounded" (click)="this.order(false)"></button>
               </div>
             </div>
-
           </div>
         </div>
       </div>

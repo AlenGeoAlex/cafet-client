@@ -33,7 +33,6 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartService.cartObservable$.subscribe({
       next: value => {
         if(value == null){
-          //this.router.navigate(['/404']);
           this.messageService.add({severity: "error", summary: "Unknown Error", detail: "Failed to fetch your cart!"});
           return;
         }
@@ -42,7 +41,6 @@ export class CartComponent implements OnInit, OnDestroy {
         this.cart = value;
       },
       error: err => {
-        //this.router.navigate(['/404']);
         console.log(err)
         this.messageService.add({severity: "error", summary: "Unknown Error", detail: "Failed to fetch your cart!"});
         return;
@@ -68,6 +66,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.userService.meObservable$.subscribe({
       next: value => {
         this.user = value;
+        console.log(this.user)
       },
       error: err => {
         console.log(err)
@@ -78,9 +77,7 @@ export class CartComponent implements OnInit, OnDestroy {
           }
         }
       },
-
-      }
-    )
+      })
   }
 
   ngOnInit(): void {
@@ -148,7 +145,15 @@ export class CartComponent implements OnInit, OnDestroy {
           }
         },
         error: err => {
-          this.messageService.add({severity: "error", summary: "Order Failed!", detail: "An unknown error occurred!"})
+          if(err instanceof HttpErrorResponse) {
+            if(err.error){
+              this.messageService.add({severity: "error", summary: "Order Failed!", detail: err.error})
+            }else{
+              this.messageService.add({severity: "error", summary: "Order Failed!", detail: "An unknown error occurred!"})
+            }
+          }else{
+            this.messageService.add({severity: "error", summary: "Order Failed!", detail: "An unknown error occurred!"})
+          }
           console.log(err);
         },
         complete: () => {
