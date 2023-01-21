@@ -3,7 +3,7 @@ import {CafetService} from "../services/cafet.service";
 import {IEmailQuery} from "../domain/IEmailQuery";
 import {IDailyStock} from "../domain/IDailyStock";
 import {MessageService} from "primeng/api";
-import {StaffOrder} from "../domain/StaffOrder";
+import {Order} from "../domain/Order";
 import {AutoComplete} from "primeng/autocomplete";
 import {OverlayPanel} from "primeng/overlaypanel";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -41,7 +41,7 @@ export class StaffComponent implements OnInit {
   public emailQuerySuggestion : IEmailQuery[]
 
   public foodSuggestion : IDailyStock[];
-  public selectedFoods : StaffOrder[];
+  public selectedFoods : Order[];
 
   public emailQueryCoolDown : Date;
   public foodQueryCoolDown : Date;
@@ -143,7 +143,7 @@ export class StaffComponent implements OnInit {
 
     var index = this.selectedFoods.findIndex(ord => ord.foodId == updateStock.foodId);
     if(index <= -1){
-      const newOrder = new StaffOrder(updateStock);
+      const newOrder = new Order(updateStock);
       this.selectedFoods.push(newOrder);
     }else{
       const updatedStockItem = this.selectedFoods[index];
@@ -153,7 +153,7 @@ export class StaffComponent implements OnInit {
         return
       }
 
-      const updatedOrder = new StaffOrder(updateStock);
+      const updatedOrder = new Order(updateStock);
       updatedOrder.orderQuantity = newQuantity;
       this.selectedFoods[index] = updatedOrder;
       this.messageService.add({severity: "success", detail: `${updateStock.foodName} is updated with new quantity!`, summary: "Updated"})
@@ -177,7 +177,7 @@ export class StaffComponent implements OnInit {
     }
   }
 
-  onQuantityUpdate(selectedFood: StaffOrder) {
+  onQuantityUpdate(selectedFood: Order) {
     if(selectedFood.orderQuantity <= 0){
       this.removeFromSelectedFood(selectedFood.foodId);
       return;
@@ -193,7 +193,7 @@ export class StaffComponent implements OnInit {
 
         var index = this.selectedFoods.findIndex(ord => ord.foodId == updateStock.foodId);
         if(index <= -1){
-          const newOrder = new StaffOrder(updateStock);
+          const newOrder = new Order(updateStock);
           this.selectedFoods.push(newOrder);
         }else{
           const updatedStockItem = this.selectedFoods[index];
@@ -203,7 +203,7 @@ export class StaffComponent implements OnInit {
             return
           }
 
-          const updatedOrder = new StaffOrder(updateStock);
+          const updatedOrder = new Order(updateStock);
           updatedOrder.orderQuantity = updatedStockItem.orderQuantity;
           this.selectedFoods[index] = updatedOrder;
           this.messageService.add({severity: "success", detail: `${updateStock.foodName} is updated with new quantity!`, summary: "Updated"})

@@ -7,6 +7,8 @@ import {environment} from "../../environments/environment";
 import {IUser} from "../domain/IUser";
 import {AccountStatus} from "../domain/AccountStatus";
 import Endpoints from "../constants/Endpoints";
+import {FoodOrder} from "../domain/StaffFoodOrder";
+import {IProcessedOrder} from "../domain/IProcessedOrder";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,10 @@ import Endpoints from "../constants/Endpoints";
 export class UserService {
 
   public readonly userObservable$ : Observable<IUser[]>;
+  public readonly meObservable$ : Observable<IUser>;
   constructor(private readonly client : HttpClient) {
     this.userObservable$ = this.client.get<IUser[]>(Endpoints.User);
+    this.meObservable$ = this.client.get<IUser>(Endpoints.User+"me");
   }
 
   registerNewUser(regParam : RegistrationParam) : Observable<any>{
@@ -34,5 +38,9 @@ export class UserService {
 
   updateUserProfile(formData : FormData) : Observable<IUser> {
     return this.client.post<IUser>(Endpoints.User+"update", formData);
+  }
+
+  order(food : FoodOrder) : Observable<IProcessedOrder> {
+    return this.client.post<IProcessedOrder>(Endpoints.Order+"me", food);
   }
 }

@@ -16,7 +16,7 @@
 
       <div class="ms-1 me-4">
         <ng-container *ngIf="cart !== null && cart !== undefined && cart.count !== undefined">
-          <i class="pi pi-shopping-cart" [ngClass]="((cart.isValid) ? 'p-text-secondary' : 'p-text-danger')" pBadge style="font-size: 1.4rem" value="{{cart.count}}"></i>
+          <i class="pi pi-shopping-cart" [routerLink]="['/user/cart']" [ngClass]="((cart.isValid) ? 'p-text-secondary' : 'p-text-danger')" pBadge style="font-size: 1.4rem; cursor: pointer" value="{{cart.count}}"></i>
         </ng-container>
       </div>
 

@@ -1,0 +1,117 @@
+<app-user-overlay></app-user-overlay>
+<div class="position-relative ">
+  <div class="container " style="padding-top: 4.05rem; padding-left: 0px; padding-right: 0px">
+    <div class="row mt-4">
+      <div class="col-5"></div>
+      <div class="col">
+        <h2 style="font-family: Poppins, sans-serif" class="fw-bolder">Recharge Wallet</h2>
+      </div>
+    </div>
+    <div class="card mt-3 pb-5 bg-light">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-7">
+            <div class="container mt-3">
+
+              <div class="row ms-1">
+                <div class="col">
+                  <h5>Email Address</h5>
+                </div>
+              </div>
+
+              <div class="row mb-1 ms-1 me-1">
+                <div class="col-12">
+                <span class="p-fluid">
+<!--                  <p-autoComplete-->
+<!--                    #autoComplete-->
+<!--                    [required]="true" field="emailAddress" [showClear]="true"-->
+<!--                    dropdownIcon="pi pi-search" (completeMethod)="this.searchUser($event)" [forceSelection]="true" [suggestions]="emailQuerySuggestion"-->
+<!--                    (onUnselect)="this.onAccountUnselected()" (onClear)="this.onAccountUnselected()" (onSelect)="this.onAccountSelected($event.emailAddress)"-->
+<!--                    [minLength]="2" >-->
+<!--                  </p-autoComplete>-->
+                </span>
+                </div>
+              </div>
+
+              <!-- -->
+
+              <div class="container mt-3">
+                <div class="row">
+                  <div class="col">
+                    <h5>Full Name</h5>
+                  </div>
+                </div>
+
+                <div class="col-12 md:col-4">
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+<!--                    <input type="text" readonly [value]="getFullName()" pInputText>-->
+                  </div>
+                </div>
+              </div>
+
+              <!-- -->
+
+              <div class="container mt-3">
+                <div class="row">
+                  <div class="col">
+                    <div class="row">
+                      <div class="col">
+                        <h5>Current Balance</h5>
+                      </div>
+                    </div>
+
+                    <div class="col-12 md:col-4">
+                      <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-star"></i></span>
+<!--                        <input type="number" [value]="getAccountBalance()" readonly pInputText>-->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="row">
+                      <div class="col">
+                        <h5>Add Balance</h5>
+                      </div>
+                    </div>
+
+                    <div class="col-12 md:col-4">
+                      <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-star-fill"></i></span>
+<!--                        <input type="number" [(ngModel)]="balanceToAdd" pInputText placeholder="Balance">-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- -->
+
+              <div class="row mt-4">
+                <div class="col-4">
+                </div>
+                <div class="col">
+<!--                  <p-button label="Update" [disabled]="balanceToAdd <= 0 || currentlySelectedAccounts == null " (click)="this.recharge()" pTooltip="Update the user wallet" class="ms-2 " icon="pi pi-check"></p-button>-->
+<!--                  <p-button label="Clear" class="ms-2 " pTooltip="Clear the window" (click)="this.clear()" icon="pi pi-times"></p-button>-->
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-1 "></div>
+
+          <div class="col mt-5 ms-5">
+            <img src="assets/coin.svg">
+          </div>
+
+          <div class="col"></div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

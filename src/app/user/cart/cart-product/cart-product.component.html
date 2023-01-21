@@ -1,0 +1,33 @@
+<div class="product-item">
+  <div class="image-container">
+    <img src="{{Cart.foodImage}}" [alt]="Cart.foodName" class="product-image" />
+  </div>
+  <div class="product-list-detail">
+    <h5 class="mb-2">{{Cart.foodName}}</h5>
+    <span class="product-badge {{this.getClassForVeg(Cart.foodType)}}">{{(Cart.foodType) ? 'Vegetarian' : 'Non Vegetarian'}}</span>
+  </div>
+
+  <div class="product-list-detail" *ngIf="Cart.available">
+    <div class="row">
+      <span>{{Cart.quantity}} x {{Cart.foodPrice | currency: 'INR'}}</span>
+    </div>
+    <span class="row">
+      <button pButton type="button" icon="pi pi-plus" (click)="changeQuantity(true)" class="p-button-rounded p-button-secondary p-button-text"></button>
+      <button pButton type="button" icon="pi pi-minus" (click)="changeQuantity(false)" class="p-button-rounded p-button-secondary p-button-text"></button>
+    </span>
+  </div>
+
+  <div class="product-list-detail" *ngIf="!Cart.available">
+    <div class="row">
+      <h5 class=" text-danger text-capitalize">Out Of Stock</h5>
+    </div>
+
+  </div>
+
+  <div class="product-list-action">
+    <h6 class="mb-2">{{Cart.foodPrice * Cart.quantity | currency: "INR"}}</h6>
+    <div class="row">
+      <button pButton type="button" icon="pi pi-trash" (click)="removeItem()" class="p-button-rounded p-button-danger p-button-text"></button>
+    </div>
+  </div>
+</div>

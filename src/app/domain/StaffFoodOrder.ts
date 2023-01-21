@@ -1,16 +1,25 @@
 import {IEmailQuery} from "./IEmailQuery";
 import {SelectedFood} from "./IFood";
-import {StaffOrder} from "./StaffOrder";
+import {Order} from "./Order";
 
-export class StaffFoodOrder {
+export class FoodOrder {
+  selectedFood : Order[];
+  paymentMethod : boolean;
 
-  constructor(user: IEmailQuery, selectedFood: StaffOrder[], paymentMethod: boolean) {
-    this.user = user;
+  constructor(selectedFood: Order[], paymentMethod: boolean) {
     this.selectedFood = selectedFood;
     this.paymentMethod = paymentMethod;
   }
+}
+
+
+export class StaffFoodOrder extends FoodOrder{
+
+  constructor(user: IEmailQuery, selectedFood: Order[], paymentMethod: boolean) {
+    super(selectedFood, paymentMethod);
+    this.user = user;
+  }
 
   user : IEmailQuery;
-  selectedFood : StaffOrder[];
-  paymentMethod : boolean;
 }
+

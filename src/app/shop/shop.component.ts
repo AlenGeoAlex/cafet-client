@@ -4,7 +4,7 @@ import {IDailyStock} from "../domain/IDailyStock";
 import {StockService} from "../services/stock.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MessageService} from "primeng/api";
-import {BehaviorSubject, finalize} from "rxjs";
+import {BehaviorSubject, finalize, Subscription} from "rxjs";
 import {UserConstants} from "../constants/UserConstants";
 import {CartService} from "../services/cart.service";
 import {ICart, ICartData} from "../domain/ICart";
@@ -23,7 +23,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   public stock : IDailyStock[];
   public stockMap = new Map<string, IDailyStock[]>;
 
-  public readonly cartSubject : BehaviorSubject<ICart | null>;
+  public readonly cartSubject : Subscription;
   public cart : ICart;
 
   public cartMap = new Map<string, ICartData[]>;
@@ -51,10 +51,9 @@ export class ShopComponent implements OnInit, OnDestroy {
     if(tempCart != null)
       this.cart = tempCart;
 
-    this.cartSubject = cartService.cartCacheSubject$;
     var filterSettings = localStorage.getItem(UserConstants.FilterConstants);
     this.cartService.updateCart();
-    this.cartSubject.subscribe({
+    this.cartSubject = cartService.cartCacheSubject$.asObservable().subscribe({
       next: value => {
         if(value == null)
           return;

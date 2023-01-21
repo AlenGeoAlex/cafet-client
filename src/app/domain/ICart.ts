@@ -14,4 +14,6 @@ export interface ICartData {
   foodCategory: string;
   available: boolean;
   lastUpdated: string;
+  foodImage : string;
+  foodPrice : number;
 }

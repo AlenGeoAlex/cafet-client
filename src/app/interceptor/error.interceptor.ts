@@ -11,10 +11,11 @@ import { catchError, tap } from 'rxjs/operators';
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import Endpoints from "../constants/Endpoints";
+import {AuthenticationService} from "../services/authentication.service";
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private readonly router : Router, private readonly messageService : MessageService) {
+  constructor(private readonly router : Router, private readonly messageService : MessageService, private readonly authService : AuthenticationService) {
   }
 
   intercept(
@@ -29,6 +30,9 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.messageService.add({severity: "error", detail: "Session Timed Out, Please login again", summary: "Timeout"})
               this.router.navigate(['/auth']);
             }
+          }else if(error.status == 403){
+            this.authService.logout();
+            this.messageService.add({severity: "error", detail: "Session Timed Out, Please login again", summary: "Timeout"})
           }
         }
         console.warn(

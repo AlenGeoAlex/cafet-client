@@ -1,0 +1,85 @@
+<app-user-overlay [cart]="cart"></app-user-overlay>
+<ng-container *ngIf="cart != null" >
+  <div class="container-fluid" >
+    <div class="row mt-3" style="margin-bottom: 0">
+      <span >
+        <h3 style="font-family: Poppins, sans-serif;" class="fw-bolder p-4">Your Cart</h3>
+      </span>
+      <p-divider></p-divider>
+    </div>
+    <div class="row" *ngIf="cart.count > 0">
+      <div class="col-9 col-md-8">
+        <!-- Left Side Container -->
+
+        <div class="container-fluid" style="padding-left: 0">
+          <div class="col-12 md:col-6 drag-column">
+            <ng-container *ngFor="let cart of cart.cartData">
+              <app-cart-product [Cart]="cart" (onItemRemove)="this.removeItem($event)"></app-cart-product>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-md-4">
+        <!-- Right Side Container -->
+
+
+        <div class="card bg-light" style="width: 100%" *ngIf="user">
+          <div class="mt-4 mx-4">
+            <h4 class="fw-bold">Order Details</h4>
+          </div>
+          <p-divider ></p-divider>
+          <div class="card-body container">
+            <div class="row">
+              <h6> {{user.userName}} </h6>
+            </div>
+            <div class="row">
+              <h6> {{user.userEmail}} </h6>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-10">
+                <h5 class="fw-bold">Items</h5>
+              </div>
+              <div class="col">
+                <span class="fw-bolder">{{getTotalNoOfItems()}}</span>
+              </div>
+            </div>
+
+            <div class="row" *ngFor="let each of cart.cartData">
+              <h6 class="ps-4" *ngIf="each.available">{{each.foodName}} x {{each.quantity}}</h6>
+              <h6 class="ps-4 text-decoration-line-through" *ngIf="!each.available">{{each.foodName}} x {{each.quantity}}</h6>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-8">
+                <h5 class="fw-bold">Amount</h5>
+              </div>
+              <div class="col">
+                <span class="fw-bold">{{getTotalPrice() | currency: "INR"}}</span>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="d-flex justify-content-between">
+                <button pButton pRipple [disabled]="!this.cart.isValid && (this.user.walletBalance < getTotalPrice())" pTooltip="{{(this.user.walletBalance < getTotalPrice()) ? 'You don\'t have enough balance in wallet' : 'Pay ₹'+getTotalPrice()+' using your wallet balance' }}" (click)="this.order(true)" type="button" label="Wallet {{this.user.walletBalance | currency: 'INR'}}" icon="pi pi-cart-plus" class="p-button-rounded p-button-help"></button>
+                <button pButton pRipple [disabled]="!this.cart.isValid" pTooltip="{{'Pay ₹'+getTotalPrice()+' using online payments'}}"  type="button" label="Checkout" icon="pi pi-cart-plus" class="p-button-rounded" (click)="this.order(false)"></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- If nothing is in the cart -->
+    <div class="container-fluid" *ngIf="cart.count <= 0">
+      <div class="d-flex justify-content-center align-items-center">
+        <img src="assets/foodpot.gif" alt="">
+      </div>
+      <div class="d-flex justify-content-center align-items-center">
+        <span class="fw-bolder text-secondary" style="font-family: Poppins, sans-serif;white-space: initial">The kitchen is waiting, Go <a routerLink="/shop">Checkout</a>!</span>
+      </div>
+    </div>
+  </div>
+</ng-container>
