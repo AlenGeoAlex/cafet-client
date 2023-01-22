@@ -1,6 +1,6 @@
 <div class="col hp">
   <div class="card h-100 shadow-sm">
-    <a>
+    <a >
       <img src="{{Stock.foodImage}}" class="card-img-top" alt="product.title" />
     </a>
 
@@ -10,7 +10,7 @@
     <div class="card-body">
       <div class="clearfix mb-3">
         <span class="float-start badge rounded-pill bg-success">{{this.Stock.foodPrice | currency: 'INR'}}</span>
-
+        <span *ngIf="Stock.topSeller" class="float-end badge rounded-pill fw-bolder" style="background-color: #5de593; color: black;"><i class="pi pi-star-fill pe-1" style="font-size: 0.8rem; color: goldenrod"></i>Most Sold</span>
       </div>
       <h5 class="card-title">
         <a> <span class="fw-bold">{{this.Stock.foodName}}</span> - {{this.Stock.foodDescription}}</a>

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IDailyStock} from "../../domain/IDailyStock";
+import {IDailyStock, IShopStock} from "../../domain/IDailyStock";
 import {ICartData} from "../../domain/ICart";
 
 @Component({
@@ -10,7 +10,7 @@ import {ICartData} from "../../domain/ICart";
 export class CategoryComponent implements OnInit {
 
   @Input("categoryName") categoryName : string
-  @Input("categoryStock") categoryStock : IDailyStock[]
+  @Input("categoryStock") categoryStock : IShopStock[]
   @Input("categoryCart") categoryCart : ICartData[] | undefined;
 
   constructor() { }

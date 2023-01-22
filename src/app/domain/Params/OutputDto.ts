@@ -33,7 +33,7 @@ export interface ILoginParams {
 }
 
 export interface IWalletRechargeParams {
-  emailAddress : string,
+  emailAddress? : string,
   balanceToAdd : number,
 }
 

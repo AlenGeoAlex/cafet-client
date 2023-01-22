@@ -10,3 +10,7 @@ export interface IDailyStock {
   foodType: boolean;
   foodDescription : string;
 }
+
+export interface IShopStock extends IDailyStock {
+  topSeller? : boolean;
+}

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CafetService} from "../services/cafet.service";
-import {IDailyStock} from "../domain/IDailyStock";
+import {IDailyStock, IShopStock} from "../domain/IDailyStock";
 import {StockService} from "../services/stock.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MessageService} from "primeng/api";
@@ -9,6 +9,7 @@ import {UserConstants} from "../constants/UserConstants";
 import {CartService} from "../services/cart.service";
 import {ICart, ICartData} from "../domain/ICart";
 import {AuthenticationService} from "../services/authentication.service";
+import {StatisticsService} from "../services/statistics.service";
 
 @Component({
   selector: 'app-shop',
@@ -20,8 +21,8 @@ export class ShopComponent implements OnInit, OnDestroy {
   public ignoreOutOfStock : boolean;
   public allowedFoodType : string;
 
-  public stock : IDailyStock[];
-  public stockMap = new Map<string, IDailyStock[]>;
+  public stock : IShopStock[];
+  public stockMap = new Map<string, IShopStock[]>;
 
   public readonly cartSubject : Subscription;
   public cart : ICart;
@@ -36,6 +37,8 @@ export class ShopComponent implements OnInit, OnDestroy {
     {typeIdentifier: "Vegetarian", typeCode: "V"}
   ]
 
+  public topSellerFoodId : number[];
+
   constructor(
     private readonly cafetService : CafetService,
     private readonly spinnerService: NgxSpinnerService,
@@ -43,8 +46,12 @@ export class ShopComponent implements OnInit, OnDestroy {
     private readonly stockService : StockService,
     private readonly cartService : CartService,
     private readonly authService : AuthenticationService,
+    private readonly statsService : StatisticsService,
   ) {
     this.stock = [];
+    this.topSellerFoodId = [];
+    this.getTopSeller();
+
     this.imageLink = this.authService.getUserData(UserConstants.ImageLink);
 
     const tempCart  = this.cartService.getCart();
@@ -58,7 +65,6 @@ export class ShopComponent implements OnInit, OnDestroy {
         if(value == null)
           return;
 
-        console.log(value);
         this.cart = value;
 
         for (let cartDatum of value.cartData) {
@@ -89,6 +95,20 @@ export class ShopComponent implements OnInit, OnDestroy {
       this.ignoreOutOfStock = settings.ignoreFoodOnStock;
       this.allowedFoodType = settings.foodTypeCode;
     }
+  }
+
+  getTopSeller(){
+    this.statsService.getTopSeller()
+      .subscribe({
+        next: value => {
+          console.log(value);
+          for (let itTopSoldFood of value) {
+            this.topSellerFoodId.push(itTopSoldFood.foodId);
+          }
+
+          console.log(this.topSellerFoodId)
+        }
+      })
   }
 
   getCategoryMappedStock(cat : string) : ICartData[] | undefined {
@@ -141,7 +161,7 @@ export class ShopComponent implements OnInit, OnDestroy {
     }
   }
 
-  applyFilter(dailyStock : IDailyStock[]) : IDailyStock[] {
+  applyFilter(dailyStock : IShopStock[]) : IShopStock[] {
     if(this.ignoreOutOfStock)
       dailyStock = dailyStock.filter(d => d.currentInStock > 0);
 
@@ -154,11 +174,16 @@ export class ShopComponent implements OnInit, OnDestroy {
     return dailyStock;
   }
 
-  private mapStock(ds : IDailyStock[]){
+  private mapStock(ds : IShopStock[]){
     this.stockMap.clear();
     for (let eachStock of ds) {
       const category = eachStock.foodCategory;
 
+      //Map as topSeller
+      if(this.topSellerFoodId.findIndex(s => s == eachStock.foodId) >= 0)
+        eachStock.topSeller = true;
+
+      //Map to Category
       const stockOfCategory = this.stockMap.get(category);
       if(stockOfCategory == null){
         this.stockMap.set(category, [eachStock])

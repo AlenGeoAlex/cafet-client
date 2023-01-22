@@ -17,7 +17,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class UserProfileComponent implements OnInit {
 
   public menuItem : MenuItem[];
-  public user : IUser | null;
+  public user : IUser;
   public userFormGroup : FormGroup;
   public showConfPassword : boolean;
   public imageFile : File | null;
@@ -36,7 +36,6 @@ export class UserProfileComponent implements OnInit {
     private readonly formBuilder : FormBuilder
     ) {
     this.showConfPassword = false;
-    this.user = null;
     this.imageUrl = "";
     this.userFormGroup = formBuilder.group({
       FirstName : ['', [Validators.required]],
@@ -50,15 +49,12 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinnerService.show();
-    const emailAddress = this.authService.getUserData(UserConstants.Email);
-    if(emailAddress == null)
-      return;
 
-    this.getUser(emailAddress);
+    this.getUser();
   }
 
-  getUser(emailAddress : string) {
-    this.userService.getUserOfEmailAddress(emailAddress).pipe(
+  getUser() {
+    this.userService.meObservable$.pipe(
       finalize(() => {
         this.spinnerService.hide();
       })
@@ -176,7 +172,7 @@ export class UserProfileComponent implements OnInit {
           this.user = value;
           this.authService.setData(UserConstants.UserName, this.user.userName);
           this.authService.setData(UserConstants.ImageLink, this.user.userImage);
-          this.getUser(value.userEmail);
+          this.getUser();
           this.messageService.add({severity: "success", summary: "Updated", detail:"Your profile has been updated"})
         },
         error: err => {

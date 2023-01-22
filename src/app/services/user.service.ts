@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IRole} from "../domain/IRole";
-import {RegistrationParam} from "../domain/Params/OutputDto";
+import {IWalletRechargeParams, RegistrationParam} from "../domain/Params/OutputDto";
 import {environment} from "../../environments/environment";
 import {IUser} from "../domain/IUser";
 import {AccountStatus} from "../domain/AccountStatus";
@@ -42,5 +42,9 @@ export class UserService {
 
   order(food : FoodOrder) : Observable<IProcessedOrder> {
     return this.client.post<IProcessedOrder>(Endpoints.Order+"me", food);
+  }
+
+  rechargeWallet(param : IWalletRechargeParams) : Observable<unknown> {
+    return this.client.post<unknown>(Endpoints.User+"wallet-recharge", param);
   }
 }

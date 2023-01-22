@@ -67,7 +67,7 @@ export class UserOverlayComponent implements OnInit {
           {
             label: "Recharge Wallet",
             icon: "pi pi-credit-card",
-            routerLink: ""
+            routerLink: "/user/wallet-recharge"
           },
           {
             label: "Wallet History",

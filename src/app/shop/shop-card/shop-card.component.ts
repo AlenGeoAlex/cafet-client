@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IDailyStock} from "../../domain/IDailyStock";
+import {IDailyStock, IShopStock} from "../../domain/IDailyStock";
 import {OverlayPanel} from "primeng/overlaypanel";
 import {MessageService} from "primeng/api";
 import {ICartAddition} from "../../domain/Params/OutputDto";
@@ -15,7 +15,7 @@ import {ICartData} from "../../domain/ICart";
 })
 export class ShopCardComponent implements OnInit {
 
-  @Input() Stock : IDailyStock;
+  @Input() Stock : IShopStock;
   @Input() Cart : ICartData | null;
 
   tempCartQuantity : number;

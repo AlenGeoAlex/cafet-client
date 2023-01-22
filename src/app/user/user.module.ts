@@ -17,6 +17,7 @@ import {InputNumberModule} from "primeng/inputnumber";
 import { OrderPlacedComponent } from './order-placed/order-placed.component';
 import { WalletRechargeComponent } from './wallet-recharge/wallet-recharge.component';
 import {AutoCompleteModule} from "primeng/autocomplete";
+import {InputTextModule} from "primeng/inputtext";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {AutoCompleteModule} from "primeng/autocomplete";
         BadgeModule,
         DividerModule,
         InputNumberModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        InputTextModule
     ]
 })
 export class UserModule { }
