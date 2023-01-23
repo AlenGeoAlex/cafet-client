@@ -21,6 +21,11 @@ import {AutoCompleteModule} from "primeng/autocomplete";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {DialogModule} from "primeng/dialog";
 import { RechargeCusComponent } from './recharge-cus/recharge-cus.component';
+import { OrderDetailComponent } from './order/order-detail/order-detail.component';
+import {AppModule} from "../app.module";
+import {BooleanPipe} from "../pipes/boolean.pipe";
+import {SharedPipesModule} from "../pipes/shared-pipes/shared-pipes.module";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
   declarations: [
@@ -29,6 +34,7 @@ import { RechargeCusComponent } from './recharge-cus/recharge-cus.component';
     RegStockComponent,
     DailyStockComponent,
     RechargeCusComponent,
+    OrderDetailComponent,
   ],
 
   imports: [
@@ -49,6 +55,8 @@ import { RechargeCusComponent } from './recharge-cus/recharge-cus.component';
     AutoCompleteModule,
     OverlayPanelModule,
     DialogModule,
+    SharedPipesModule,
+    CheckboxModule,
   ]
 })
 export class CafetStaffModule { }

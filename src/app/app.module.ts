@@ -14,13 +14,15 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {JwtInterceptor} from "./interceptor/jwt.interceptor";
 import {ErrorInterceptor} from "./interceptor/error.interceptor";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { BooleanPipe } from './pipes/boolean.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    Error404Component,
+    declarations: [
+        AppComponent,
+        Error404Component,
 
-  ],
+
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -32,13 +34,13 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
         NgxSpinnerModule,
         ConfirmDialogModule
     ],
-  providers: [
-    MessageService,
-    ConfirmationService,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    // {provide: APP_INITIALIZER, useFactory: initializeApp, multi: true, deps: [AuthenticationService]},
-  ],
-  bootstrap: [AppComponent]
+    providers: [
+        MessageService,
+        ConfirmationService,
+        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+        // {provide: APP_INITIALIZER, useFactory: initializeApp, multi: true, deps: [AuthenticationService]},
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

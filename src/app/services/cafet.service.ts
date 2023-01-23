@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {IEmailQuery} from "../domain/IEmailQuery";
@@ -8,6 +8,7 @@ import {StaffFoodOrder} from "../domain/StaffFoodOrder";
 import {IProcessedOrder} from "../domain/IProcessedOrder";
 import {IWalletRechargeParams} from "../domain/Params/OutputDto";
 import Endpoints from "../constants/Endpoints";
+import {IStaffOrderView} from "../domain/IStaffOrderView";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class CafetService {
 
   constructor(private readonly client : HttpClient) {
 
+  }
+
+  searchOrder(queryString : HttpParams) : Observable<IStaffOrderView[]> {
+    return this.client.get<IStaffOrderView[]>(`${Endpoints.Search}order?${queryString.toString()}`);
   }
 
   searchUser(queryString : string) : Observable<IEmailQuery[]> {
@@ -41,5 +46,14 @@ export class CafetService {
 
   recharge(params : IWalletRechargeParams) : Observable<any>   {
     return this.client.post<any>(Endpoints.User+"wallet-recharge", params)
+  }
+
+  reject(orderId : string) : Observable<boolean> {
+    return this.client.get<boolean>(Endpoints.Order+"reject?orderId="+orderId)
+  }
+
+
+  accept(orderId : string) : Observable<boolean> {
+    return this.client.get<boolean>(Endpoints.Order+"complete?orderId="+orderId)
   }
 }

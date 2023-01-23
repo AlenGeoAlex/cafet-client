@@ -1,0 +1,13 @@
+.order-card {
+  background: rgb(238,238,240);
+  background: linear-gradient(90deg, rgba(238,238,240,0.863795518207283) 0%, rgba(255,255,255,1) 100%, rgba(0,212,255,1) 100%);
+  padding: 20px;
+  color: #1b3e59;
+  border-radius: 15px;
+
+}
+
+.order-card:hover {
+  transition: 0.2s all;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
