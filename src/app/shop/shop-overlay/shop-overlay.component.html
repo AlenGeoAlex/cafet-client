@@ -26,7 +26,7 @@
           <p-menu #menu [popup]="true" [model]="items"></p-menu>
         </ng-container>
         <ng-container *ngIf="!imageLink">
-          <p-avatar label="A" [routerLink]="['/auth']"  shape="circle"></p-avatar>
+          <p-avatar label="A" [routerLink]="['/auth']" [styleClass]="'me-5'" [tooltipStyleClass]="'p-3'" pTooltip="Please login to use customer services" shape="circle"></p-avatar>
         </ng-container>
       </div>
     </div>

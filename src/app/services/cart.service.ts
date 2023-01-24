@@ -31,13 +31,13 @@ export class CartService {
     return this.client.delete<unknown>(Endpoints.Cart+`clear`);
   }
 
-  getCart() : ICart | null {
-    const item = localStorage.getItem(UserConstants.Cart);
-    if(item === null || item === undefined)
-      return null;
-
-    return JSON.parse(item);
-  }
+  // getCart() : ICart | null {
+  //   const item = localStorage.getItem(UserConstants.Cart);
+  //   if(item === null || item === undefined)
+  //     return null;
+  //
+  //   return JSON.parse(item);
+  // }
 
   updateCart(){
     this.cartObservable$.subscribe({

@@ -25,7 +25,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   public stockMap = new Map<string, IShopStock[]>;
 
   public readonly cartSubject : Subscription;
-  public cart : ICart;
+  public cart : ICart | null;
 
   public cartMap = new Map<string, ICartData[]>;
 
@@ -54,9 +54,9 @@ export class ShopComponent implements OnInit, OnDestroy {
 
     this.imageLink = this.authService.getUserData(UserConstants.ImageLink);
 
-    const tempCart  = this.cartService.getCart();
+/*    const tempCart  = this.cartService.getCart();
     if(tempCart != null)
-      this.cart = tempCart;
+      this.cart = tempCart;*/
 
     var filterSettings = localStorage.getItem(UserConstants.FilterConstants);
     this.cartService.updateCart();
@@ -79,7 +79,7 @@ export class ShopComponent implements OnInit, OnDestroy {
 
       },
       error: err => {
-
+        this.cart = null;
       },
       complete: () => {
 
@@ -101,12 +101,10 @@ export class ShopComponent implements OnInit, OnDestroy {
     this.statsService.getTopSeller()
       .subscribe({
         next: value => {
-          console.log(value);
           for (let itTopSoldFood of value) {
             this.topSellerFoodId.push(itTopSoldFood.foodId);
           }
 
-          console.log(this.topSellerFoodId)
         }
       })
   }

@@ -18,6 +18,12 @@ import { OrderPlacedComponent } from './order-placed/order-placed.component';
 import { WalletRechargeComponent } from './wallet-recharge/wallet-recharge.component';
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {InputTextModule} from "primeng/inputtext";
+import {SharedModule} from "../pipes/shared-pipes/shared.module";
+import { WalletHistoryComponent } from './wallet-history/wallet-history.component';
+import {DropdownModule} from "primeng/dropdown";
+import {CalendarModule} from "primeng/calendar";
+import {CheckboxModule} from "primeng/checkbox";
+import {TableModule} from "primeng/table";
 
 
 @NgModule({
@@ -28,21 +34,25 @@ import {InputTextModule} from "primeng/inputtext";
     CartProductComponent,
     OrderPlacedComponent,
     WalletRechargeComponent,
+    WalletHistoryComponent,
   ],
-    imports: [
-        CommonModule,
-        UserRoutingModule,
-        AvatarModule,
-        MenuModule,
-        ReactiveFormsModule,
-        ButtonModule,
-        RippleModule,
-        FormsModule,
-        BadgeModule,
-        DividerModule,
-        InputNumberModule,
-        AutoCompleteModule,
-        InputTextModule
-    ]
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    AvatarModule,
+    MenuModule,
+    ReactiveFormsModule,
+    FormsModule,
+    BadgeModule,
+    DividerModule,
+    InputNumberModule,
+    AutoCompleteModule,
+    InputTextModule,
+    SharedModule,
+    DropdownModule,
+    CalendarModule,
+    CheckboxModule,
+    TableModule,
+  ]
 })
 export class UserModule { }

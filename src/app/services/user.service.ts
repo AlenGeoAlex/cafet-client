@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IRole} from "../domain/IRole";
 import {IWalletRechargeParams, RegistrationParam} from "../domain/Params/OutputDto";
@@ -9,6 +9,7 @@ import {AccountStatus} from "../domain/AccountStatus";
 import Endpoints from "../constants/Endpoints";
 import {FoodOrder} from "../domain/StaffFoodOrder";
 import {IProcessedOrder} from "../domain/IProcessedOrder";
+import {IWalletHistory} from "../domain/IWalletHistory";
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,9 @@ export class UserService {
 
   rechargeWallet(param : IWalletRechargeParams) : Observable<unknown> {
     return this.client.post<unknown>(Endpoints.User+"wallet-recharge", param);
+  }
+
+  getUserWalletHistory(param : HttpParams) : Observable<IWalletHistory[]> {
+    return this.client.get<IWalletHistory[]>(Endpoints.User+"wallet-history?"+param.toString());
   }
 }

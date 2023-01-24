@@ -24,7 +24,7 @@ import { RechargeCusComponent } from './recharge-cus/recharge-cus.component';
 import { OrderDetailComponent } from './order/order-detail/order-detail.component';
 import {AppModule} from "../app.module";
 import {BooleanPipe} from "../pipes/boolean.pipe";
-import {SharedPipesModule} from "../pipes/shared-pipes/shared-pipes.module";
+import {SharedModule} from "../pipes/shared-pipes/shared.module";
 import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
@@ -55,7 +55,7 @@ import {CheckboxModule} from "primeng/checkbox";
     AutoCompleteModule,
     OverlayPanelModule,
     DialogModule,
-    SharedPipesModule,
+    SharedModule,
     CheckboxModule,
   ]
 })

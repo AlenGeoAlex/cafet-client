@@ -35,6 +35,7 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {BadgeModule} from "primeng/badge";
   import {RadioButtonModule} from "primeng/radiobutton";
   import {ChipsModule} from "primeng/chips";
+  import {SharedModule} from "../pipes/shared-pipes/shared.module";
 
 @NgModule({
     declarations: [
@@ -61,15 +62,11 @@ import {BadgeModule} from "primeng/badge";
         RouterModule,
         CardModule,
         DividerModule,
-        ButtonModule,
         TableModule,
-        RippleModule,
         FormsModule,
         InputTextModule,
         InputTextareaModule,
         ReactiveFormsModule,
-        ToastModule,
-        ConfirmDialogModule,
         FileUploadModule,
         AutoCompleteModule,
         InputNumberModule,
@@ -79,6 +76,7 @@ import {BadgeModule} from "primeng/badge";
         BadgeModule,
         RadioButtonModule,
         ChipsModule,
+        SharedModule
     ]
 })
 export class AdminModule { }

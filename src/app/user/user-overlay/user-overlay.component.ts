@@ -4,6 +4,7 @@ import {MenuItem} from "primeng/api";
 import {AuthenticationService} from "../../services/authentication.service";
 import {UserConstants} from "../../constants/UserConstants";
 import {Menu} from "primeng/menu";
+import {IWalletHistory} from "../../domain/IWalletHistory";
 
 @Component({
   selector: 'app-user-overlay',
@@ -17,6 +18,8 @@ export class UserOverlayComponent implements OnInit {
   items : MenuItem[];
   userName : string;
   imageLink : string | null;
+
+
   constructor(private readonly authService : AuthenticationService) {
 
 
@@ -72,7 +75,7 @@ export class UserOverlayComponent implements OnInit {
           {
             label: "Wallet History",
             icon: "pi pi-database",
-            routerLink: ""
+            routerLink: "/user/wallet-history"
           }
         ]
       },

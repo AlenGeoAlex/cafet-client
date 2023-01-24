@@ -15,25 +15,28 @@ import {JwtInterceptor} from "./interceptor/jwt.interceptor";
 import {ErrorInterceptor} from "./interceptor/error.interceptor";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import { BooleanPipe } from './pipes/boolean.pipe';
+import { HomeComponent } from './home.component';
+import {RippleModule} from "primeng/ripple";
+import {SharedModule} from "./pipes/shared-pipes/shared.module";
+import {MenuModule} from "primeng/menu";
+import { NullablePipe } from './pipes/nullable.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         Error404Component,
-
-
+        HomeComponent,
     ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        FileUploadModule,
-        AdminModule,
-        ToastModule,
-        NgxSpinnerModule,
-        ConfirmDialogModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FileUploadModule,
+    AdminModule,
+    SharedModule,
+    MenuModule,
+  ],
     providers: [
         MessageService,
         ConfirmationService,

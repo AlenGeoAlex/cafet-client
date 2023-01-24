@@ -7,6 +7,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {CartService} from "../../services/cart.service";
 import {finalize} from "rxjs";
 import {ICartData} from "../../domain/ICart";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-shop-card',
@@ -72,6 +73,12 @@ export class ShopCardComponent implements OnInit {
             this.messageService.add({severity: "success", summary: "Added!", detail: "Updated Cart!"})
           },
           error: err => {
+            if(err instanceof HttpErrorResponse){
+              if(err.status === 403){
+                console.log(err)
+                return;
+              }
+            }
             this.messageService.add({severity: "error", summary: "Failed!", detail: "Failed to remove item from the cart!"})
             console.log(err);
           },
@@ -108,6 +115,12 @@ export class ShopCardComponent implements OnInit {
         },
 
         error: err => {
+          if(err instanceof HttpErrorResponse){
+            if(err.status === 403){
+              console.log(err)
+              return;
+            }
+          }
           this.messageService.add({severity: "error", detail: "Failed to add the item as the item is not in stock anymore", summary: "Not in stock!"})
           console.log(err);
         },

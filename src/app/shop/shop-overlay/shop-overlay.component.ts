@@ -13,7 +13,7 @@ import {Menu} from "primeng/menu";
 export class ShopOverlayComponent implements OnInit {
 
   @Input("userImage") imageLink : string | null;
-  @Input("cart") cart : ICart;
+  @Input("cart") cart : ICart | null;
   @Output() onSearch = new EventEmitter();
 
   items : MenuItem[];
@@ -88,6 +88,7 @@ export class ShopOverlayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(`Cart Is ${JSON.stringify(this.cart)}`)
   }
 
   searchEvent(inputElement: HTMLInputElement) {
