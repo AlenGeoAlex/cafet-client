@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ILoginParams, IRegistrationParams, RegistrationParam} from "../domain/Params/OutputDto";
+import {ILoginParams, RegistrationParam} from "../domain/Params/OutputDto";
 import {AuthenticationService} from "../services/authentication.service";
-import {HttpErrorResponse, HttpResponseBase} from "@angular/common/http";
+import {HttpErrorResponse} from "@angular/common/http";
 import {MessageService} from "primeng/api";
+import {SocialAuthService} from "@abacritt/angularx-social-login";
+import {UserConstants} from "../constants/UserConstants";
 
 @Component({
   selector: 'app-auth',
@@ -17,7 +19,7 @@ export class AuthComponent implements OnInit {
   public mode : "sign-up-mode" | "" = "";
   public readonly regGroup : FormGroup;
   public readonly logGroup : FormGroup;
-  constructor(private readonly fb: FormBuilder, private readonly authenticationService : AuthenticationService, private messageService: MessageService) {
+  constructor(private readonly fb: FormBuilder, private readonly authenticationService : AuthenticationService, private messageService: MessageService, private readonly authService: SocialAuthService) {
     this.regGroup = fb.group({
       firstName : ['', Validators.required],
       lastName : ['', Validators.required],
@@ -33,6 +35,39 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.clear();
+    this.authService.authState.subscribe((user) => {
+      if(user == null)
+        return;
+
+      this.authenticationService.socialLogin(user).subscribe({
+        next: value => {
+          this.authenticationService.setLoginData(value);
+        },error: err => {
+          this.logGroup.reset();
+          if(err instanceof HttpErrorResponse){
+            const error = <HttpErrorResponse> err;
+            if(err.status === 400){
+              const errMessage = error.error;
+              if(errMessage != null || errMessage != undefined){
+                this.messageService.add({severity: "error", summary: "Failed", detail: errMessage})
+              }
+            } else if(err.status === 401){
+              const errMessage = error.error;
+              if(errMessage != null || errMessage != undefined){
+                this.messageService.add({severity: "error", summary: "Denied", detail: errMessage})
+              }
+            } else{
+              console.log(err);
+              this.messageService.add({severity: "error", summary: "Failed", detail: "An unknown error occurred. Please try again later!"})
+            }
+          }
+        },
+        complete: () => {
+
+        }
+      })
+    });
   }
 
   toggleMode(){
@@ -101,6 +136,7 @@ export class AuthComponent implements OnInit {
     this.authenticationService.registerNewAccount(param).subscribe({
       next: value => {
         this.authenticationService.setLoginData(value);
+        this.authenticationService.setData(UserConstants.SocialLoginIn, "true");
         this.messageService.add({severity: "success", summary: "Login", detail: "An account has been created, Please login!"})
       },
       error: err => {
@@ -124,5 +160,4 @@ export class AuthComponent implements OnInit {
     });
 
   }
-
 }

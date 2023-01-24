@@ -8,4 +8,5 @@ export enum UserConstants{
   CartId = "CART_ID",
   Cart = "CART",
   FilterConstants = "FILTER_SETTINGS",
+  SocialLoginIn = "SOCIAL_LOGIN",
 }

@@ -7,6 +7,7 @@ import {ICred} from "../domain/ICred";
 import {UserConstants} from "../constants/UserConstants";
 import {ActivatedRoute, Router} from "@angular/router";
 import Endpoints from "../constants/Endpoints";
+import {SocialAuthService, SocialUser} from "@abacritt/angularx-social-login";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import Endpoints from "../constants/Endpoints";
 export class AuthenticationService {
   readonly apiUrl : string;
   readonly authenticationObservable$ : BehaviorSubject<string | null>
-  constructor(private readonly client: HttpClient, private readonly router : Router, private readonly route : ActivatedRoute) {
+  constructor(private readonly client: HttpClient, private readonly router : Router, private readonly route : ActivatedRoute, private readonly socialAuthService: SocialAuthService) {
     this.apiUrl = `${environment.apiUrl}auth/`;
     this.authenticationObservable$ = new BehaviorSubject<string | null>(this.getUserData(UserConstants.UserName));
   }
@@ -29,6 +30,11 @@ export class AuthenticationService {
 
   resetPassword(emailAddress : any) : Observable<any> {
     return this.client.post(Endpoints.Auth+"reset-pass/", emailAddress);
+  }
+
+  socialLogin(loginResponse : SocialUser) : Observable<ICred> {
+    localStorage.clear();
+    return this.client.post<ICred>(Endpoints.Auth+"social-login", loginResponse)
   }
 
   setLoginData(userData : ICred){
@@ -54,6 +60,13 @@ export class AuthenticationService {
   }
 
   logout() {
+    const socialLogin = localStorage.getItem(UserConstants.SocialLoginIn);
+    if(socialLogin && socialLogin === "true"){
+      console.log("Social Logout")
+      this.socialAuthService.signOut(true)
+        .then((val) => console.log(val))
+        .catch((err) => console.log(err))
+    }
     localStorage.removeItem(UserConstants.AccessToken);
     localStorage.removeItem(UserConstants.Email);
     localStorage.removeItem(UserConstants.UserName);

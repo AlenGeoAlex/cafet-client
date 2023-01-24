@@ -10,6 +10,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
 import {RippleModule} from "primeng/ripple";
+import {SocialLoginModule} from "@abacritt/angularx-social-login";
 
 
 @NgModule({
@@ -17,16 +18,17 @@ import {RippleModule} from "primeng/ripple";
     AuthComponent,
     ResetPassComponent,
   ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    ReactiveFormsModule,
-    ToastModule,
-    InputTextModule,
-    ButtonModule,
-    FormsModule,
-    TooltipModule,
-    RippleModule
-  ]
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        ReactiveFormsModule,
+        ToastModule,
+        InputTextModule,
+        ButtonModule,
+        FormsModule,
+        TooltipModule,
+        RippleModule,
+        SocialLoginModule
+    ]
 })
 export class AuthModule { }

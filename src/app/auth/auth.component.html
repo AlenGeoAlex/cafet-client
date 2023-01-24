@@ -16,6 +16,11 @@
           </div>
           <a class="pass" [routerLink]="['reset']"  >Forgot your password?</a>
           <input type="submit" [disabled]="logGroup.invalid" value="Sign in" (click)="this.signin(this.logGroup.getRawValue())" class="btn solid">
+          <p class="social-text">You can login with:</p>
+          <div class="social-media">
+            <asl-google-signin-button>
+            </asl-google-signin-button>
+          </div>
         </form>
         <form [formGroup]="regGroup" class="sign-up-form">
           <img src="assets/cafet.svg" width="52px" height="52px">
@@ -45,6 +50,11 @@
             <span class="ms-2 checkmark">I accept the <a>terms and services</a></span>
           </label>
           <input type="submit" [disabled]="regGroup.invalid" value="Create" (click)="this.signup()" class="btn solid">
+          <p class="social-text">You can register with:</p>
+          <div class="social-media">
+            <asl-google-signin-button>
+            </asl-google-signin-button>
+          </div>
         </form>
       </div>
     </div>

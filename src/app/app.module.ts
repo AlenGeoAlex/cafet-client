@@ -20,6 +20,7 @@ import {RippleModule} from "primeng/ripple";
 import {SharedModule} from "./pipes/shared-pipes/shared.module";
 import {MenuModule} from "primeng/menu";
 import { NullablePipe } from './pipes/nullable.pipe';
+import {GoogleLoginProvider, SocialAuthServiceConfig} from "@abacritt/angularx-social-login";
 
 @NgModule({
     declarations: [
@@ -38,10 +39,24 @@ import { NullablePipe } from './pipes/nullable.pipe';
     MenuModule,
   ],
     providers: [
-        MessageService,
-        ConfirmationService,
-        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+      MessageService,
+      ConfirmationService,
+      {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+      {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+      {
+        provide: 'SocialAuthServiceConfig',
+        useValue: {
+          autoLogin: false,
+          providers: [
+            {
+              id: GoogleLoginProvider.PROVIDER_ID,
+              provider: new GoogleLoginProvider(
+                ''
+              )
+            }
+          ]
+        } as SocialAuthServiceConfig,
+      },
         // {provide: APP_INITIALIZER, useFactory: initializeApp, multi: true, deps: [AuthenticationService]},
     ],
     bootstrap: [AppComponent]
