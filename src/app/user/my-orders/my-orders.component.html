@@ -1,0 +1,94 @@
+<app-user-overlay></app-user-overlay>
+<div class="container-fluid">
+  <div class="d-flex justify-content-center mt-4">
+    <h3 class="fw-bolder">Order History</h3>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="filter">
+
+        <div class="filter-grp">
+          <span class="me-3 fw-bolder">From</span>
+          <p-calendar [maxDate]="today" [(ngModel)]="fromSelectedDate" (onSelect)="fetchOrderHistory()" [disabled]="allTime" [readonlyInput]="true" dateFormat="dd/mm/yy" styleClass="ps-1" inputId="min-max"></p-calendar>
+        </div>
+
+        <div class="filter-grp">
+          <span class="me-3 fw-bolder">To</span>
+          <p-calendar [maxDate]="today" [disabled]="allTime" [(ngModel)]="toSelectedDate" (onSelect)="fetchOrderHistory()" [minDate]="fromSelectedDate" [readonlyInput]="true"  dateFormat="dd/mm/yy" styleClass="ps-1" inputId="min-max"></p-calendar>
+        </div>
+
+        <div class="filter-grp p-2" style="margin-bottom: 0.3rem">
+          <span class="me-3 fw-bolder">All Time</span>
+          <p-checkbox [(ngModel)]="allTime" [styleClass]="'mb-1'" [binary]="true" (onChange)="fetchOrderHistory()" inputId="binary"></p-checkbox>
+        </div>
+
+        <div class="filter-grp p-2" style="margin-bottom: 0.3rem">
+          <span class="me-3 fw-bolder">Ignore Completed</span>
+          <p-checkbox [(ngModel)]="onlyActive" [styleClass]="'mb-1'" [binary]="true" (onChange)="fetchOrderHistory()" inputId="binary2"></p-checkbox>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <p-accordion>
+      <ng-container class="mb-4"  *ngFor="let order of orders">
+        <p-accordionTab [selected]="this.selectedRoute && this.selectedRoute === order.orderId" >
+          <ng-template pTemplate="header">
+            <div class="container">
+              <div class="row justify-content-start">
+                <div class="col-11">
+                  <span class="">Order ID : {{order.orderId}}</span>
+                </div>
+
+                <div class="col">
+                  <span class="text-primary">{{getTotalPrice(order.orderedFoods) | currency : 'INR'}}</span>
+                </div>
+              </div>
+              <div class="row">
+                <span>Ordered On : {{order.orderedDate}}</span>
+              </div>
+              <div class="row">
+                <span [ngClass]="order.isCompleted ? 'text-success' : 'text-warning'">Order Status : {{order.isCompleted | boolean : 'Completed' : 'Awaiting Delivery'}}</span>
+              </div>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="content">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <p-table [value]="this.order.orderedFoods" styleClass="p-datatable-gridlines p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>Name</th>
+                      <th>Category</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td>{{product.foodName}}</td>
+                      <td>{{product.foodCategory}}</td>
+                      <td>{{product.foodQuantity}}</td>
+                      <td>{{product.foodPrice * product.foodQuantity}}</td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="footer">
+                    <tr>
+                      <td colspan="3" class="text-right">Total</td>
+                      <td>{{getTotalPrice(order.orderedFoods) | currency : 'INR'}}</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </ng-template>
+        </p-accordionTab>
+      </ng-container>
+    </p-accordion>
+  </div>
+
+</div>

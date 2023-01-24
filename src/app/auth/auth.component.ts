@@ -6,6 +6,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MessageService} from "primeng/api";
 import {SocialAuthService} from "@abacritt/angularx-social-login";
 import {UserConstants} from "../constants/UserConstants";
+import {NgxSpinnerService} from "ngx-spinner";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-auth',
@@ -19,7 +21,13 @@ export class AuthComponent implements OnInit {
   public mode : "sign-up-mode" | "" = "";
   public readonly regGroup : FormGroup;
   public readonly logGroup : FormGroup;
-  constructor(private readonly fb: FormBuilder, private readonly authenticationService : AuthenticationService, private messageService: MessageService, private readonly authService: SocialAuthService) {
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly authenticationService : AuthenticationService,
+    private messageService: MessageService,
+    private readonly authService: SocialAuthService,
+    private readonly spinnerService : NgxSpinnerService,
+  ) {
     this.regGroup = fb.group({
       firstName : ['', Validators.required],
       lastName : ['', Validators.required],
@@ -40,9 +48,15 @@ export class AuthComponent implements OnInit {
       if(user == null)
         return;
 
-      this.authenticationService.socialLogin(user).subscribe({
+      this.spinnerService.show();
+      this.authenticationService.socialLogin(user)
+        .pipe(finalize(() => {
+          this.spinnerService.hide();
+        }))
+        .subscribe({
         next: value => {
           this.authenticationService.setLoginData(value);
+          this.authenticationService.setData(UserConstants.SocialLoginIn, "true")
         },error: err => {
           this.logGroup.reset();
           if(err instanceof HttpErrorResponse){
@@ -136,7 +150,6 @@ export class AuthComponent implements OnInit {
     this.authenticationService.registerNewAccount(param).subscribe({
       next: value => {
         this.authenticationService.setLoginData(value);
-        this.authenticationService.setData(UserConstants.SocialLoginIn, "true");
         this.messageService.add({severity: "success", summary: "Login", detail: "An account has been created, Please login!"})
       },
       error: err => {

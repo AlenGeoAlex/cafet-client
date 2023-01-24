@@ -6,6 +6,7 @@ import {CartComponent} from "./cart/cart/cart.component";
 import {OrderPlacedComponent} from "./order-placed/order-placed.component";
 import {WalletRechargeComponent} from "./wallet-recharge/wallet-recharge.component";
 import {WalletHistoryComponent} from "./wallet-history/wallet-history.component";
+import {MyOrdersComponent} from "./my-orders/my-orders.component";
 
 
 const routes: Routes = [
@@ -14,6 +15,9 @@ const routes: Routes = [
   {path: "order-placed/:id", component: OrderPlacedComponent, data: {"ROLE": ["CUSTOMER", "STAFF", "ADMIN"]}, canActivate: [AuthorizationGuard]},
   {path: "wallet-recharge", component: WalletRechargeComponent, data: {"ROLE": ["CUSTOMER", "STAFF", "ADMIN"]}, canActivate: [AuthorizationGuard]},
   {path: "wallet-history", component: WalletHistoryComponent, data: {"ROLE": ["CUSTOMER", "STAFF", "ADMIN"]}, canActivate: [AuthorizationGuard]},
+  {path: "orders", component: MyOrdersComponent, data: {"ROLE": ["CUSTOMER", "STAFF", "ADMIN"]}, canActivate: [AuthorizationGuard]},
+  {path: "orders/:oId", component: MyOrdersComponent, data: {"ROLE": ["CUSTOMER", "STAFF", "ADMIN"]}, canActivate: [AuthorizationGuard]},
+
 ];
 
 @NgModule({

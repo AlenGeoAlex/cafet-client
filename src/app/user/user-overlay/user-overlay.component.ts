@@ -54,13 +54,8 @@ export class UserOverlayComponent implements OnInit {
           {
             label: "My Orders",
             icon: "pi pi-paperclip",
-            routerLink: ""
+            routerLink: "/user/orders"
           },
-          {
-            label: "Order History",
-            icon: "pi pi-list",
-            routerLink: ""
-          }
         ]
       },
 

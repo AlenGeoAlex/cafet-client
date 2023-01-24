@@ -67,6 +67,12 @@ export class AuthenticationService {
         .then((val) => console.log(val))
         .catch((err) => console.log(err))
     }
+    this.clear();
+    this.authenticationObservable$.next(null);
+    this.router.navigate(["/auth/"]);
+  }
+
+  clear(){
     localStorage.removeItem(UserConstants.AccessToken);
     localStorage.removeItem(UserConstants.Email);
     localStorage.removeItem(UserConstants.UserName);
@@ -74,8 +80,6 @@ export class AuthenticationService {
     localStorage.removeItem(UserConstants.Role)
     localStorage.removeItem(UserConstants.ImageLink)
     localStorage.removeItem(UserConstants.CartId)
-    this.authenticationObservable$.next(null);
-    this.router.navigate(["/auth/"]);
   }
 
   getUserData(constants : UserConstants) : string | null{

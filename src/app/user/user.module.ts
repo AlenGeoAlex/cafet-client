@@ -24,6 +24,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {CalendarModule} from "primeng/calendar";
 import {CheckboxModule} from "primeng/checkbox";
 import {TableModule} from "primeng/table";
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import {AccordionModule} from "primeng/accordion";
 
 
 @NgModule({
@@ -35,24 +37,26 @@ import {TableModule} from "primeng/table";
     OrderPlacedComponent,
     WalletRechargeComponent,
     WalletHistoryComponent,
+    MyOrdersComponent,
   ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    AvatarModule,
-    MenuModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BadgeModule,
-    DividerModule,
-    InputNumberModule,
-    AutoCompleteModule,
-    InputTextModule,
-    SharedModule,
-    DropdownModule,
-    CalendarModule,
-    CheckboxModule,
-    TableModule,
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        AvatarModule,
+        MenuModule,
+        ReactiveFormsModule,
+        FormsModule,
+        BadgeModule,
+        DividerModule,
+        InputNumberModule,
+        AutoCompleteModule,
+        InputTextModule,
+        SharedModule,
+        DropdownModule,
+        CalendarModule,
+        CheckboxModule,
+        TableModule,
+        AccordionModule,
+    ]
 })
 export class UserModule { }

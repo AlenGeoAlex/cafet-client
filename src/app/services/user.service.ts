@@ -10,6 +10,7 @@ import Endpoints from "../constants/Endpoints";
 import {FoodOrder} from "../domain/StaffFoodOrder";
 import {IProcessedOrder} from "../domain/IProcessedOrder";
 import {IWalletHistory} from "../domain/IWalletHistory";
+import {IStaffOrderView} from "../domain/IStaffOrderView";
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +52,9 @@ export class UserService {
 
   getUserWalletHistory(param : HttpParams) : Observable<IWalletHistory[]> {
     return this.client.get<IWalletHistory[]>(Endpoints.User+"wallet-history?"+param.toString());
+  }
+
+  getOrders(param : HttpParams) : Observable<IStaffOrderView[]> {
+    return this.client.get<IStaffOrderView[]>(Endpoints.User+"my-orders?"+param.toString());
   }
 }
