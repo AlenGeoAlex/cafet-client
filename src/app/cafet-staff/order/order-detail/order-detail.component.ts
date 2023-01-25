@@ -44,7 +44,7 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.hubConnectionBuilder = new HubConnectionBuilder()
-      .withUrl(Endpoints.LiveStaff+"order/", {skipNegotiation: true, transport: HttpTransportType.WebSockets})
+      .withUrl(Endpoints.Live+"order/", {skipNegotiation: true, transport: HttpTransportType.WebSockets})
       .configureLogging(LogLevel.Information)
       .build();
 

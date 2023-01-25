@@ -8,7 +8,7 @@ const Endpoints = {
   Auth : environment.apiUrl+"auth/",
   Cart : environment.apiUrl+"cart/",
   Statistics : environment.apiUrl+"statistics/",
-  LiveStaff : environment.apiUrl+"live/",
+  Live : environment.apiUrl+"live/",
 }
 
 export default Endpoints;

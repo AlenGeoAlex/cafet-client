@@ -18,3 +18,13 @@ export interface IStaffOrderView {
   isCancelled: boolean;
   orderedFoods: OrderedFood[];
 }
+
+export default function getOrderAmount(of : OrderedFood[]) : number {
+  let cost = 0;
+
+  for (let orderedFood of of) {
+    cost += orderedFood.foodQuantity * orderedFood.foodPrice;
+  }
+
+  return cost;
+}

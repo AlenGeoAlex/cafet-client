@@ -1,3 +1,71 @@
-<div class="d-flex">
+<div class="d-flex" style="background-color: rgba(234,237,239,0.51)">
   <app-overlay></app-overlay>
+  <div class="mt-5 min-vh-100">
+    <div class="container-fluid min-vw-100" style="margin-top: 2rem">
+       <div class="row p-4">
+         <div class="card-list">
+           <div class="row">
+             <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+               <div class="card blue">
+                 <div class="title">Total Orders</div>
+                 <i class="zmdi zmdi-upload"></i>
+                 <div class="value">{{stats.totalOrders | number}}</div>
+               </div>
+             </div>
+             <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+               <div class="card green">
+                 <div class="title">Completed Orders</div>
+                 <i class="zmdi zmdi-upload"></i>
+                 <div class="value">{{stats.completedOrders | number}}</div>
+               </div>
+             </div>
+             <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+               <div class="card orange">
+                 <div class="title">Cost Earned</div>
+                 <i class="zmdi zmdi-download"></i>
+                 <div class="value">{{stats.costEarned | currency: 'INR'}}</div>
+               </div>
+             </div>
+             <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+               <div class="card red">
+                 <div class="title">Total Customers</div>
+                 <i class="zmdi zmdi-download"></i>
+                 <div class="value">{{stats.userCount | number}}</div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+      <div class="row p-3">
+        <span class="d-flex justify-content-center text-primary fw-bolder" style="font-size: xx-large">Live Orders</span>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <p-table [value]="liveOrders" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Order Id</th>
+                <th>Order User</th>
+                <th>Order Time</th>
+                <th>Amount</th>
+                <th>Order Status</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-order>
+              <tr>
+                <td>{{order.orderId}}</td>
+                <td>{{order.orderedUserName}}</td>
+                <td>{{order.orderedDate }} {{order.orderedTime}}</td>
+                <td>{{getOrderAmount(order.orderedFoods)}}</td>
+                <td ><span [ngClass]="getOrderStatusClass(order)">{{getOrderStatus(order)}}</span></td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
