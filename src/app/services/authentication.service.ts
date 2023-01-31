@@ -45,7 +45,8 @@ export class AuthenticationService {
     localStorage.setItem(UserConstants.Role, userData.userRole);
     localStorage.setItem(UserConstants.ImageLink, userData.imageLink);
     localStorage.setItem(UserConstants.CartId, userData.cartId);
-    let roleItem  = userData.userRole;
+    let roleItem  = localStorage.getItem(UserConstants.Role);
+
     if(roleItem == null){
       this.logout();
       return;
@@ -62,7 +63,6 @@ export class AuthenticationService {
   logout() {
     const socialLogin = localStorage.getItem(UserConstants.SocialLoginIn);
     if(socialLogin && socialLogin === "true"){
-      console.log("Social Logout")
       this.socialAuthService.signOut(true)
         .then((val) => console.log(val))
         .catch((err) => console.log(err))

@@ -33,7 +33,7 @@ export class AuthComponent implements OnInit {
       lastName : ['', Validators.required],
       emailAddress : ['', [Validators.email, Validators.required]],
       password : ['', [Validators.required, Validators.min(5)]],
-      termsCheckbox: [false, Validators.required]
+      termsCheckbox: [false, Validators.requiredTrue]
     });
 
     this.logGroup = fb.group({
@@ -150,7 +150,7 @@ export class AuthComponent implements OnInit {
     this.authenticationService.registerNewAccount(param).subscribe({
       next: value => {
         this.authenticationService.setLoginData(value);
-        this.messageService.add({severity: "success", summary: "Login", detail: "An account has been created, Please login!"})
+        this.messageService.add({severity: "success", summary: "Login", detail: "An account has been created!"})
       },
       error: err => {
         this.regGroup.reset();
