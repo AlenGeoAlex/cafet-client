@@ -136,6 +136,11 @@ export class CartComponent implements OnInit, OnDestroy {
       }))
       .subscribe({
         next: value => {
+          console.log(value)
+
+
+          return;
+
           if(value.orderSuccessful){
             this.messageService.add({severity: "success", summary: "Order Placed", detail: "Successfully placed the order"})
             this.messageService.add({severity: "success", summary: "Order Id", detail: value.orderId})

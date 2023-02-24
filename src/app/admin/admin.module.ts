@@ -51,9 +51,10 @@ import {BadgeModule} from "primeng/badge";
         FoodEditComponent,
         UserRegComponent
     ],
-    exports: [
-        CategoryComponent
-    ],
+  exports: [
+    CategoryComponent,
+    OverlayComponent
+  ],
     imports: [
         CommonModule,
         AdminRoutingModule,

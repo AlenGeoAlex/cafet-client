@@ -19,6 +19,8 @@ export class AdminHomeComponent implements OnInit, OnDestroy{
   public stats : IStatistics = DefaultStatistics();
   public liveOrders : IStaffOrderView[] = [];
   constructor(private readonly messageService : MessageService, private readonly spinnerService : NgxSpinnerService) {
+
+
     this.statsWebsocket = new HubConnectionBuilder()
       .withAutomaticReconnect()
       .configureLogging(LogLevel.Information)

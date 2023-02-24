@@ -15,8 +15,7 @@ const routes: Routes = [
   {path: "food/edit/:id", component: FoodEditComponent, data: { "ROLE" : "ADMIN"} , canActivate: [AuthorizationGuard]},
   {path: "users", component: UsersComponent, data: { "ROLE" : "ADMIN"} , canActivate: [AuthorizationGuard]},
   {path: "users/reg", component: UserRegComponent, data: { "ROLE" : "ADMIN"} , canActivate: [AuthorizationGuard]},
-
-
+  {path: "stats", loadChildren: () => import('./statistics/statistics.module').then(mod => mod.StatisticsModule), data: { "ROLE" : "ADMIN"} , canActivate: [AuthorizationGuard]},
 ];
 
 @NgModule({

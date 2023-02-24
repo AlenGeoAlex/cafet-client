@@ -51,7 +51,10 @@ import {GoogleLoginProvider, SocialAuthServiceConfig} from "@abacritt/angularx-s
             {
               id: GoogleLoginProvider.PROVIDER_ID,
               provider: new GoogleLoginProvider(
-                ''
+                '',
+                {
+                  oneTapEnabled: false
+                }
               )
             }
           ]

@@ -86,6 +86,10 @@ export class AuthenticationService {
     return localStorage.getItem(constants);
   }
 
+  refresh(token : string) : Observable<ICred>{
+    return this.client.post<ICred>(Endpoints.Auth+"refresh", {token: token})
+  }
+
   isUserRegistered() : boolean {
     return this.getUserData(UserConstants.Role) != null
       && this.getUserData(UserConstants.Email) != null

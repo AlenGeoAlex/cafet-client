@@ -5,6 +5,7 @@ import {MessageService} from "primeng/api";
 import {AutoComplete} from "primeng/autocomplete";
 import {FoodService} from "../../../services/food.service";
 import {IFoodType} from "../../../domain/IFood";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-food-reg',
@@ -139,8 +140,13 @@ private contains(key: string): boolean {
         this.fg.reset();
       },
       error: err => {
-        this.regEvent.emit(true);
-        this.fg.reset();
+        this.regEvent.emit(false);
+        if(err instanceof HttpErrorResponse){
+          if(err.status === 422 && err.error){
+            this.messageService.add({severity: "error", summary: "Duplicate Exists!", detail: err.error})
+          }
+        }
+
       },
       complete: () => {
         this.fg.reset();

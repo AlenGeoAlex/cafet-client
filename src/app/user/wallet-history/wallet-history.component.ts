@@ -33,7 +33,6 @@ export class WalletHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.fromSelectedDate.getTime())
     this.fetchUserWallet();
   }
 

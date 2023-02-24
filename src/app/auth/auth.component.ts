@@ -7,7 +7,8 @@ import {MessageService} from "primeng/api";
 import {SocialAuthService} from "@abacritt/angularx-social-login";
 import {UserConstants} from "../constants/UserConstants";
 import {NgxSpinnerService} from "ngx-spinner";
-import {finalize} from "rxjs";
+import {combineLatest, combineLatestWith, EMPTY, empty, finalize, map, Observable, of, scheduled} from "rxjs";
+import {ICred} from "../domain/ICred";
 
 @Component({
   selector: 'app-auth',
@@ -44,7 +45,12 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.clear();
+
+
     this.authService.authState.subscribe((user) => {
+
+      console.log(user + "From auth component social login")
+
       if(user == null)
         return;
 
@@ -171,6 +177,13 @@ export class AuthComponent implements OnInit {
 
       }
     });
+  }
 
+  refresh() : Observable<ICred> {
+    const userData = this.authenticationService.getUserData(UserConstants.RefreshTokens);
+    if(userData == null)
+      return EMPTY;
+
+    return this.authenticationService.refresh(userData);
   }
 }
