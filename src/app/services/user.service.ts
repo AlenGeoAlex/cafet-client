@@ -11,6 +11,7 @@ import {FoodOrder} from "../domain/StaffFoodOrder";
 import {IProcessedOrder} from "../domain/IProcessedOrder";
 import {IWalletHistory} from "../domain/IWalletHistory";
 import {IStaffOrderView} from "../domain/IStaffOrderView";
+import {IStripSessionUrl} from "../domain/IStripSessionUrl";
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,7 @@ export class UserService {
     return this.client.post<IUser>(Endpoints.User+"update", formData);
   }
 
-  order(food : FoodOrder) : Observable<IProcessedOrder> {
+  order(food : FoodOrder) : Observable<IProcessedOrder | IStripSessionUrl> {
     return this.client.post<IProcessedOrder>(Endpoints.Order+"me", food);
   }
 

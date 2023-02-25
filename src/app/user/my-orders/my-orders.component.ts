@@ -4,6 +4,7 @@ import {HttpParams} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
 import {IStaffOrderView, OrderedFood} from "../../domain/IStaffOrderView";
 import {ActivatedRoute} from "@angular/router";
+import {PaymentStatus} from "../../constants/PaymentStatus";
 
 @Component({
   selector: 'app-my-orders',
@@ -60,5 +61,17 @@ export class MyOrdersComponent implements OnInit {
     }
 
     return cost;
+  }
+
+  getOrderPriceClass(paymentStatus: number) : string {
+    if(paymentStatus === PaymentStatus.Pending){
+      return "text-warning";
+    }else if(paymentStatus === PaymentStatus.Success){
+      return "text-success";
+    }else if(paymentStatus === PaymentStatus.Cancelled){
+      return "text-danger";
+    }
+
+    return "text-info";
   }
 }

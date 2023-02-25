@@ -11,6 +11,8 @@ import {UserService} from "../../../services/user.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Order} from "../../../domain/Order";
 import {FoodOrder} from "../../../domain/StaffFoodOrder";
+import {IStripSessionUrl} from "../../../domain/IStripSessionUrl";
+import {IProcessedOrder} from "../../../domain/IProcessedOrder";
 
 @Component({
   selector: 'app-cart',
@@ -136,10 +138,15 @@ export class CartComponent implements OnInit, OnDestroy {
       }))
       .subscribe({
         next: value => {
-          console.log(value)
 
+          if(value.hasOwnProperty("url"))
+          {
+            value = <IStripSessionUrl> value;
+            window.open(value.url, "_self");
+            return;
+          }
 
-          return;
+          value = <IProcessedOrder>value;
 
           if(value.orderSuccessful){
             this.messageService.add({severity: "success", summary: "Order Placed", detail: "Successfully placed the order"})

@@ -44,14 +44,15 @@
                 </div>
 
                 <div class="col">
-                  <span class="text-primary">{{getTotalPrice(order.orderedFoods) | currency : 'INR'}}</span>
+                  <span [ngClass]="getOrderPriceClass(order.paymentStatus)">{{getTotalPrice(order.orderedFoods) | currency : 'INR'}}</span>
                 </div>
               </div>
               <div class="row">
                 <span>Ordered On : {{order.orderedDate}}</span>
               </div>
               <div class="row">
-                <span [ngClass]="order.isCompleted ? 'text-success' : 'text-warning'">Order Status : {{order.isCompleted | boolean : 'Completed' : 'Awaiting Delivery'}}</span>
+                <span *ngIf="order.paymentStatus === 0" class="text-info">Payment Pending</span>
+                <span *ngIf="order.paymentStatus !== 0" [ngClass]="order.isCompleted ? 'text-success' : 'text-warning'">Order Status : {{order.isCompleted | boolean : 'Completed' : 'Awaiting Delivery'}}</span>
               </div>
             </div>
           </ng-template>
