@@ -51,8 +51,9 @@
                 <span>Ordered On : {{order.orderedDate}}</span>
               </div>
               <div class="row">
-                <span *ngIf="order.paymentStatus === 0" class="text-info">Payment Pending</span>
-                <span *ngIf="order.paymentStatus !== 0" [ngClass]="order.isCompleted ? 'text-success' : 'text-warning'">Order Status : {{order.isCompleted | boolean : 'Completed' : 'Awaiting Delivery'}}</span>
+                <span pTooltip="Wish to retry the payment" *ngIf="order.paymentStatus === 0" class="text-info">Payment Pending</span>
+                <span *ngIf="order.paymentStatus === 1" [ngClass]="order.isCompleted ? 'text-success' : 'text-warning'">Order Status : {{order.isCompleted | boolean : 'Completed' : 'Awaiting Delivery'}}</span>
+                <span *ngIf="order.paymentStatus === 2" class="text-danger">Payment Failed {{order.paymentFailStatusReason}}</span>
               </div>
             </div>
           </ng-template>
