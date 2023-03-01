@@ -67,8 +67,7 @@ export class WalletRechargeComponent implements OnInit {
       .pipe(finalize(() => this.spinnerService.hide()))
       .subscribe({
         next: value => {
-          this.getUser();
-          this.messageService.add({severity: "success", detail: "Successfully recharged your wallet", summary: "Success"})
+          window.open(value.url, "_self");
         },
         error: err => {
           this.messageService.add({severity: "error", detail: "An unknown error occurred", summary: "Invalid"})

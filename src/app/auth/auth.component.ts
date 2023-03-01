@@ -49,8 +49,6 @@ export class AuthComponent implements OnInit {
 
     this.authService.authState.subscribe((user) => {
 
-      console.log(user + "From auth component social login")
-
       if(user == null)
         return;
 

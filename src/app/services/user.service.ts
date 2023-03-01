@@ -47,8 +47,8 @@ export class UserService {
     return this.client.post<IProcessedOrder>(Endpoints.Order+"me", food);
   }
 
-  rechargeWallet(param : IWalletRechargeParams) : Observable<unknown> {
-    return this.client.post<unknown>(Endpoints.User+"wallet-recharge", param);
+  rechargeWallet(param : IWalletRechargeParams) : Observable<IStripSessionUrl> {
+    return this.client.post<IStripSessionUrl>(Endpoints.User+"wallet-recharge", param);
   }
 
   getUserWalletHistory(param : HttpParams) : Observable<IWalletHistory[]> {
