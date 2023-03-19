@@ -47,7 +47,7 @@
                   {{customer.walletBalance | currency: "INR"}}
                 </td>
                 <td>
-                  {{customer.activated.toString() | uppercase}}
+                  {{customer.activated.toString() | boolean:"Active" : "Not Active"}}
                 </td>
                 <td>
                   <button pButton icon="pi pi-cog" class=" p-button-text" (click)="this.onClick(customer.userId, $event, this.menu)" ></button>

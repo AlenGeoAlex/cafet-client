@@ -29,6 +29,10 @@ export class UserService {
     return this.client.post<any>(Endpoints.Auth+"register", regParam);
   }
 
+  resetPassOfAnotherUser(selectedUser : string) : Observable<any>{
+    return this.client.post<any>(Endpoints.Auth+"reset-pass", {"emailAddress": selectedUser})
+  }
+
   deleteUserAccount(id : number) : Observable<boolean> {
     const statusData = new AccountStatus();
     statusData.accountId = id;

@@ -17,8 +17,10 @@ export interface IStaffOrderView {
   isCompleted: boolean;
   isCancelled: boolean;
   paymentStatus : number;
+  paymentStatusRaw : string;
   paymentStatusUpdatedAt? : string;
   paymentFailStatusReason? : string;
+  paymentMethod : boolean;
   orderedFoods: OrderedFood[];
 }
 

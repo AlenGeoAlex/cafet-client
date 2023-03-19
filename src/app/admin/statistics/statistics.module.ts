@@ -8,6 +8,8 @@ import {CalendarModule} from "primeng/calendar";
 import {CheckboxModule} from "primeng/checkbox";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
+import {ChartModule} from "primeng/chart";
+import {RippleModule} from "primeng/ripple";
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {FormsModule} from "@angular/forms";
     CalendarModule,
     CheckboxModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    ChartModule,
+    RippleModule
   ]
 })
 export class StatisticsModule { }

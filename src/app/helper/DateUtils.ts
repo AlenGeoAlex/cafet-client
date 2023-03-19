@@ -6,4 +6,12 @@ export class DateUtils {
 
     return `${day}/${month}`
   }
+
+  public static getDdMmYyyy(string : string) : Date | undefined {
+    var strings = string.split("-");
+    if(strings.length != 3)
+      return undefined;
+
+    return new Date(`${strings[1]}/${strings[0]}/${strings[2]}`)
+  }
 }

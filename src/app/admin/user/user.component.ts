@@ -34,10 +34,51 @@ export class UsersComponent implements OnInit {
     this.items = [{
       label: "Manage",
       items: [
-        {label: "Reset Password", icon: "pi pi-flag", command: event => {
-          console.log(this.selectedId);
+        {label: "Reset Password",
+          icon: "pi pi-flag",
+          command: event => {
+          if(!this.selectedId)
+            return;
+
+          var userOfId = this.getUserOfId(this.selectedId);
+          if(!userOfId)
+            return;
+          this.spinnerService.show();
+          this.userService.resetPassOfAnotherUser(userOfId.userEmail)
+            .pipe(finalize( () => {
+              this.spinnerService.hide();
+            }))
+            .subscribe({
+              next: value => {
+                this.messageService.add({severity: "success", detail: `An account password reset has been initiated for ${userOfId?.userEmail}.`})
+              },
+              error : (err) => {
+                this.messageService.add({severity: "error", detail: `Failed to reset password for ${userOfId?.userEmail}.`})
+              },
+              complete: () => {
+
+            }
+            });
+
           }},
-        {label: "Change Role", icon: "pi pi-pencil"},
+/*        {
+          label: "Change Role",
+          icon: "pi pi-pencil",
+          items: [
+            {
+              label: "To Admin",
+              icon: "pi pi-flag"
+            },
+            {
+              label: "To Staff",
+              icon: "pi pi-flag"
+            },
+            {
+              label: "To Customer",
+              icon: "pi pi-flag"
+            }
+          ]
+        },*/
       ]
     },{
       label: "Account Settings",

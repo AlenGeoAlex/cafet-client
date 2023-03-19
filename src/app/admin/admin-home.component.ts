@@ -35,6 +35,7 @@ export class AdminHomeComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    this.spinnerService.show();
     this.statsWebsocket.start()
       .then((val) => {
         this.statsWebsocket.invoke('FetchStats');
@@ -45,13 +46,21 @@ export class AdminHomeComponent implements OnInit, OnDestroy{
       })
 
     this.statsWebsocket.on('OnStatisticsUpdate', (val : IStatistics) => {
-      console.log(val);
-      this.stats = val;
+      try {
+        console.log(val);
+        this.stats = val;
+      }catch (err){
+        console.log(err);
+      }
+      this.spinnerService.hide();
     })
 
     this.orderWebsocket.start()
       .then(val => {
         this.orderWebsocket.invoke('GetLiveOrders');
+      })
+      .catch((err) => {
+        console.log(err)
       });
 
     this.orderWebsocket.on('SendOrderUpdate', (res) => {
