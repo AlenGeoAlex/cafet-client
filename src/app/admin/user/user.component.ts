@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ConfirmationService, LazyLoadEvent, MenuItem, MessageService} from "primeng/api";
+import {ConfirmationService, LazyLoadEvent, MenuItem, MessageService, PrimeIcons} from "primeng/api";
 import {IUser} from "../../domain/IUser";
 import {UserService} from "../../services/user.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {Menu} from "primeng/menu";
 import {finalize} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -28,13 +29,29 @@ export class UsersComponent implements OnInit {
 
   public selectedId : number | null;
 
-  constructor(private readonly userService: UserService, private readonly spinnerService : NgxSpinnerService,private readonly confirmationService: ConfirmationService, private readonly messageService : MessageService) {
+  constructor(private readonly userService: UserService,
+              private readonly spinnerService : NgxSpinnerService,
+              private readonly confirmationService: ConfirmationService,
+              private readonly messageService : MessageService,
+              private readonly router : Router,
+  ) {
     this.users = [];
     this.selectedId = -1;
     this.items = [{
       label: "Manage",
       items: [
-        {label: "Reset Password",
+        {
+          label: "Get User Activity",
+          icon: PrimeIcons.USER_EDIT,
+          command: event => {
+            if(!this.selectedId)
+              return;
+
+            router.navigate(["admin/stats/user-activity-stats/"+this.selectedId])
+          }
+        },
+        {
+          label: "Reset Password",
           icon: "pi pi-flag",
           command: event => {
           if(!this.selectedId)

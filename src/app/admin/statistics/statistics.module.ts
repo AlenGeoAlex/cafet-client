@@ -10,11 +10,21 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {ChartModule} from "primeng/chart";
 import {RippleModule} from "primeng/ripple";
+import { UserActivityStatsComponent } from './user-activity-stats/user-activity-stats.component';
+import {TimelineModule} from "primeng/timeline";
+import {CardModule} from "primeng/card";
+import { OrderStatsComponent } from './order-stats/order-stats.component';
+import {TableModule} from "primeng/table";
+import {TooltipModule} from "primeng/tooltip";
+import { RevenuveStatsComponent } from './revenuve-stats/revenuve-stats.component';
 
 
 @NgModule({
   declarations: [
-    TotalOrderComponent
+    TotalOrderComponent,
+    UserActivityStatsComponent,
+    OrderStatsComponent,
+    RevenuveStatsComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +35,11 @@ import {RippleModule} from "primeng/ripple";
     DropdownModule,
     FormsModule,
     ChartModule,
-    RippleModule
+    RippleModule,
+    TimelineModule,
+    CardModule,
+    TableModule,
+    TooltipModule
   ]
 })
 export class StatisticsModule { }

@@ -1,0 +1,33 @@
+<app-overlay></app-overlay>
+<div class="container-fluid b-start">
+  <div class="top-filter">
+    <h3 class="fw-bolder">Order Report</h3>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="filter">
+
+        <div class="filter-grp">
+          <span class="me-3 fw-bolder">Year</span>
+          <p-dropdown [options]="this.yearSelection" [styleClass]="'ps-4'" [(ngModel)]="selectedYear" (onChange)="getData()" optionLabel="key" optionValue="value"></p-dropdown>
+        </div>
+
+        <div class="filter-grp" *ngIf="this.rawData">
+          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-outlined" (click)="this.downloadReport()" pTooltip="Download Report"></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top-filter">
+      <h3 class="fw-bolder">Revenue Report of Year {{this.selectedYear}}</h3>
+    </div>
+    <p-chart type="line" [data]="basicData" [options]="basicOptions" ></p-chart>
+  </div>
+
+
+
+</div>

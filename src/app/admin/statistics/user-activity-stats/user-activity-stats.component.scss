@@ -1,0 +1,45 @@
+.b-start {
+  margin-top: 6rem;
+}
+
+.top-filter {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.filter {
+  margin: 2rem 0 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.filter-grp {
+  margin-right: 2rem;
+}
+
+:host ::ng-deep .wallet-credit {
+  background: rgba(115,184,98,0.62);
+}
+
+:host ::ng-deep .wallet-debit{
+  background: rgba(216,11,9,0.51);
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr {
+  color: #3f3f46;
+  transition: none;
+}
+
+.custom-marker {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  border-radius: 50%;
+  z-index: 1;
+}

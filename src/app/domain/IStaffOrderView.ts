@@ -24,6 +24,12 @@ export interface IStaffOrderView {
   orderedFoods: OrderedFood[];
 }
 
+export interface ICompletedOrderView extends IStaffOrderView {
+  orderDeliveredAt? : string;
+  orderCancelledAt? : string;
+  isFinished : boolean;
+}
+
 export default function getOrderAmount(of : OrderedFood[]) : number {
   let cost = 0;
 

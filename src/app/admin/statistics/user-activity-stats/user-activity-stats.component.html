@@ -1,0 +1,50 @@
+<app-overlay></app-overlay>
+<div class="container-fluid b-start">
+  <div class="top-filter">
+    <h3 class="fw-bolder">Activities of User</h3>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="filter">
+        <div class="filter-grp">
+          <span class="me-3 fw-bolder">From</span>
+          <p-calendar [maxDate]="today" [(ngModel)]="fromSelectedDate" (onSelect)="getData()" [disabled]="allTime" [readonlyInput]="true" dateFormat="dd/mm/yy" styleClass="ps-1" inputId="min-max"></p-calendar>
+        </div>
+
+        <div class="filter-grp">
+          <span class="me-3 fw-bolder">To</span>
+          <p-calendar [maxDate]="today" [disabled]="allTime" [(ngModel)]="toSelectedDate" (onSelect)="getData()" [minDate]="fromSelectedDate" [readonlyInput]="true" dateFormat="dd/mm/yy" styleClass="ps-1" inputId="min-max"></p-calendar>
+        </div>
+
+        <div class="filter-grp p-2" style="margin-bottom: 0.3rem">
+          <span class="me-3 fw-bolder">All Time</span>
+          <p-checkbox [(ngModel)]="allTime" [styleClass]="'mb-1'" [binary]="true" (onChange)="getData()" inputId="binary"></p-checkbox>
+        </div>
+
+        <div class="filter-grp">
+          <span class="me-3 fw-bolder">Filter By</span>
+          <p-dropdown [options]="this.OrderType" [styleClass]="'ps-4'" (onChange)="getData()" [(ngModel)]="selectedFilterMode" optionLabel="key" optionValue="value"></p-dropdown>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="this.timeLine">
+    <p-timeline [value]="timeLine" align="alternate" class="mt-5 mb-4">
+      <ng-template pTemplate="marker" let-event>
+        <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
+            <i [ngClass]="event.icon"></i>
+        </span>
+      </ng-template>
+      <ng-template pTemplate="content" let-event>
+        <p-card [header]="event.activityTypeFormatted" [subheader]="event.activityOccurence">
+          <p>{{event.message}}</p>
+          <button *ngIf="event.activityType === 'CancelledOrder' || event.activityType === 'CompletedOrder'" pButton label="View" (click)="event.onClickAction()" class="p-button-text"></button>
+        </p-card>
+      </ng-template>
+    </p-timeline>
+  </div>
+
+</div>

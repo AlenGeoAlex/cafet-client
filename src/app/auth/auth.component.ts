@@ -44,7 +44,7 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.clear();
+    // localStorage.clear();
 
 
     this.authService.authState.subscribe((user) => {
@@ -56,6 +56,11 @@ export class AuthComponent implements OnInit {
       this.authenticationService.socialLogin(user)
         .pipe(finalize(() => {
           this.spinnerService.hide();
+          try {
+            this.authService.signOut(true);
+          }catch (err){
+            console.error(err)
+          }
         }))
         .subscribe({
         next: value => {

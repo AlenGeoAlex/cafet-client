@@ -1,0 +1,58 @@
+<app-overlay></app-overlay>
+<div *ngIf="!order">
+  <div class="top-filter">
+    <h3 class="fw-bolder">Fetching your order or Order doesn't exists!</h3>
+  </div>
+</div>
+<div *ngIf="order" class="container-fluid b-start mb-5">
+  <div class="card m-5 mt-5">
+    <div class="top-filter">
+      <h3 class="fw-bolder">Order Timeline</h3>
+    </div>
+    <p-timeline *ngIf="timeLine" [value]="timeLine" align="alternate" styleClass="customized-timeline">
+      <ng-template pTemplate="marker" let-event>
+            <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
+                <i [ngClass]="event.icon"></i>
+            </span>
+      </ng-template>
+      <ng-template pTemplate="content" let-event>
+        <p-card [header]="event.status" [subheader]="event.date">
+        </p-card>
+      </ng-template>
+    </p-timeline>
+  </div>
+
+  <div class="card mt-5">
+    <div class="top-filter">
+      <h3 class="fw-bolder">Order Details</h3>
+    </div>
+
+    <p-table [value]="this.order.orderedFoods" >
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success mr-2" (click)="this.exportExcel()"  pTooltip="XLS" tooltipPosition="bottom"></button>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td>{{rowData.foodName}}</td>
+          <td>{{rowData.foodPrice}}</td>
+          <td>{{rowData.foodQuantity}}</td>
+          <td>{{rowData.foodPrice * rowData.foodQuantity}}</td>
+
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div >
+
+</div>
